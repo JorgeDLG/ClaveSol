@@ -10,51 +10,44 @@ namespace ClaveSol.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new Usuario(
+            using (var context = new MvcUserContext(
                 serviceProvider.GetRequiredService<
-                    DbContextOptions<Usuario>>()))
+                    DbContextOptions<MvcUserContext>>()))
             {
                 // Look for any movies.
-                if (context.Movie.Any())
+                if (context.User.Any())
                 {
                     return;   // DB has been seeded
                 }
 
-                context.Movie.AddRange(
-                    new Movie
+                context.User.AddRange(
+                    new User
                     {
-                        Title = "When Harry Met Sally",
-                        ReleaseDate = DateTime.Parse("1989-2-12"),
-                        Genre = "Romantic Comedy",
-                        Rating = "R",
-                        Price = 7.99M
+                        Name = "John",
+                        Surname = "Doe",
+                        Mail = "johndoe@mail.com",
+                        Premium = true 
                     },
-
-                    new Movie
+                    new User
                     {
-                        Title = "Ghostbusters ",
-                        ReleaseDate = DateTime.Parse("1984-3-13"),
-                        Genre = "Comedy",
-                        Rating = "R",
-                        Price = 8.99M
+                        Name = "Ana",
+                        Surname = "Pérez Martinez",
+                        Mail = "anaPerez@mail.com",
+                        Premium = false 
                     },
-
-                    new Movie
+                    new User
                     {
-                        Title = "Ghostbusters 2",
-                        ReleaseDate = DateTime.Parse("1986-2-23"),
-                        Genre = "Comedy",
-                        Rating = "R",
-                        Price = 9.99M
+                        Name = "Pepe",
+                        Surname = "Smith",
+                        Mail = "pepe00@mail.com",
+                        Premium = true 
                     },
-
-                    new Movie
+                    new User
                     {
-                        Title = "Rio Bravo",
-                        ReleaseDate = DateTime.Parse("1959-4-15"),
-                        Genre = "Western",
-                        Rating = "R",
-                        Price = 3.99M
+                        Name = "Kim",
+                        Surname = "Morrison",
+                        Mail = "kim_morrison@mail.com",
+                        Premium = false 
                     }
                 );
                 context.SaveChanges();
