@@ -10,9 +10,9 @@ namespace ClaveSol.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new MvcUserContext(
+            using (var context = new ClaveSolContext(
                 serviceProvider.GetRequiredService<
-                    DbContextOptions<MvcUserContext>>()))
+                    DbContextOptions<ClaveSolContext>>()))
             {
                 // Look for any movies.
                 if (context.User.Any())

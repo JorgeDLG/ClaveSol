@@ -20521,6 +20521,16 @@
   "RootNamespace": "ClaveSol",
   "Documents": [
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/User/Delete.cshtml",
+      "TargetPath": "Views\\User\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/User/Create.cshtml",
+      "TargetPath": "Views\\User\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shared/_LoginPartial.cshtml",
       "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
       "FileKind": "mvc"
@@ -20531,13 +20541,28 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/User/Edit.cshtml",
+      "TargetPath": "Views\\User\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shared/Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/User/Details.cshtml",
+      "TargetPath": "Views\\User\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Home/Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/User/Index.cshtml",
+      "TargetPath": "Views\\User\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
