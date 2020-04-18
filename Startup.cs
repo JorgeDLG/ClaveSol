@@ -32,6 +32,10 @@ namespace ClaveSol
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<ClaveSolDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("ClaveSolConnection")));
+
             //IDENTITY
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
