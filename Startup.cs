@@ -31,7 +31,7 @@ namespace ClaveSol
             //DB CONTEXTS
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("IdentityConnection")));
 
             services.AddDbContext<ClaveSolDbContext>(options =>
                 options.UseSqlite(
