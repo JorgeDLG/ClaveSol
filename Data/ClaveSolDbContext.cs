@@ -7,7 +7,7 @@ using ClaveSol.Models;
 
 namespace ClaveSol.Data
 {
-    public class ClaveSolDbContext : IdentityDbContext
+    public class ClaveSolDbContext : DbContext
     {
         public ClaveSolDbContext(DbContextOptions<ClaveSolDbContext> options)
             : base(options)

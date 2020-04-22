@@ -27,6 +27,7 @@ namespace ClaveSol
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddMvc();
             //DB CONTEXTS
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
@@ -100,8 +101,13 @@ namespace ClaveSol
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseAuthentication(); //deja obsoleto a  app.UseIdentity();
             app.UseAuthorization();
+
+            //From Pro Asp.Net core mvc Book
+            app.UseStatusCodePages();
+            //app.UseMvcWithDefaultRoute();
+            //
 
             app.UseEndpoints(endpoints =>
             {
