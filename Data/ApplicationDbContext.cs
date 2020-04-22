@@ -12,5 +12,6 @@ namespace ClaveSol.Data
             : base(options)
         {
         }
+        //public DbSet<AspNetUsers> User {get; set;}
     }
 }

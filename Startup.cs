@@ -27,7 +27,6 @@ namespace ClaveSol
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvc();
             //DB CONTEXTS
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
@@ -42,8 +41,9 @@ namespace ClaveSol
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            //
             //services.AddRazorPages();
-
+            //services.AddMvc();
 
             //configures Identity with default option values.
             services.Configure<IdentityOptions>(options =>
