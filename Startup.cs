@@ -28,6 +28,9 @@ namespace ClaveSol
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options => 
                 options.UseSqlite(Configuration.GetConnectionString("AppDbContext")));
+
+            services.AddDbContext<appIdentityDbContext>(options => 
+                options.UseSqlite(Configuration.GetConnectionString("appIdentityDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
