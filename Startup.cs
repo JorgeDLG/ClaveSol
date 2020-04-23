@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 //using ClaveSol.Data;
+using ClaveSol.Security;
 
 namespace ClaveSol
 {
@@ -26,11 +27,23 @@ namespace ClaveSol
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+
             services.AddDbContext<AppDbContext>(options => 
                 options.UseSqlite(Configuration.GetConnectionString("AppDbContext")));
 
+         //Identity
             services.AddDbContext<appIdentityDbContext>(options => 
                 options.UseSqlite(Configuration.GetConnectionString("appIdentityDbContext")));
+            
+            services.AddIdentity<appIdentityUser, appIdentityRole>()
+                .AddEntityFrameworkStores<appIdentityDbContext>();
+            
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = "/Security/SignIn";
+                opt.AccessDeniedPath = "/Security/AccessDenied";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +64,7 @@ namespace ClaveSol
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
