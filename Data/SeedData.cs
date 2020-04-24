@@ -3,56 +3,138 @@ using Microsoft.Extensions.DependencyInjection;
 using ClaveSol.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using ClaveSol.Security;
 
 namespace ClaveSol.Data
-{
+{//UPDATE: Seed Users(AppDbContext) & Create Identity Users and Roles LINKING with it.
     public static class SeedData
     {
-        public static void Initialize(IServiceProvider serviceProvider)
+        public static void SeedDB(AppDbContext context, string adminID)
         {
-            using (var context = new AppDbContext(
-                serviceProvider.GetRequiredService<
-                    DbContextOptions<AppDbContext>>()))
+            // Look for any movies.
+            if (context.User.Any())
             {
-                // Look for any movies.
-                if (context.User.Any())
-                {
-                    return;   // DB has been seeded
-                }
-
-                context.User.AddRange(
-                    new User
-                    {
-                        Name = "Ana",
-                        Surname = "Perez",
-                        Mail = "ana@mail.com",
-                        Premium = false,
-
-                    },
-                    new User
-                    {
-                        Name = "Paco",
-                        Surname = "Perez",
-                        Mail = "paco@mail.com",
-                        Premium = false,
-                    },
-                    new User
-                    {
-                        Name = "Mario",
-                        Surname = "Garcia",
-                        Mail = "mario@mail.com",
-                        Premium = true,
-                    },
-                    new User
-                    {
-                        Name = "Arturo",
-                        Surname = "Sanchez",
-                        Mail = "arturo@mail.com",
-                        Premium = true,
-                    }
-                );
-                context.SaveChanges();
+                return;   // DB has been seeded
             }
+
+            //Seeding User table (ApDbContext)
+            context.User.AddRange(
+                new User
+                {
+                    Name = "Ana",
+                    Surname = "Perez",
+                    Mail = "ana@mail.com",
+                    Premium = false,
+                    OwnerID = adminID
+
+                },
+                new User
+                {
+                    Name = "Paco",
+                    Surname = "Perez",
+                    Mail = "paco@mail.com",
+                    Premium = false,
+                    OwnerID = adminID
+                },
+                new User
+                {
+                    Name = "Mario",
+                    Surname = "Garcia",
+                    Mail = "mario@mail.com",
+                    Premium = true,
+                    OwnerID = adminID
+                },
+                new User
+                {
+                    Name = "Arturo",
+                    Surname = "Sanchez",
+                    Mail = "arturo@mail.com",
+                    Premium = true,
+                    OwnerID = adminID
+                }
+            );
+            context.SaveChanges();
+        }
+        public static async Task Initialize(IServiceProvider serviceProvider, string testUserPw)
+        {
+            // For sample purposes seed both with the same password.
+            // Password is set with the following:
+            // dotnet user-secrets set SeedUserPW <pw>
+            // The admin user can do anything
+
+            //Identity following this tutorial: https://bit.ly/3cKxRXz
+
+            var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@contoso.com");
+            await EnsureRole(serviceProvider, adminID, "admin"/*Constants.ContactAdministratorsRole*/);
+
+            // allowed user can create and edit contacts that they create
+            var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@contoso.com");
+            await EnsureRole(serviceProvider, managerID, "manager"/*Constants.ContactManagersRole*/);
+
+            var context = new AppDbContext(serviceProvider.
+            GetRequiredService<DbContextOptions<AppDbContext>>());
+
+            SeedDB(context, adminID);
+
+        }
+
+        private static async Task<string> EnsureUser(IServiceProvider serviceProvider,
+                                            string testUserPw, string UserName)
+        {
+            var userManager = serviceProvider.GetService<UserManager<appIdentityUser>>();
+
+            var user = await userManager.FindByNameAsync(UserName);
+            if (user == null)
+            {
+                user = new appIdentityUser
+                {
+                    UserName = UserName,
+                    EmailConfirmed = true
+                    //FullName ?
+                };
+                await userManager.CreateAsync(user, testUserPw);
+
+                //Link with AppUser?
+            }
+
+            if (user == null)
+            {
+                throw new Exception("The password is probably not strong enough!");
+            }
+
+            return user.Id;
+        }
+
+        private static async Task<IdentityResult> EnsureRole(IServiceProvider serviceProvider,
+                                                                      string uid, string role)
+        {
+            IdentityResult IR = null;
+            var roleManager = serviceProvider.GetService<RoleManager<appIdentityRole>>();
+
+            if (roleManager == null)
+            {
+                throw new Exception("roleManager null");
+            }
+
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                IR = await roleManager.CreateAsync(new appIdentityRole(role));
+            }
+
+            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+
+            var user = await userManager.FindByIdAsync(uid);
+
+            if (user == null)
+            {
+                throw new Exception("The testUserPw password was probably not strong enough!");
+            }
+
+            IR = await userManager.AddToRoleAsync(user, role);
+
+            return IR;
         }
     }
 
