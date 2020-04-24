@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 //using ClaveSol.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using ClaveSol.Security;
 
 namespace ClaveSol
@@ -29,16 +31,28 @@ namespace ClaveSol
             services.AddControllersWithViews();
 
 
-            services.AddDbContext<AppDbContext>(options => 
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("AppDbContext")));
 
-         //Identity
-            services.AddDbContext<appIdentityDbContext>(options => 
+            //Identity
+            services.AddDbContext<appIdentityDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("appIdentityDbContext")));
-            
+
             services.AddIdentity<appIdentityUser, appIdentityRole>()
+                .AddRoles<appIdentityRole>()
                 .AddEntityFrameworkStores<appIdentityDbContext>();
-            
+
+
+            services.AddControllers(config =>
+            {
+                // using Microsoft.AspNetCore.Mvc.Authorization;
+                // using Microsoft.AspNetCore.Authorization;
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
             services.ConfigureApplicationCookie(opt =>
             {
                 opt.LoginPath = "/Security/SignIn";
