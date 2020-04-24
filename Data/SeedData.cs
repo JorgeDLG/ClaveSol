@@ -23,19 +23,21 @@ namespace ClaveSol.Data
             var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@mail.com");
             await EnsureRole(serviceProvider, adminID, "admin"/*Constants.ContactAdministratorsRole*/);
 
-            // allowed user can create and edit contacts that they create
-            var normalID = await EnsureUser(serviceProvider, testUserPw, "normal@contoso.com");
-            await EnsureRole(serviceProvider, normalID, "normal"/*Constants.ContactManagersRole*/);
-
-
             var context = new AppDbContext(serviceProvider.
             GetRequiredService<DbContextOptions<AppDbContext>>());
 
-            SeedDB(context, adminID);
-            SeedDB(context, normalUsers);
+            SeedAppDB(context, adminID);
+
+
+            //Loop 4 NormalUsers(Identity) generation,role addition & linked/generated to AppUsers. 
+            var normalID = await EnsureUser(serviceProvider, testUserPw, "normal@mail.com");
+            await EnsureRole(serviceProvider, normalID, "normal"/*Constants.ContactManagersRole*/);
+
+            SeedAppDB(context, normalUsers);
 
         }
 
+        //Return User for push it to array?
         private static async Task<string> EnsureUser(IServiceProvider serviceProvider,
                                             string testUserPw, string UserName)
         {
@@ -92,7 +94,7 @@ namespace ClaveSol.Data
 
             return IR;
         }
-        public static void SeedDB(AppDbContext context, string adminID)
+        public static void SeedAppDB(AppDbContext context, string IdentityID)
         {
             // Look for any movies.
             if (context.User.Any())
@@ -108,7 +110,7 @@ namespace ClaveSol.Data
                     Surname = "Perez",
                     Mail = "ana@mail.com",
                     Premium = false,
-                    OwnerID = adminID
+                    OwnerID = IdentityID
 
                 },
                 new User
@@ -117,7 +119,7 @@ namespace ClaveSol.Data
                     Surname = "Perez",
                     Mail = "paco@mail.com",
                     Premium = false,
-                    OwnerID = adminID
+                    OwnerID = IdentityID
                 },
                 new User
                 {
@@ -125,7 +127,7 @@ namespace ClaveSol.Data
                     Surname = "Garcia",
                     Mail = "mario@mail.com",
                     Premium = true,
-                    OwnerID = adminID
+                    OwnerID = IdentityID
                 },
                 new User
                 {
@@ -133,7 +135,7 @@ namespace ClaveSol.Data
                     Surname = "Sanchez",
                     Mail = "arturo@mail.com",
                     Premium = true,
-                    OwnerID = adminID
+                    OwnerID = IdentityID
                 }
             );
             context.SaveChanges();
