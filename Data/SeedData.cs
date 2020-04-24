@@ -20,25 +20,28 @@ namespace ClaveSol.Data
 
             //Identity following this tutorial: https://bit.ly/3cKxRXz
 
-            var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@mail.com");
-            await EnsureRole(serviceProvider, adminID, "admin"/*Constants.ContactAdministratorsRole*/);
+            var admin = await EnsureUser(serviceProvider, testUserPw, "admin@mail.com");
+            await EnsureRole(serviceProvider, admin.Id, "admin"/*Constants.ContactAdministratorsRole*/);
 
             var context = new AppDbContext(serviceProvider.
             GetRequiredService<DbContextOptions<AppDbContext>>());
 
-            SeedAppDB(context, adminID);
+            SeedAppDB(context, admin);
 
 
             //Loop 4 NormalUsers(Identity) generation,role addition & linked/generated to AppUsers. 
-            var normalID = await EnsureUser(serviceProvider, testUserPw, "normal@mail.com");
-            await EnsureRole(serviceProvider, normalID, "normal"/*Constants.ContactManagersRole*/);
+            string[] userNamesSeed = {"ana","paco","mario","arturo"}; 
+            appIdentityUser[] normalUsers = null;
+
+            var normal = await EnsureUser(serviceProvider, testUserPw, "normal@mail.com");
+            await EnsureRole(serviceProvider, normal.Id, "normal"/*Constants.ContactManagersRole*/);
 
             SeedAppDB(context, normalUsers);
 
         }
 
         //Return User for push it to array?
-        private static async Task<string> EnsureUser(IServiceProvider serviceProvider,
+        private static async Task<appIdentityUser> EnsureUser(IServiceProvider serviceProvider,
                                             string testUserPw, string UserName)
         {
             var userManager = serviceProvider.GetService<UserManager<appIdentityUser>>();
@@ -53,16 +56,13 @@ namespace ClaveSol.Data
                     //FullName ?
                 };
                 await userManager.CreateAsync(user, testUserPw);
-
-                //Link with AppUser?
             }
 
             if (user == null)
             {
                 throw new Exception("The password is probably not strong enough!");
             }
-
-            return user.Id;
+            return user;
         }
 
         private static async Task<IdentityResult> EnsureRole(IServiceProvider serviceProvider,
