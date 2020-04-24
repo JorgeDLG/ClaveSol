@@ -11,52 +11,6 @@ namespace ClaveSol.Data
 {//UPDATE: Seed Users(AppDbContext) & Create Identity Users and Roles LINKING with it.
     public static class SeedData
     {
-        public static void SeedDB(AppDbContext context, string adminID)
-        {
-            // Look for any movies.
-            if (context.User.Any())
-            {
-                return;   // DB has been seeded
-            }
-
-            //Seeding User table (ApDbContext)
-            context.User.AddRange(
-                new User
-                {
-                    Name = "Ana",
-                    Surname = "Perez",
-                    Mail = "ana@mail.com",
-                    Premium = false,
-                    OwnerID = adminID
-
-                },
-                new User
-                {
-                    Name = "Paco",
-                    Surname = "Perez",
-                    Mail = "paco@mail.com",
-                    Premium = false,
-                    OwnerID = adminID
-                },
-                new User
-                {
-                    Name = "Mario",
-                    Surname = "Garcia",
-                    Mail = "mario@mail.com",
-                    Premium = true,
-                    OwnerID = adminID
-                },
-                new User
-                {
-                    Name = "Arturo",
-                    Surname = "Sanchez",
-                    Mail = "arturo@mail.com",
-                    Premium = true,
-                    OwnerID = adminID
-                }
-            );
-            context.SaveChanges();
-        }
         public static async Task Initialize(IServiceProvider serviceProvider, string testUserPw)
         {
             // For sample purposes seed both with the same password.
@@ -66,17 +20,19 @@ namespace ClaveSol.Data
 
             //Identity following this tutorial: https://bit.ly/3cKxRXz
 
-            var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@contoso.com");
+            var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@mail.com");
             await EnsureRole(serviceProvider, adminID, "admin"/*Constants.ContactAdministratorsRole*/);
 
             // allowed user can create and edit contacts that they create
-            var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@contoso.com");
-            await EnsureRole(serviceProvider, managerID, "manager"/*Constants.ContactManagersRole*/);
+            var normalID = await EnsureUser(serviceProvider, testUserPw, "normal@contoso.com");
+            await EnsureRole(serviceProvider, normalID, "normal"/*Constants.ContactManagersRole*/);
+
 
             var context = new AppDbContext(serviceProvider.
             GetRequiredService<DbContextOptions<AppDbContext>>());
 
             SeedDB(context, adminID);
+            SeedDB(context, normalUsers);
 
         }
 
@@ -135,6 +91,52 @@ namespace ClaveSol.Data
             IR = await userManager.AddToRoleAsync(user, role);
 
             return IR;
+        }
+        public static void SeedDB(AppDbContext context, string adminID)
+        {
+            // Look for any movies.
+            if (context.User.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            //Seeding User table (ApDbContext)
+            context.User.AddRange(
+                new User
+                {
+                    Name = "Ana",
+                    Surname = "Perez",
+                    Mail = "ana@mail.com",
+                    Premium = false,
+                    OwnerID = adminID
+
+                },
+                new User
+                {
+                    Name = "Paco",
+                    Surname = "Perez",
+                    Mail = "paco@mail.com",
+                    Premium = false,
+                    OwnerID = adminID
+                },
+                new User
+                {
+                    Name = "Mario",
+                    Surname = "Garcia",
+                    Mail = "mario@mail.com",
+                    Premium = true,
+                    OwnerID = adminID
+                },
+                new User
+                {
+                    Name = "Arturo",
+                    Surname = "Sanchez",
+                    Mail = "arturo@mail.com",
+                    Premium = true,
+                    OwnerID = adminID
+                }
+            );
+            context.SaveChanges();
         }
     }
 
