@@ -39,16 +39,11 @@ namespace ClaveSol.Data
 
             //Loop 4 NormalUsers(Identity) generation,role addition & linked/generated to AppUsers. 
             string[] userNamesSeed = { "ana", "paco", "mario", "arturo" };
-            string[,] normalUsers = null;
-            //foreach (var uSeed in userNamesSeed)
-            //{
-            //    var normal = await EnsureUser(serviceProvider, uSeed + "123", $"{uSeed}@mail.com");
-            //    await EnsureRole(serviceProvider, normal.Id, "normal"/*Constants.ContactManagersRole*/);
-            //}
+            string[,] normalUsers = new string[userNamesSeed.Length,4];
             for (int i = 0; i < userNamesSeed.Length; i++)
             {
                 var normal = await EnsureUser(serviceProvider,
-                     userNamesSeed[i] + "123", $"{userNamesSeed[i]}@mail.com");
+                     testUserPw, $"{userNamesSeed[i]}@mail.com");
                 await EnsureRole(serviceProvider, normal.Id, "normal"/*Constants.ContactManagersRole*/);
 
                 normalUsers[i, 0] = userNamesSeed[i];
@@ -129,19 +124,14 @@ namespace ClaveSol.Data
         }
         public static void SeedAppDB(AppDbContext context, string[,] IdentityUsers)
         {
-            // Look for any movies.
             if (context.User.Any())
             {
-                return;   // DB has been seeded
+                if (IdentityUsers[0,0] != "ana" && context.User.Count() != 1 || context.User.Count() >= 5) // last || prescindible?
+                {
+                    return;   // DB has been seeded
+                }
             }
 
-            //User[] AppUsers = new User[IdentityUsers.Count];
-
-            //for (int i = 0; i < AppUsers.Length; i++)
-            //{
-            //   AppUsers[i].Name = IdentityUsers[i].UserName; 
-            //}
-            //Seeding User table (ApDbContext)
             try
             {
                 for (int i = 0; i < IdentityUsers.GetLength(0); i++)
@@ -164,41 +154,6 @@ namespace ClaveSol.Data
                 throw;
             }
 
-            //context.User.AddRange(
-            //    new User
-            //    {
-            //        Name = "Ana",
-            //        Surname = "Perez",
-            //        Mail = "ana@mail.com",
-            //        Premium = false,
-            //        //OwnerID = IdentityID
-
-            //    },
-            //    new User
-            //    {
-            //        Name = "Paco",
-            //        Surname = "Perez",
-            //        Mail = "paco@mail.com",
-            //        Premium = false,
-            //        //OwnerID = IdentityID
-            //    },
-            //    new User
-            //    {
-            //        Name = "Mario",
-            //        Surname = "Garcia",
-            //        Mail = "mario@mail.com",
-            //        Premium = true,
-            //        //OwnerID = IdentityID
-            //    },
-            //    new User
-            //    {
-            //        Name = "Arturo",
-            //        Surname = "Sanchez",
-            //        Mail = "arturo@mail.com",
-            //        Premium = true,
-            //        //OwnerID = IdentityID
-            //    }
-            //);
             context.SaveChanges();
         }
     }
