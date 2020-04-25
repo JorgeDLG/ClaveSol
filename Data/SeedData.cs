@@ -1,7 +1,10 @@
+using System.ComponentModel;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ClaveSol.Models;
 using System;
+using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -20,33 +23,56 @@ namespace ClaveSol.Data
 
             //Identity following this tutorial: https://bit.ly/3cKxRXz
 
+            string[,] adminUsers = new string[1, 4];
             var admin = await EnsureUser(serviceProvider, testUserPw, "admin@mail.com");
             await EnsureRole(serviceProvider, admin.Id, "admin"/*Constants.ContactAdministratorsRole*/);
 
             var context = new AppDbContext(serviceProvider.
             GetRequiredService<DbContextOptions<AppDbContext>>());
 
-            SeedAppDB(context, admin);
+            adminUsers[0, 0] = "admin";
+            adminUsers[0, 1] = admin.UserName;//mail
+            adminUsers[0, 2] = "False";
+            adminUsers[0, 3] = admin.Id;
 
+            SeedAppDB(context, adminUsers);
 
             //Loop 4 NormalUsers(Identity) generation,role addition & linked/generated to AppUsers. 
-            string[] userNamesSeed = {"ana","paco","mario","arturo"}; 
-            appIdentityUser[] normalUsers = null;
+            string[] userNamesSeed = { "ana", "paco", "mario", "arturo" };
+            string[,] normalUsers = null;
+            //foreach (var uSeed in userNamesSeed)
+            //{
+            //    var normal = await EnsureUser(serviceProvider, uSeed + "123", $"{uSeed}@mail.com");
+            //    await EnsureRole(serviceProvider, normal.Id, "normal"/*Constants.ContactManagersRole*/);
+            //}
+            for (int i = 0; i < userNamesSeed.Length; i++)
+            {
+                var normal = await EnsureUser(serviceProvider,
+                     userNamesSeed[i] + "123", $"{userNamesSeed[i]}@mail.com");
+                await EnsureRole(serviceProvider, normal.Id, "normal"/*Constants.ContactManagersRole*/);
 
-            var normal = await EnsureUser(serviceProvider, testUserPw, "normal@mail.com");
-            await EnsureRole(serviceProvider, normal.Id, "normal"/*Constants.ContactManagersRole*/);
-
+                normalUsers[i, 0] = userNamesSeed[i];
+                normalUsers[i, 1] = $"{userNamesSeed[i]}@mail.com";
+                normalUsers[i, 2] = "False";
+                normalUsers[i, 3] = normal.Id;
+            }
             SeedAppDB(context, normalUsers);
-
         }
-
-        //Return User for push it to array?
         private static async Task<appIdentityUser> EnsureUser(IServiceProvider serviceProvider,
                                             string testUserPw, string UserName)
         {
             var userManager = serviceProvider.GetService<UserManager<appIdentityUser>>();
 
-            var user = await userManager.FindByNameAsync(UserName);
+            appIdentityUser user = null;
+            try
+            {
+                user = await userManager.FindByNameAsync(UserName);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+
             if (user == null)
             {
                 user = new appIdentityUser
@@ -76,12 +102,19 @@ namespace ClaveSol.Data
                 throw new Exception("roleManager null");
             }
 
-            if (!await roleManager.RoleExistsAsync(role))
+            try
             {
-                IR = await roleManager.CreateAsync(new appIdentityRole(role));
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    IR = await roleManager.CreateAsync(new appIdentityRole(role));
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
             }
 
-            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetService<UserManager<appIdentityUser>>();
 
             var user = await userManager.FindByIdAsync(uid);
 
@@ -94,7 +127,7 @@ namespace ClaveSol.Data
 
             return IR;
         }
-        public static void SeedAppDB(AppDbContext context, string IdentityID)
+        public static void SeedAppDB(AppDbContext context, string[,] IdentityUsers)
         {
             // Look for any movies.
             if (context.User.Any())
@@ -102,42 +135,70 @@ namespace ClaveSol.Data
                 return;   // DB has been seeded
             }
 
-            //Seeding User table (ApDbContext)
-            context.User.AddRange(
-                new User
-                {
-                    Name = "Ana",
-                    Surname = "Perez",
-                    Mail = "ana@mail.com",
-                    Premium = false,
-                    OwnerID = IdentityID
+            //User[] AppUsers = new User[IdentityUsers.Count];
 
-                },
-                new User
+            //for (int i = 0; i < AppUsers.Length; i++)
+            //{
+            //   AppUsers[i].Name = IdentityUsers[i].UserName; 
+            //}
+            //Seeding User table (ApDbContext)
+            try
+            {
+                for (int i = 0; i < IdentityUsers.GetLength(0); i++)
                 {
-                    Name = "Paco",
-                    Surname = "Perez",
-                    Mail = "paco@mail.com",
-                    Premium = false,
-                    OwnerID = IdentityID
-                },
-                new User
-                {
-                    Name = "Mario",
-                    Surname = "Garcia",
-                    Mail = "mario@mail.com",
-                    Premium = true,
-                    OwnerID = IdentityID
-                },
-                new User
-                {
-                    Name = "Arturo",
-                    Surname = "Sanchez",
-                    Mail = "arturo@mail.com",
-                    Premium = true,
-                    OwnerID = IdentityID
+                    context.User.Add(
+                        new User
+                        {
+                            Name = IdentityUsers[i, 0],
+                            Surname = "Perez",
+                            Mail = IdentityUsers[i, 1],
+                            Premium = Convert.ToBoolean(IdentityUsers[i, 2]),
+                            OwnerID = IdentityUsers[i, 3]
+                        }
+                    );
                 }
-            );
+
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+
+            //context.User.AddRange(
+            //    new User
+            //    {
+            //        Name = "Ana",
+            //        Surname = "Perez",
+            //        Mail = "ana@mail.com",
+            //        Premium = false,
+            //        //OwnerID = IdentityID
+
+            //    },
+            //    new User
+            //    {
+            //        Name = "Paco",
+            //        Surname = "Perez",
+            //        Mail = "paco@mail.com",
+            //        Premium = false,
+            //        //OwnerID = IdentityID
+            //    },
+            //    new User
+            //    {
+            //        Name = "Mario",
+            //        Surname = "Garcia",
+            //        Mail = "mario@mail.com",
+            //        Premium = true,
+            //        //OwnerID = IdentityID
+            //    },
+            //    new User
+            //    {
+            //        Name = "Arturo",
+            //        Surname = "Sanchez",
+            //        Mail = "arturo@mail.com",
+            //        Premium = true,
+            //        //OwnerID = IdentityID
+            //    }
+            //);
             context.SaveChanges();
         }
     }
