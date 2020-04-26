@@ -1,0 +1,27 @@
+using System;
+using ClaveSol.Security;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+[assembly: HostingStartup(typeof(ClaveSol.Areas.Identity.IdentityHostingStartup))]
+namespace ClaveSol.Areas.Identity
+{
+    public class IdentityHostingStartup : IHostingStartup
+    {
+        public void Configure(IWebHostBuilder builder)
+        {
+            builder.ConfigureServices((context, services) => {
+                services.AddDbContext<appIdentityDbContext>(options =>
+                    options.UseSqlite(
+                        context.Configuration.GetConnectionString("appIdentityDbContextConnection")));
+
+                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddEntityFrameworkStores<appIdentityDbContext>();
+            });
+        }
+    }
+}
