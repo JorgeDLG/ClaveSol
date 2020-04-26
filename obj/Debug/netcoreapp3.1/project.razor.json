@@ -20566,6 +20566,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Security/SignIn.cshtml",
+      "TargetPath": "Security\\SignIn.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Home/Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
