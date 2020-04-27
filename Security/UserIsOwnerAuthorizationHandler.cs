@@ -10,7 +10,7 @@ namespace ClaveSol.Security
     public class UserIsOwnerAuthorizationHandler 
         : AuthorizationHandler<OperationAuthorizationRequirement, User>
     {
-        UserManager<IdentityUser> _userManager;
+        UserManager<appIdentityUser> _userManager;
 
         public UserIsOwnerAuthorizationHandler(UserManager<appIdentityUser> 
             userManager)
@@ -19,19 +19,17 @@ namespace ClaveSol.Security
         }
 
         protected override Task
-            HandleRequirementAsync(AuthorizationHandlerContext context,
-                                   OperationAuthorizationRequirement requirement,
-                                   User resource)
+            HandleRequirementAsync(AuthorizationHandlerContext context, OperationAuthorizationRequirement requirement,
+                User resource)
         {
             if (context.User == null || resource == null)
             {
                 return Task.CompletedTask;
             }
 
-            // If not asking for CRUD permission, return.
-
             //% CONSTANTS CUSTOM CLASS CREATED here: https://docs.microsoft.com/es-es/aspnet/core/security/authorization/secure-data?view=aspnetcore-3.1#review-the-contact-operations-requirements-class
 
+            // If not asking for CRUD permission, return.
             if (requirement.Name != Constants.CreateOperationName &&
                 requirement.Name != Constants.ReadOperationName   &&
                 requirement.Name != Constants.UpdateOperationName &&
