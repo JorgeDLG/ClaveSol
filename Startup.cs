@@ -45,8 +45,8 @@ namespace ClaveSol
 
             services.AddControllers(config =>
             {
-                // using Microsoft.AspNetCore.Mvc.Authorization;
-                // using Microsoft.AspNetCore.Authorization;
+                //% Deactivating policy allow view access on run
+
                 //var policy = new AuthorizationPolicyBuilder()
                 //                 .RequireAuthenticatedUser()
                 //                 .Build();
