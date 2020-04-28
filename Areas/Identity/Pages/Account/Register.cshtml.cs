@@ -1,3 +1,7 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
+using System.Transactions;
+using System.Security.Cryptography;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +17,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ClaveSol.Models;
+using ClaveSol.Data;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ClaveSol.Areas.Identity.Pages.Account
 {
@@ -23,17 +32,20 @@ namespace ClaveSol.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ClaveSolDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ClaveSolDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -45,6 +57,18 @@ namespace ClaveSol.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [DataType(DataType.Text)]
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [DataType(DataType.Text)]
+            [Display(Name = "Surname")]
+            public string SurName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -74,10 +98,25 @@ namespace ClaveSol.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                //% Creation of IdentityUser(with pass and role)
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
+
+                //% CREATE ROLES BEFORE!
+                var result2 = await _userManager.AddToRoleAsync(user, "normal");
+
+                if (result.Succeeded && result2.Succeeded)
                 {
+                    try
+                    {
+                        //% Link & Create IdentityUser to AppDB User 
+                        var result3 = createLinkAppDB(Input.Name ,Input.SurName ,user ,_context);
+                    }
+                    catch (System.Exception)
+                    {
+                        throw;
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -109,6 +148,23 @@ namespace ClaveSol.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+        public static bool createLinkAppDB(string name, string surName, IdentityUser ideUser, ClaveSolDbContext cntxt)
+        {
+            cntxt.User.Add(
+                new User
+                {
+                    OwnerID = ideUser.Id,
+                    Name = name,
+                    Surname = surName,
+                    Mail = ideUser.Email,
+                    Premium = false,
+                    Status = 0
+                }
+            );
+            int res = cntxt.SaveChanges();
+
+            return res == 1 ? true : false;
         }
     }
 }
