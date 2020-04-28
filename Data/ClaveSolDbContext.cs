@@ -12,8 +12,10 @@ namespace ClaveSol.Data
         public ClaveSolDbContext(DbContextOptions<ClaveSolDbContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
+
         }
 
-        public DbSet<User> User {get; set;}
+        public DbSet<User> User { get; set; }
     }
 }

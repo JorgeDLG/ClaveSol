@@ -13,6 +13,7 @@ namespace ClaveSol.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
         //public DbSet<AspNetUsers> User {get; set;}
     }
