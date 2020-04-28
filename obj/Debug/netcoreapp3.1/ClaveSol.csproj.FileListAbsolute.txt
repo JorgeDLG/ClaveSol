@@ -2,7 +2,6 @@
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/appsettings.json
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/Properties/launchSettings.json
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/ClaveSol.StaticWebAssets.xml
-/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/app.db
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/ClaveSol
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/ClaveSol.deps.json
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/ClaveSol.runtimeconfig.json
@@ -186,3 +185,4 @@
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Users/Details.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Users/Edit.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Users/Index.cshtml.g.cs
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/Identity.db
