@@ -9,9 +9,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ClaveSol.Data;
-
-using Microsoft.Extensions.DependencyInjection;
-using ClaveSol.Data;
 using ClaveSol.Models;
 
 namespace ClaveSol
