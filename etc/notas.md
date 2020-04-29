@@ -1,7 +1,7 @@
 TIENDA DE INSTRUMENTOS MUSICALES 'CLAVESOL'
 ===========================================
 
-##Acciones (maximalista):
+##AccioneS (maximalista):
 
 - CRUD básico MVC (try .Core) 
 - Carrito y compra

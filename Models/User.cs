@@ -22,6 +22,21 @@ namespace ClaveSol.Models
 
         [Required]
         public bool Premium {get; set;}
-        
+
+
+
+
+        /////// Identity/Auth atributes: //////
+            //User ID for AspNetUser table
+        public string OwnerID {get; set;} 
+
+            //If general users can see it
+        public UserStatus Status {get; set;} 
+    }
+    public enum UserStatus
+    {
+        Submitted,
+        Approved,
+        Rejected
     }
 }

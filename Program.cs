@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ClaveSol.Data;
 
 using Microsoft.Extensions.DependencyInjection;
 using ClaveSol.Data;
@@ -22,19 +25,24 @@ namespace ClaveSol
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
                 try
                 {
-                    SeedData.Initialize(services); //init BD
+                    var context = services.GetRequiredService<ClaveSolDbContext>();
+                    context.Database.Migrate();
+                    var config = host.Services.GetRequiredService<IConfiguration>();
+
+                    var testUserPW = config["SeedUserPW"]; //for 1 admin seeded user
+
+                    SeedData.Initialize(services,testUserPW).Wait();
                 }
                 catch (Exception ex)
                 {
-                   var logger = services.GetRequiredService<ILogger<Program>>(); 
-                   logger.LogError(ex, "An error ocurred seeding te DB.");
-                    //throw;
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex,"An error occurred seeding the DB.");
                 }
             }
             host.Run();
