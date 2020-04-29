@@ -102,7 +102,7 @@ namespace ClaveSol.Areas.Identity.Pages.Account
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
-                //% CREATE ROLES BEFORE!
+                //% Roles created on SeedData? 
                 var result2 = await _userManager.AddToRoleAsync(user, "normal");
 
                 if (result.Succeeded && result2.Succeeded)
@@ -110,7 +110,7 @@ namespace ClaveSol.Areas.Identity.Pages.Account
                     try
                     {
                         //% Link & Create IdentityUser to AppDB User 
-                        var result3 = createLinkAppDB(Input.Name ,Input.SurName ,user ,_context);
+                        bool result3 = createLinkAppDB(Input.Name ,Input.SurName ,user ,_context);
                     }
                     catch (System.Exception)
                     {
