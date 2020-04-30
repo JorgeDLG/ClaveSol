@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using ClaveSol.Data;
 
 namespace ClaveSol.Migrations
 {
-    [DbContext(typeof(ClaveSolContext))]
+    [DbContext(typeof(ClaveSolDbContext))]
     [Migration("20200415103602_InitialCreate")]
     partial class InitialCreate
     {

@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using ClaveSol.Data;
 
 namespace ClaveSol.Migrations
 {
-    [DbContext(typeof(ClaveSolContext))]
+    [DbContext(typeof(ClaveSolDbContext))]
     partial class ClaveSolContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

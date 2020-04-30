@@ -6,14 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ClaveSol.Models;
+using ClaveSol.Data;
 
 namespace ClaveSol.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ClaveSolContext _context;
+        private readonly ClaveSolDbContext _context;
 
-        public UserController(ClaveSolContext context)
+        public UserController(ClaveSolDbContext context)
         {
             _context = context;
         }
