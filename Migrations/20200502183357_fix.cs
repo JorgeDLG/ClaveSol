@@ -2,7 +2,7 @@
 
 namespace ClaveSol.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class fix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,11 +11,13 @@ namespace ClaveSol.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(maxLength: 30, nullable: false),
                     Surname = table.Column<string>(maxLength: 60, nullable: false),
                     Mail = table.Column<string>(nullable: false),
-                    Premium = table.Column<bool>(nullable: false)
+                    Premium = table.Column<bool>(nullable: false),
+                    OwnerID = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

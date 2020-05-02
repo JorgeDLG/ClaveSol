@@ -28,8 +28,11 @@ namespace ClaveSol
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<ClaveSolDbContext>();
-                    context.Database.Migrate();
+                    var claveSolContext = services.GetRequiredService<ClaveSolDbContext>();
+                    claveSolContext.Database.Migrate();
+                    var identityContext = services.GetRequiredService<ApplicationDbContext>();
+                    identityContext.Database.Migrate();
+
                     var config = host.Services.GetRequiredService<IConfiguration>();
 
                     var testUserPW = config["SeedUserPW"]; //for 1 admin seeded user
