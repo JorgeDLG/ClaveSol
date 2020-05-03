@@ -5,27 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ClaveSol.Models;
 using ClaveSol.Data;
+using ClaveSol.Models;
 
 namespace ClaveSol.Controllers
 {
-    public class UserController : Controller
+    public class OrdersController : Controller
     {
         private readonly ClaveSolDbContext _context;
 
-        public UserController(ClaveSolDbContext context)
+        public OrdersController(ClaveSolDbContext context)
         {
             _context = context;
         }
 
-        // GET: User
+        // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+            var claveSolDbContext = _context.Order.Include(o => o.User);
+            return View(await claveSolDbContext.ToListAsync());
         }
 
-        // GET: User/Details/5
+        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var order = await _context.Order
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(order);
         }
 
-        // GET: User/Create
+        // GET: Orders/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.User, "Id", "Mail");
             return View();
         }
 
-        // POST: User/Create
+        // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Mail,Premium")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Date,nLines,Price,State,UserId")] Order order)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            ViewData["UserId"] = new SelectList(_context.User, "Id", "Mail", order.UserId);
+            return View(order);
         }
 
-        // GET: User/Edit/5
+        // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var order = await _context.Order.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
-            return View(user);
+            ViewData["UserId"] = new SelectList(_context.User, "Id", "Mail", order.UserId);
+            return View(order);
         }
 
-        // POST: User/Edit/5
+        // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Mail,Premium")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,nLines,Price,State,UserId")] Order order)
         {
-            if (id != user.Id)
+            if (id != order.Id)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace ClaveSol.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(order);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!OrderExists(order.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace ClaveSol.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            ViewData["UserId"] = new SelectList(_context.User, "Id", "Mail", order.UserId);
+            return View(order);
         }
 
-        // GET: User/Delete/5
+        // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var order = await _context.Order
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(order);
         }
 
-        // POST: User/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
+            var order = await _context.Order.FindAsync(id);
+            _context.Order.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool OrderExists(int id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return _context.Order.Any(e => e.Id == id);
         }
     }
 }

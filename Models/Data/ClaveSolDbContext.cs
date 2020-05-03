@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,5 +15,7 @@ namespace ClaveSol.Data
         }
 
         public DbSet<User> User {get; set;}
+
+        public DbSet<ClaveSol.Models.Order> Order { get; set; }
     }
 }
