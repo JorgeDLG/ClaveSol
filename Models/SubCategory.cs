@@ -9,7 +9,8 @@ namespace ClaveSol.Models
 
         [Required]
         public string Name {get; set;} //unique  
-        public int? nElements {get; set;}
+
+        //public int? nElements {get; set;} UNECESARY
 
         //Nav props
         public ICollection<Instrument> Instrument {get; set;}

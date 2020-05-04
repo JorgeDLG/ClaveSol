@@ -8,7 +8,8 @@ namespace ClaveSol.Models
         public int Id {get; set;}
         [Required]
         public string Name {get; set;} //unique
-        public int? nElements {get; set;}
+
+        //public int? nElements {get; set;} UNECESARY
 
         //Nav props
         public ICollection<SubCategory> SubCategory {get; set;}
