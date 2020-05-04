@@ -190,3 +190,4 @@
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Orders/Details.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Orders/Edit.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Orders/Index.cshtml.g.cs
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/Identity.db

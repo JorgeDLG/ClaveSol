@@ -30,7 +30,6 @@ namespace ClaveSol.Models
         public LineOrder LineOrder {get; set;}
 
             //% N-N relations (Materials and Colors) 
-
         
     }
 }
