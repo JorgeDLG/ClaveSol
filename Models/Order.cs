@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -23,5 +24,7 @@ namespace ClaveSol.Models
         //NAV Props
         public int? UserId {get; set;} //FK
         public User User {get; set;}
+
+        public ICollection<LineOrder> LineOrders {get; set;}
     }
 }
