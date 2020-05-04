@@ -20,8 +20,6 @@ namespace ClaveSol.Models
         [Required]
         [DefaultValueAttribute("Disponible")]
         public string State {get; set;} //% enum?
-        public string[] Materials {get; set;}
-        public string[] Colors {get; set;}
         public string Description {get; set;} 
         public string MediaDir {get; set;} //directory for vids and pics 
 
@@ -30,5 +28,9 @@ namespace ClaveSol.Models
         public SubCategory SubCategory {get; set;}
         public int? LineOrderId {get; set;} //FK
         public LineOrder LineOrder {get; set;}
+
+            //% N-N relations (Materials and Colors) 
+
+        
     }
 }
