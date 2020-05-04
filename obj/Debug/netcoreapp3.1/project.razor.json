@@ -20581,6 +20581,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instruments/Create.cshtml",
+      "TargetPath": "Views\\Instruments\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/SubCategories/Edit.cshtml",
       "TargetPath": "Views\\SubCategories\\Edit.cshtml",
       "FileKind": "mvc"
@@ -20588,6 +20593,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Home/Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instruments/Delete.cshtml",
+      "TargetPath": "Views\\Instruments\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20641,6 +20651,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instruments/Index.cshtml",
+      "TargetPath": "Views\\Instruments\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Home/Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
@@ -20663,6 +20678,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Categories/Edit.cshtml",
       "TargetPath": "Views\\Categories\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instruments/Details.cshtml",
+      "TargetPath": "Views\\Instruments\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20693,6 +20713,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Areas/Identity/Pages/_ViewStart.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instruments/Edit.cshtml",
+      "TargetPath": "Views\\Instruments\\Edit.cshtml",
       "FileKind": "mvc"
     }
   ],

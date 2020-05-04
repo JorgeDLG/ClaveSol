@@ -26,6 +26,8 @@ namespace ClaveSol.Models
         public decimal TotalPrice {get; set;}
 
         //Nav props
+        public int? OrderId {get; set;} //FK
+        public Order Order {get; set;}
         public int? IntrumentId {get; set;} //FK
         public Instrument Instrument {get; set;}
     }
