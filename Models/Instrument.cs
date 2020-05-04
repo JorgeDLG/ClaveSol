@@ -20,8 +20,8 @@ namespace ClaveSol.Models
         [Required]
         [DefaultValueAttribute("Disponible")]
         public string State {get; set;} //% enum?
-        public ICollection<string> Materials {get; set;}
-        public ICollection<string> Colors {get; set;}
+        public string[] Materials {get; set;}
+        public string[] Colors {get; set;}
         public string Description {get; set;} 
         public string MediaDir {get; set;} //directory for vids and pics 
 
