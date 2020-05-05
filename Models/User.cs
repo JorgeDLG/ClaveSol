@@ -29,6 +29,7 @@ namespace ClaveSol.Models
         public ICollection<Order> Orders {get; set;}
         public ICollection<List> Lists {get; set;}
         public ICollection<Comment> Comments {get; set;}
+        public ICollection<Chat> Chats {get; set;}
 
 
 

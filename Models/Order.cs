@@ -26,5 +26,6 @@ namespace ClaveSol.Models
         public User User {get; set;}
 
         public ICollection<LineOrder> LineOrders {get; set;}
+        public ICollection<Tiket> Tikets {get; set;}
     }
 }
