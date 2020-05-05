@@ -20521,13 +20521,43 @@
   "RootNamespace": "ClaveSol",
   "Documents": [
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Operators/Details.cshtml",
+      "TargetPath": "Views\\Operators\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Tikets/Edit.cshtml",
+      "TargetPath": "Views\\Tikets\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Delete.cshtml",
+      "TargetPath": "Views\\Comments\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Categories/Index.cshtml",
       "TargetPath": "Views\\Categories\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Lists/Create.cshtml",
+      "TargetPath": "Views\\Lists\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Tikets/Create.cshtml",
+      "TargetPath": "Views\\Tikets\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/LineOrders/Index.cshtml",
       "TargetPath": "Views\\LineOrders\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Lists/Edit.cshtml",
+      "TargetPath": "Views\\Lists\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20541,6 +20571,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Chats/Delete.cshtml",
+      "TargetPath": "Views\\Chats\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/SubCategories/Delete.cshtml",
       "TargetPath": "Views\\SubCategories\\Delete.cshtml",
       "FileKind": "mvc"
@@ -20551,6 +20586,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Lists/Delete.cshtml",
+      "TargetPath": "Views\\Lists\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
@@ -20558,6 +20598,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Categories/Create.cshtml",
       "TargetPath": "Views\\Categories\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Operators/Index.cshtml",
+      "TargetPath": "Views\\Operators\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20591,6 +20636,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Chats/Index.cshtml",
+      "TargetPath": "Views\\Chats\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Users/Delete.cshtml",
       "TargetPath": "Views\\Users\\Delete.cshtml",
       "FileKind": "mvc"
@@ -20598,6 +20648,16 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instruments/Create.cshtml",
       "TargetPath": "Views\\Instruments\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Chats/Create.cshtml",
+      "TargetPath": "Views\\Chats\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Tikets/Delete.cshtml",
+      "TargetPath": "Views\\Tikets\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20631,6 +20691,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Lists/Details.cshtml",
+      "TargetPath": "Views\\Lists\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/SubCategories/Create.cshtml",
       "TargetPath": "Views\\SubCategories\\Create.cshtml",
       "FileKind": "mvc"
@@ -20651,6 +20716,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Tikets/Index.cshtml",
+      "TargetPath": "Views\\Tikets\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
@@ -20663,6 +20733,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Areas/Identity/Pages/_ViewImports.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Chats/Details.cshtml",
+      "TargetPath": "Views\\Chats\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20681,8 +20756,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Operators/Edit.cshtml",
+      "TargetPath": "Views\\Operators\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Home/Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Index.cshtml",
+      "TargetPath": "Views\\Comments\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20696,8 +20781,23 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Create.cshtml",
+      "TargetPath": "Views\\Comments\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Lists/Index.cshtml",
+      "TargetPath": "Views\\Lists\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Areas/Identity/Pages/Account/Register.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Operators/Delete.cshtml",
+      "TargetPath": "Views\\Operators\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20711,6 +20811,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Details.cshtml",
+      "TargetPath": "Views\\Comments\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/SubCategories/Index.cshtml",
       "TargetPath": "Views\\SubCategories\\Index.cshtml",
       "FileKind": "mvc"
@@ -20721,8 +20826,28 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Edit.cshtml",
+      "TargetPath": "Views\\Comments\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Categories/Details.cshtml",
       "TargetPath": "Views\\Categories\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Chats/Edit.cshtml",
+      "TargetPath": "Views\\Chats\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Operators/Create.cshtml",
+      "TargetPath": "Views\\Operators\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Tikets/Details.cshtml",
+      "TargetPath": "Views\\Tikets\\Details.cshtml",
       "FileKind": "mvc"
     },
     {

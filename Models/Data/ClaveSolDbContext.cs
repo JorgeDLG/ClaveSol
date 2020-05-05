@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -20,5 +20,10 @@ namespace ClaveSol.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<SubCategory> SubCategory { get; set; }
         public DbSet<Instrument> Instrument { get; set; }
+        public DbSet<ClaveSol.Models.Comment> Comment { get; set; }
+        public DbSet<ClaveSol.Models.List> List { get; set; }
+        public DbSet<ClaveSol.Models.Chat> Chat { get; set; }
+        public DbSet<ClaveSol.Models.Operator> Operator { get; set; }
+        public DbSet<ClaveSol.Models.Tiket> Tiket { get; set; }
     }
 }
