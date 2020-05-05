@@ -231,3 +231,8 @@
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Operators/Details.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Operators/Edit.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Operators/Index.cshtml.g.cs
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Tikets/Create.cshtml.g.cs
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Tikets/Delete.cshtml.g.cs
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Tikets/Details.cshtml.g.cs
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Tikets/Edit.cshtml.g.cs
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Tikets/Index.cshtml.g.cs
