@@ -59,7 +59,7 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,LineOrderId")] Instrument instrument)
+        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,LineOrderId,InstrumentId")] Instrument instrument)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,LineOrderId")] Instrument instrument)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,LineOrderId,InstrumentId")] Instrument instrument)
         {
             if (id != instrument.Id)
             {

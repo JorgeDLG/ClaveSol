@@ -57,7 +57,7 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Deleted,UserId")] List list)
+        public async Task<IActionResult> Create([Bind("Id,Name,Deleted,UserId,ListId")] List list)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Deleted,UserId")] List list)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Deleted,UserId,ListId")] List list)
         {
             if (id != list.Id)
             {
