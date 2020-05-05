@@ -31,6 +31,9 @@ namespace ClaveSol.Models
         public ICollection<Comment> Comments {get; set;}
 
             //% N-N relations (Materials and Colors) 
+
+        public int? InstrumentId {get; set;}
+        public ICollection<List_Instrument> List_Instruments {get; set;}
         
     }
 }
