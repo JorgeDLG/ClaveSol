@@ -36,11 +36,12 @@ namespace ClaveSol.Models
         public ICollection<List_Instrument> List_Instruments {get; set;}
 
         //---------------------------
-
         public int? shInsId {get; set;}
         public ICollection<Shop_Ins> Shop_Inss {get; set;}
 
         //---------------------------
+        public int? attrInsId {get; set;}
+        public ICollection<Attribute_Ins> Attribute_Inss {get; set;}
         
     }
 }

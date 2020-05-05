@@ -4,7 +4,6 @@ namespace ClaveSol.Models
 {
     public class Shop
     {
-        
         public int Id {get; set;}
 
         [Required]
