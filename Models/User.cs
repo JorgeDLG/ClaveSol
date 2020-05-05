@@ -27,6 +27,8 @@ namespace ClaveSol.Models
 
         //NAVIGATION PROPS
         public ICollection<Order> Orders {get; set;}
+        public ICollection<List> Lists {get; set;}
+        public ICollection<Comment> Comments {get; set;}
 
 
 

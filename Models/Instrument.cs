@@ -28,6 +28,7 @@ namespace ClaveSol.Models
         public SubCategory SubCategory {get; set;}
         public int? LineOrderId {get; set;} //FK
         public LineOrder LineOrder {get; set;}
+        public ICollection<Comment> Comments {get; set;}
 
             //% N-N relations (Materials and Colors) 
         
