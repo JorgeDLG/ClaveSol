@@ -71,6 +71,7 @@ namespace ClaveSol.Data
                 .HasForeignKey(pt => pt.InstrumentId);
         }
 
-        public DbSet<ClaveSol.Models.Shop> Shop { get; set; }
+        public DbSet<Shop> Shop { get; set; }
+        public DbSet<Attribut> Attribut { get; set; }
     }
 }

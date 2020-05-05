@@ -20616,6 +20616,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Attributs/Edit.cshtml",
+      "TargetPath": "Views\\Attributs\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shared/Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
@@ -20643,6 +20648,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Chats/Index.cshtml",
       "TargetPath": "Views\\Chats\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Attributs/Delete.cshtml",
+      "TargetPath": "Views\\Attributs\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20731,6 +20741,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Attributs/Details.cshtml",
+      "TargetPath": "Views\\Attributs\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Tikets/Index.cshtml",
       "TargetPath": "Views\\Tikets\\Index.cshtml",
       "FileKind": "mvc"
@@ -20783,6 +20798,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Index.cshtml",
       "TargetPath": "Views\\Comments\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Attributs/Index.cshtml",
+      "TargetPath": "Views\\Attributs\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20858,6 +20878,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shops/Delete.cshtml",
       "TargetPath": "Views\\Shops\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Attributs/Create.cshtml",
+      "TargetPath": "Views\\Attributs\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
