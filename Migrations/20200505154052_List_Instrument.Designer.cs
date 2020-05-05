@@ -3,14 +3,16 @@ using System;
 using ClaveSol.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClaveSol.Migrations
 {
     [DbContext(typeof(ClaveSolDbContext))]
-    partial class ClaveSolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200505154052_List_Instrument")]
+    partial class List_Instrument
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
