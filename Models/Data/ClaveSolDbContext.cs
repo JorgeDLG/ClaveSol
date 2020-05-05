@@ -41,6 +41,22 @@ namespace ClaveSol.Data
                 .HasOne(pt => pt.Instrument)
                 .WithMany(t => t.List_Instruments)
                 .HasForeignKey(pt => pt.InstrumentId);
+
+
+            modelBuilder.Entity<Shop_Ins>()
+            .HasKey(t => new { t.ShopId, t.InstrumentId });
+
+            modelBuilder.Entity<Shop_Ins>()
+                .HasOne(pt => pt.Shop)
+                .WithMany(p => p.Shop_Inss)
+                .HasForeignKey(pt => pt.ShopId);
+
+            modelBuilder.Entity<Shop_Ins>()
+                .HasOne(pt => pt.Instrument)
+                .WithMany(t => t.Shop_Inss)
+                .HasForeignKey(pt => pt.InstrumentId);
         }
+
+        public DbSet<ClaveSol.Models.Shop> Shop { get; set; }
     }
 }

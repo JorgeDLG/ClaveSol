@@ -30,10 +30,17 @@ namespace ClaveSol.Models
         public LineOrder LineOrder {get; set;}
         public ICollection<Comment> Comments {get; set;}
 
-            //% N-N relations (Materials and Colors) 
+        //% N-N relations (Materials and Colors too) 
 
         public int? InstrumentId {get; set;}
         public ICollection<List_Instrument> List_Instruments {get; set;}
+
+        //---------------------------
+
+        public int? shInsId {get; set;}
+        public ICollection<Shop_Ins> Shop_Inss {get; set;}
+
+        //---------------------------
         
     }
 }

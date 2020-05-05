@@ -20571,6 +20571,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shops/Create.cshtml",
+      "TargetPath": "Views\\Shops\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Chats/Delete.cshtml",
       "TargetPath": "Views\\Chats\\Delete.cshtml",
       "FileKind": "mvc"
@@ -20651,8 +20656,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shops/Edit.cshtml",
+      "TargetPath": "Views\\Shops\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Chats/Create.cshtml",
       "TargetPath": "Views\\Chats\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shops/Index.cshtml",
+      "TargetPath": "Views\\Shops\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20776,6 +20791,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shops/Details.cshtml",
+      "TargetPath": "Views\\Shops\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
@@ -20833,6 +20853,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Categories/Details.cshtml",
       "TargetPath": "Views\\Categories\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shops/Delete.cshtml",
+      "TargetPath": "Views\\Shops\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {

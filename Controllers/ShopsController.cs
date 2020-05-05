@@ -10,23 +10,22 @@ using ClaveSol.Models;
 
 namespace ClaveSol.Controllers
 {
-    public class InstrumentsController : Controller
+    public class ShopsController : Controller
     {
         private readonly ClaveSolDbContext _context;
 
-        public InstrumentsController(ClaveSolDbContext context)
+        public ShopsController(ClaveSolDbContext context)
         {
             _context = context;
         }
 
-        // GET: Instruments
+        // GET: Shops
         public async Task<IActionResult> Index()
         {
-            var claveSolDbContext = _context.Instrument.Include(i => i.LineOrder).Include(i => i.SubCategory);
-            return View(await claveSolDbContext.ToListAsync());
+            return View(await _context.Shop.ToListAsync());
         }
 
-        // GET: Instruments/Details/5
+        // GET: Shops/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +33,39 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
-            var instrument = await _context.Instrument
-                .Include(i => i.LineOrder)
-                .Include(i => i.SubCategory)
+            var shop = await _context.Shop
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (instrument == null)
+            if (shop == null)
             {
                 return NotFound();
             }
 
-            return View(instrument);
+            return View(shop);
         }
 
-        // GET: Instruments/Create
+        // GET: Shops/Create
         public IActionResult Create()
         {
-            ViewData["LineOrderId"] = new SelectList(_context.LineOrder, "Id", "Name");
-            ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "Id", "Name");
             return View();
         }
 
-        // POST: Instruments/Create
+        // POST: Shops/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,LineOrderId,InstrumentId,shInsId")] Instrument instrument)
+        public async Task<IActionResult> Create([Bind("Id,City,ShopId")] Shop shop)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(instrument);
+                _context.Add(shop);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LineOrderId"] = new SelectList(_context.LineOrder, "Id", "Name", instrument.LineOrderId);
-            ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "Id", "Name", instrument.SubCategoryId);
-            return View(instrument);
+            return View(shop);
         }
 
-        // GET: Instruments/Edit/5
+        // GET: Shops/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +73,22 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
-            var instrument = await _context.Instrument.FindAsync(id);
-            if (instrument == null)
+            var shop = await _context.Shop.FindAsync(id);
+            if (shop == null)
             {
                 return NotFound();
             }
-            ViewData["LineOrderId"] = new SelectList(_context.LineOrder, "Id", "Name", instrument.LineOrderId);
-            ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "Id", "Name", instrument.SubCategoryId);
-            return View(instrument);
+            return View(shop);
         }
 
-        // POST: Instruments/Edit/5
+        // POST: Shops/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,LineOrderId,InstrumentId,shInsId")] Instrument instrument)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,City,ShopId")] Shop shop)
         {
-            if (id != instrument.Id)
+            if (id != shop.Id)
             {
                 return NotFound();
             }
@@ -106,12 +97,12 @@ namespace ClaveSol.Controllers
             {
                 try
                 {
-                    _context.Update(instrument);
+                    _context.Update(shop);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InstrumentExists(instrument.Id))
+                    if (!ShopExists(shop.Id))
                     {
                         return NotFound();
                     }
@@ -122,12 +113,10 @@ namespace ClaveSol.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LineOrderId"] = new SelectList(_context.LineOrder, "Id", "Name", instrument.LineOrderId);
-            ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "Id", "Name", instrument.SubCategoryId);
-            return View(instrument);
+            return View(shop);
         }
 
-        // GET: Instruments/Delete/5
+        // GET: Shops/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +124,30 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
-            var instrument = await _context.Instrument
-                .Include(i => i.LineOrder)
-                .Include(i => i.SubCategory)
+            var shop = await _context.Shop
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (instrument == null)
+            if (shop == null)
             {
                 return NotFound();
             }
 
-            return View(instrument);
+            return View(shop);
         }
 
-        // POST: Instruments/Delete/5
+        // POST: Shops/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var instrument = await _context.Instrument.FindAsync(id);
-            _context.Instrument.Remove(instrument);
+            var shop = await _context.Shop.FindAsync(id);
+            _context.Shop.Remove(shop);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool InstrumentExists(int id)
+        private bool ShopExists(int id)
         {
-            return _context.Instrument.Any(e => e.Id == id);
+            return _context.Shop.Any(e => e.Id == id);
         }
     }
 }
