@@ -57,17 +57,17 @@ namespace ClaveSol.Data
                 .HasForeignKey(pt => pt.InstrumentId);
 
 
-            modelBuilder.Entity<Attribute_Ins>()
-            .HasKey(t => new { t.AttributeId, t.InstrumentId });
+            modelBuilder.Entity<Attribut_Ins>()
+            .HasKey(t => new { t.AttributId, t.InstrumentId });
 
-            modelBuilder.Entity<Attribute_Ins>()
-                .HasOne(pt => pt.Attribute)
-                .WithMany(p => p.Attribute_Inss)
-                .HasForeignKey(pt => pt.AttributeId);
+            modelBuilder.Entity<Attribut_Ins>()
+                .HasOne(pt => pt.Attribut)
+                .WithMany(p => p.Attribut_Inss)
+                .HasForeignKey(pt => pt.AttributId);
 
-            modelBuilder.Entity<Attribute_Ins>()
+            modelBuilder.Entity<Attribut_Ins>()
                 .HasOne(pt => pt.Instrument)
-                .WithMany(t => t.Attribute_Inss)
+                .WithMany(t => t.Attribut_Inss)
                 .HasForeignKey(pt => pt.InstrumentId);
         }
 

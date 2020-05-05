@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -41,7 +42,7 @@ namespace ClaveSol.Models
 
         //---------------------------
         public int? attrInsId {get; set;}
-        public ICollection<Attribute_Ins> Attribute_Inss {get; set;}
-        
+        public ICollection<Attribut_Ins> Attribut_Inss {get; set;}
+
     }
 }
