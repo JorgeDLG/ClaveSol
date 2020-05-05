@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -36,11 +37,12 @@ namespace ClaveSol.Models
         public ICollection<List_Instrument> List_Instruments {get; set;}
 
         //---------------------------
-
         public int? shInsId {get; set;}
         public ICollection<Shop_Ins> Shop_Inss {get; set;}
 
         //---------------------------
-        
+        public int? attrInsId {get; set;}
+        public ICollection<Attribut_Ins> Attribut_Inss {get; set;}
+
     }
 }
