@@ -32,16 +32,27 @@
                     <input class="form-check-input" asp-for="Premium" /> @Html.DisplayNameFor(model => model.Premium)
                 </label>
             </div>
-            <div class="form-group">
+            <div class="form-group"> <!--% HIDE -->
                 <label asp-for="OwnerID" class="control-label"></label>
                 <input asp-for="OwnerID" class="form-control" />
                 <span asp-validation-for="OwnerID" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
+                @* <select asp-for="Status" class="form-control"></select> 
+                <input asp-for="Status" class="form-control" />
                 <span asp-validation-for="Status" class="text-danger"></span>
+            </div> *@
+            @* for identity link  *@
+            <div class="form-group">
+                <label class="control-label">Contraseña</label>
+                <input class="form-control" type="text" name="pass" />
             </div>
+            <div class="form-group">
+                <label class="control-label">Rol</label>
+                <input class="form-control" type="text" name="role" />
+            </div>
+            @*  *@
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
             </div>

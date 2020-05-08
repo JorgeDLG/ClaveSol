@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +17,14 @@ namespace ClaveSol.Controllers
     public class UsersController : Controller
     {
         private readonly ClaveSolDbContext _context;
+        private readonly ApplicationDbContext _IDcontext;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UsersController(ClaveSolDbContext context)
+        public UsersController(ClaveSolDbContext context, ApplicationDbContext IDcontext, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _IDcontext = IDcontext;
+            _userManager = userManager;
         }
 
         // GET: Users
@@ -54,11 +62,15 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Mail,Premium,OwnerID,Status")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Mail,Premium,OwnerID,Status")] User user,string pass, string role)
         {
+            user.Status = 0;
             if (ModelState.IsValid)
             {
                 _context.Add(user);
+
+                IdentityLink( pass, role, user,'c');
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -148,6 +160,29 @@ namespace ClaveSol.Controllers
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.Id == id);
+        }
+        public void IdentityLink(string pass,string role,User user,char operation)
+        {
+            //IdentityUser idUser;
+
+            switch (operation)
+            {
+                case 'c': //Create
+                    var idUser = new IdentityUser { UserName = user.Mail, Email = user.Mail };
+                var result = _userManager.CreateAsync(idUser, pass);
+                var result2 = _userManager.AddToRoleAsync(idUser, role);
+                user.OwnerID = idUser.Id;
+
+                break;
+                case 'e': //Edit
+                break;
+                case 'd': //Delete
+                break;
+                
+                default:
+                    Console.WriteLine("Unexpeted operation in switch case");
+                break;
+            }
         }
     }
 }
