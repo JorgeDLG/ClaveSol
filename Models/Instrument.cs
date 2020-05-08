@@ -10,18 +10,27 @@ namespace ClaveSol.Models
         public int Id {get; set;}
 
         [Required]
+        [Display(Name="Nombre")]
         public string Name {get; set;} //unique  
+
         [Required]
+        [Display(Name="Marca")]
         public string Brand {get; set;} //unique  
 
         [Required]
         [DefaultValueAttribute(0)]
+        [Display(Name="Precio")]
         public decimal Price {get; set;}
         
         [Required]
         [DefaultValueAttribute("Disponible")]
+        [Display(Name="Estado")]
         public string State {get; set;} //% enum?
+
+        [Display(Name="Descripción")]
         public string Description {get; set;} 
+
+        [Display(Name="Directorio Multimedia")]
         public string MediaDir {get; set;} //directory for vids and pics 
 
         //NAV Props

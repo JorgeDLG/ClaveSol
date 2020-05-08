@@ -10,15 +10,20 @@ namespace ClaveSol.Models
         public int Id {get; set;}
 
         [Required]
+        [Display(Name="Fecha")]
         public DateTime Date {get; set;} 
+
+        [Display(Name="Nº de Líneas")]
         public int nLines {get; set;} //null
 
         [Required]
         [DefaultValueAttribute(0)]
+        [Display(Name="Precio")]
         public decimal Price {get; set;}
 
         [Required]
         [DefaultValueAttribute("Procesando")]
+        [Display(Name="Estado")]
         public string State {get; set;} //% enum?
 
         //NAV Props

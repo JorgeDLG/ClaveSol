@@ -11,18 +11,22 @@ namespace ClaveSol.Models
 
         [Required]
         [DefaultValueAttribute("null")]
+        [Display(Name="Nombre")]
         public string Name {get; set;} //unique  
 
         [Required]
         [DefaultValueAttribute(0)]
+        [Display(Name="Cantidad")]
         public int Quantity {get; set;}
 
         [Required]
         [DefaultValueAttribute(0)]
+        [Display(Name="Precio Unitario")]
         public decimal UnitaryPrice {get; set;}
 
         [Required]
         [DefaultValueAttribute(0)]
+        [Display(Name="Precio Total")]
         public decimal TotalPrice {get; set;}
 
         //Nav props

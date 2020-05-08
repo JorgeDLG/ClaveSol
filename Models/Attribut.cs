@@ -8,9 +8,11 @@ namespace ClaveSol.Models
         public int Id {get; set;}
 
         [Required]
+        [Display(Name="Tipo")]
         public string Type {get; set;}
 
         [Required]
+        [Display(Name="Valor")]
         public string Value {get; set;}
 
         //NAV Props

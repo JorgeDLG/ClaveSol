@@ -10,17 +10,21 @@ namespace ClaveSol.Models
         public int Id {get; set;}
 
         [Required]
+        [Display(Name="Fecha de Inicio")]
         public DateTime StartDate {get; set;} 
 
         [Required]
+        [Display(Name="Fecha de Fin")]
         public DateTime EndDate {get; set;} 
 
         [Required]
+        [Display(Name="Nombre de Archivo")]
         public string FileName {get; set;} 
             //% Userfolder/StartDate-HH:MM(EndDate).json
 
         [Required]
         [DefaultValueAttribute(false)]
+        [Display(Name="Resolución")]
         public bool Resolved {get; set;}
 
         //NAV Props

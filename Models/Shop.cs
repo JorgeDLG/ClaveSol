@@ -7,6 +7,7 @@ namespace ClaveSol.Models
         public int Id {get; set;}
 
         [Required]
+        [Display(Name="Ciudad")]
         public string City {get; set;} //unique?
 
         //NAV Props
