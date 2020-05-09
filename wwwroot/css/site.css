@@ -74,10 +74,17 @@ body {
 /* PERSONAL STYLES */
 .logo {
   width: 15%;
+  min-width: 5em;
 }
 .navbar-toggler{
   margin: 0 auto;
 }
 .navbar-collapse{
   align-items: baseline;
+}
+.navbar-brand{
+  max-width: 5em;
+}
+.container{
+  max-width: 1540px;
 }
