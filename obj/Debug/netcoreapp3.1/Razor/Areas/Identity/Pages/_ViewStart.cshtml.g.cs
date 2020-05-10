@@ -33,15 +33,8 @@ using ClaveSol.Areas.Identity.Pages;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 7 "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Areas/Identity/Pages/_ViewImports.cshtml"
-using ClaveSol.Areas.Identity.Pages.Account;
-
-#line default
-#line hidden
-#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8f0860f8b3651edd7cbcbb17f6d23b9efe27bd7b", @"/Areas/Identity/Pages/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"248f370343f5007491f483cafc9cc658be964537", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c416477adb74585bd52be046e927fedd9577b51c", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
     public class Areas_Identity_Pages__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
