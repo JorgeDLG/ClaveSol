@@ -88,3 +88,10 @@ body {
 .container{
   max-width: 1540px;
 }
+.bi-brightness-high-fill{
+  width: 2em;
+  position: absolute;
+  right: 0px;
+  top: 1px;
+  z-index: 1;
+}
