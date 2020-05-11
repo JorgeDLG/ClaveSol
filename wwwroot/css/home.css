@@ -1,0 +1,12 @@
+.carousel-inner{
+    width: 100%;
+    height: 30em;
+}
+.carousel-inner img{
+    /* height: inherit; */
+}
+#CategoriesDropDown{
+  width: 80%;
+  margin: 0 auto;
+  /* height: 2em; */
+}

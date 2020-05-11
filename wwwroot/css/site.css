@@ -95,3 +95,8 @@ body {
   top: 1px;
   z-index: 1;
 }
+#CategoriesDropDown{
+  width: 80%;
+  margin: 0 auto;
+  /* height: 2em; */
+}
