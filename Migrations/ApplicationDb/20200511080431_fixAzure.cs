@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ClaveSol.Migrations.ApplicationDb
 {
-    public partial class fixIdent : Migration
+    public partial class fixAzure : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

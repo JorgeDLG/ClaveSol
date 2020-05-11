@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClaveSol.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200502183508_fixIdent")]
-    partial class fixIdent
+    [Migration("20200511080431_fixAzure")]
+    partial class fixAzure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

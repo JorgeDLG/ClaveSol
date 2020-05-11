@@ -9,14 +9,51 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClaveSol.Migrations
 {
     [DbContext(typeof(ClaveSolDbContext))]
-    [Migration("20200505154052_List_Instrument")]
-    partial class List_Instrument
+    [Migration("20200511080359_fixAzure")]
+    partial class fixAzure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
+
+            modelBuilder.Entity("ClaveSol.Models.Attribut", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AttributId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attribut");
+                });
+
+            modelBuilder.Entity("ClaveSol.Models.Attribut_Ins", b =>
+                {
+                    b.Property<int>("AttributId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("InstrumentId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AttributId", "InstrumentId");
+
+                    b.HasIndex("InstrumentId");
+
+                    b.ToTable("Attribut_Ins");
+                });
 
             modelBuilder.Entity("ClaveSol.Models.Category", b =>
                 {
@@ -139,6 +176,12 @@ namespace ClaveSol.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("SubCategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("attrInsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("shInsId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -264,6 +307,39 @@ namespace ClaveSol.Migrations
                     b.ToTable("Order");
                 });
 
+            modelBuilder.Entity("ClaveSol.Models.Shop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ShopId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Shop");
+                });
+
+            modelBuilder.Entity("ClaveSol.Models.Shop_Ins", b =>
+                {
+                    b.Property<int>("ShopId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("InstrumentId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ShopId", "InstrumentId");
+
+                    b.HasIndex("InstrumentId");
+
+                    b.ToTable("Shop_Ins");
+                });
+
             modelBuilder.Entity("ClaveSol.Models.SubCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -353,6 +429,21 @@ namespace ClaveSol.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("ClaveSol.Models.Attribut_Ins", b =>
+                {
+                    b.HasOne("ClaveSol.Models.Attribut", "Attribut")
+                        .WithMany("Attribut_Inss")
+                        .HasForeignKey("AttributId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClaveSol.Models.Instrument", "Instrument")
+                        .WithMany("Attribut_Inss")
+                        .HasForeignKey("InstrumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ClaveSol.Models.Chat", b =>
                 {
                     b.HasOne("ClaveSol.Models.Operator", "Operator")
@@ -420,6 +511,21 @@ namespace ClaveSol.Migrations
                     b.HasOne("ClaveSol.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ClaveSol.Models.Shop_Ins", b =>
+                {
+                    b.HasOne("ClaveSol.Models.Instrument", "Instrument")
+                        .WithMany("Shop_Inss")
+                        .HasForeignKey("InstrumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClaveSol.Models.Shop", "Shop")
+                        .WithMany("Shop_Inss")
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ClaveSol.Models.SubCategory", b =>
