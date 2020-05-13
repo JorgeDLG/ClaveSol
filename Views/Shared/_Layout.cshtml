@@ -10,15 +10,15 @@
 </head>
 <body>
             @* Icon switcher for dark/light theme *@
-            <svg class="bi bi-brightness-high-fill" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <svg onclick="switchDarkMode()" class="bi bi-brightness-high-fill" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <circle cx="8" cy="8" r="4"/>
               <path fill-rule="evenodd" d="M8 0a.5.5 0 01.5.5v2a.5.5 0 01-1 0v-2A.5.5 0 018 0zm0 13a.5.5 0 01.5.5v2a.5.5 0 01-1 0v-2A.5.5 0 018 13zm8-5a.5.5 0 01-.5.5h-2a.5.5 0 010-1h2a.5.5 0 01.5.5zM3 8a.5.5 0 01-.5.5h-2a.5.5 0 010-1h2A.5.5 0 013 8zm10.657-5.657a.5.5 0 010 .707l-1.414 1.415a.5.5 0 11-.707-.708l1.414-1.414a.5.5 0 01.707 0zm-9.193 9.193a.5.5 0 010 .707L3.05 13.657a.5.5 0 01-.707-.707l1.414-1.414a.5.5 0 01.707 0zm9.193 2.121a.5.5 0 01-.707 0l-1.414-1.414a.5.5 0 01.707-.707l1.414 1.414a.5.5 0 010 .707zM4.464 4.465a.5.5 0 01-.707 0L2.343 3.05a.5.5 0 01.707-.707l1.414 1.414a.5.5 0 010 .708z" clip-rule="evenodd"/>
             </svg>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/logoClaveSol.png" class=".img-fluid logo" alt="logoClaveSol"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler navbar-light border-secondary type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -29,7 +29,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li> *@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
                         @if(User.Identity.IsAuthenticated)
@@ -37,17 +37,17 @@
                             @if (User.IsInRole("admin"))
                             {
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#">Administración</a>
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Administración</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" asp-asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a>
                                     </div>
                                 </li>
                             }else if(User.IsInRole("normal")){
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Pedidos</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index">Pedidos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Lists" asp-action="Index">Listas</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Lists" asp-action="Index">Listas</a>
                                 </li>
                             }
                         }
@@ -82,11 +82,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/myfuncs.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
-    @section Scripts {
-         <script  type="text/javascript">
-         alert("test");
-         </script>
-    }
 </body>
 </html>
