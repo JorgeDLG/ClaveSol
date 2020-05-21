@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="icon" type="image/x-icon" href="~/favicon.ico">
 </head>
-@* @model IEnumerable<ToDoItem> //% only 1 model? *@
-@inject List<ClaveSol.Models.Category> category
+@* @model IEnumerable<ToDoItem> //% only 1 model? 
+@inject List<ClaveSol.Models.Category> category *@
+@inject ICategoryService categoryService
 <body>
             @* Icon switcher for dark/light theme *@
             <svg onclick="switchDarkMode()" class="bi bi-brightness-high-fill" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -36,12 +37,21 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorías</a>
                             <div class="dropdown-menu">
-                                @foreach (var item in category)
+
+
+                                @foreach (var item in (IEnumerable<Category>)categoryService.GetAllCategories())
                                 {
                                     <a class="dropdown-item" asp-asp-area="" asp-controller="Categories" asp-action="Index">
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </a>
                                 }
+
+                                @*foreach (var item in category)
+                                {
+                                    <a class="dropdown-item" asp-asp-area="" asp-controller="Categories" asp-action="Index">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </a>
+                                }*@
                             </div>
                        </li>
 

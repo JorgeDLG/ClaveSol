@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ClaveSol.Models;
+using ClaveSol.Controllers;
 
 namespace ClaveSol
 {
@@ -82,7 +83,8 @@ namespace ClaveSol
 
             //MODEL INJECTION(FOR _LAYOUT)
             //services.AddTransient<Category>();
-            services.AddTransient<List<Category>>();
+            //services.AddTransient<List<Category>>();
+            services.AddScoped<ICategoryService,CategoryService>();
         }
 
 
