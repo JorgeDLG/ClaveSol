@@ -10,7 +10,7 @@
 </head>
 @* @model IEnumerable<ToDoItem> //% only 1 model? 
 @inject List<ClaveSol.Models.Category> category *@
-@inject ICategoryService categoryService
+@inject ClaveSol.Controllers.ICategoryService categoryService
 <body>
             @* Icon switcher for dark/light theme *@
             <svg onclick="switchDarkMode()" class="bi bi-brightness-high-fill" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@
 
                                 @foreach (var item in (IEnumerable<Category>)categoryService.GetAllCategories())
                                 {
-                                    <a class="dropdown-item" asp-asp-area="" asp-controller="Categories" asp-action="Index">
+                                    <a class="dropdown-item" asp-asp-area="" asp-controller="Categories" asp-action="Details" asp-route-id="@item.Id">
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </a>
                                 }
