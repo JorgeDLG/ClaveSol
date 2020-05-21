@@ -12,6 +12,7 @@ using ClaveSol.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ClaveSol.Models;
 
 namespace ClaveSol
 {
@@ -79,7 +80,8 @@ namespace ClaveSol
                 options.SlidingExpiration = true;
             });
 
-
+            //MODEL INJECTION(FOR _LAYOUT)
+            services.AddTransient<Category>();
         }
 
 
