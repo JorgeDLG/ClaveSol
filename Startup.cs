@@ -81,7 +81,8 @@ namespace ClaveSol
             });
 
             //MODEL INJECTION(FOR _LAYOUT)
-            services.AddTransient<Category>();
+            //services.AddTransient<Category>();
+            services.AddTransient<List<Category>>();
         }
 
 
