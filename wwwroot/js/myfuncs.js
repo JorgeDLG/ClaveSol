@@ -1,6 +1,6 @@
 console.log("loaded");
 
-var elements = $('body,nav,p,svg').not('.bi-bucket');
+var elements = $('body,nav,p,svg,.card-body').not('.bi-bucket');
 
 if (localStorage.getItem('darkMode') == null) {
     localStorage.setItem('darkMode','0');
