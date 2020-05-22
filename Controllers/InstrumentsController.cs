@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,20 @@ namespace ClaveSol.Controllers
         public async Task<IActionResult> Index()
         {
             var claveSolDbContext = _context.Instrument.Include(i => i.LineOrder).Include(i => i.SubCategory);
-            return View(await claveSolDbContext.ToListAsync());
+
+            //return View(await claveSolDbContext.ToListAsync());
+
+            //Query to get Instruments with attrib Color=Red
+            var insAttrRed = from ins in _context.Instrument
+            join attr in _context.Attribut on ins.Id equals attr.Id into test 
+            from attr2 in test
+            where attr2.Id == 1
+            select ins;
+
+            return View(await insAttrRed.ToListAsync());
+
+            //claveSolDbContext = _context.Instrument.Where(x => x.Attribut_Inss.Any(s => s.AttributId == Attribut.Id));
+            // context.Clinics.Where(x => x.Doctors.Any(d => d.Specialties.Any(s => s.SpecialtyId == specialtyId)))
         }
 
         // GET: Instruments/Details/5
