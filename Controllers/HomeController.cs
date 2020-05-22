@@ -22,10 +22,21 @@ namespace ClaveSol.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchStr)
         {
-            var claveSolDbContext = _context.Instrument.Include(i => i.LineOrder).Include(i => i.SubCategory);
-            return View(await claveSolDbContext.ToListAsync());
+            ViewData["CurrentFilter"] = searchStr;
+            //var claveSolDbContext = _context.Instrument.Include(i => i.LineOrder).Include(i => i.SubCategory);
+            var claveSolDbContext = from s in _context.Instrument
+                                    select s;
+
+            if (!String.IsNullOrEmpty(searchStr))
+            {
+                claveSolDbContext = claveSolDbContext.Where(s => s.Name.Contains(searchStr)
+                                                    || s.Brand.Contains(searchStr));
+            }
+
+
+            return View(await claveSolDbContext.AsNoTracking().ToListAsync());
         }
 
         public IActionResult Privacy()

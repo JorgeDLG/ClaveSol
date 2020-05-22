@@ -45,19 +45,18 @@
         </div>
 
 <h2>INSTRUMENTOS</h2>
-
 @* FILTERS *@
 <form class="border border-primary mb-3">
   <h4>FILTROS</h4>
   <div class="form-row align-items-center">
     <div class="col-sm-3 my-1">
-      <label class="sr-only" for="inlineFormInputName">Name</label>
-      <input type="text" class="form-control" id="inlineFormInputName" placeholder="Jane Doe">
+      @* <label class="sr-only" for="inputIns">Instrument</label> *@
+      <input type="text" class="form-control" id="inputIns" placeholder="Nombre o Marca" name="searchStr" value="@ViewData["currentFilter"]">
     </div>
     <div class="col-auto my-1">
-      <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
-      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-        <option selected>Choose...</option>
+      @* <label class="mr-sm-2" for="selectSubCat">Subcategory</label> *@
+      <select class="custom-select mr-sm-2" id="selectSubCat">
+        <option selected>SubCategoría</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
@@ -65,12 +64,15 @@
     </div>
     <div class="col-auto my-1">
       <div class="custom-control custom-checkbox mr-sm-2">
-        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-        <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+        <input type="checkbox" class="custom-control-input" id="checkboxDisponible">
+        <label class="custom-control-label" for="checkboxDisponible">Sólo disponibles</label>
       </div>
     </div>
     <div class="col-auto my-1">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+    <div class="col-auto my-1">
+      <button type="submit" class="btn btn-secondary">Restablecer</button>
     </div>
   </div>
 </form>
@@ -83,9 +85,9 @@
       <div class="card mx-auto h-100">
         <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">
-                @Html.DisplayFor(modelItem => item.Name)
-          </h5>
+          <a class="card-title" asp-asp-area="" asp-controller="Instruments" asp-action="Details" asp-route-id="@item.Id" style="font-size:1.5em;">
+              @Html.DisplayFor(modelItem => item.Name)
+          </a>
 
           @* ICONO CARRITO *@
           <svg class="bi bi-bucket" width="1.2em" height="1.2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
