@@ -6,6 +6,27 @@
 
 <h1>Detalles</h1>
 
+
+@{
+    string categName = @ViewBag.catName;
+    //int? catId = Model.SubCategory.CategoryId;
+    //string catName = from subCat in Model.SubCategory
+    //join cat in Model.SubCategory.Category on subCat.Id equals cat.SubCategoryId into test
+    //from cat2 in test
+    //where cat2.Id == subCat.Categories.SubCategoryId
+    //select 
+}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"> @*Categoria => details*@
+        @Html.ActionLink(@categName, "Details", "Categories", new { id = @Model.SubCategory.CategoryId }, null)
+    <li class="breadcrumb-item"> @*SubCategoria => details*@
+        @Html.ActionLink(Model.SubCategory.Name, "Details", "SubCategories", new { id = @Model.SubCategoryId }, null)
+    </li> 
+    <li class="breadcrumb-item active" aria-current="page">@Model.Name</li> @*Instrumento*@
+  </ol>
+</nav>
+
 <div>
     <h4>Instrumento</h4>
     <hr />

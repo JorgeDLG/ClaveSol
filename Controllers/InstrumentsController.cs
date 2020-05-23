@@ -57,6 +57,12 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
+            //get Cat.Name of Ins
+               var CatName = from c in _context.Category
+               where c.Id == instrument.SubCategory.CategoryId
+               select c.Name;
+                ViewBag.catName = CatName.FirstOrDefault();
+
             return View(instrument);
         }
 
