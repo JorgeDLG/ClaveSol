@@ -1,0 +1,9 @@
+#brandPrice{
+    text-align: center;
+}
+#brandPrice h2{
+display: inline-block;
+}
+.multimedia ul, .multimedia img{
+    margin: 0 auto;
+}

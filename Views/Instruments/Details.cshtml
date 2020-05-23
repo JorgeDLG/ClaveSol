@@ -3,18 +3,15 @@
 @{
     ViewData["Title"] = "Detalles";
 }
+<head>
+    <link href="@Url.Content("~/css/instrDetails.css")" rel="stylesheet" type="text/css" />
+</head>
 
-<h1>Detalles</h1>
+@* <h1>Detalles</h1> *@
 
 
 @{
     string categName = @ViewBag.catName;
-    //int? catId = Model.SubCategory.CategoryId;
-    //string catName = from subCat in Model.SubCategory
-    //join cat in Model.SubCategory.Category on subCat.Id equals cat.SubCategoryId into test
-    //from cat2 in test
-    //where cat2.Id == subCat.Categories.SubCategoryId
-    //select 
 }
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -26,6 +23,62 @@
     <li class="breadcrumb-item active" aria-current="page">@Model.Name</li> @*Instrumento*@
   </ol>
 </nav>
+
+
+<div class="container">
+    <h1 class="text-center">@Html.DisplayFor(model => model.Name)</h1>
+    
+    <div id="brandPrice">
+        <h2>@Html.DisplayFor(model => model.Brand)</h2>
+        <money>@Html.DisplayFor(model => model.Price)<currency>€</currency></money>
+    </div>
+    <p class="text-center">@Html.DisplayFor(model => model.Description)</p>
+
+
+        @* ##### MULTIMEDIA ##### *@
+
+  <div class="col mb-4">
+    <div class="card multimedia">
+      <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 14em;">
+      @* LISTA MEDIA *@
+      <ul class="list-group list-group-horizontal-md">
+        <li class="list-group-item">
+             <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 5em;">
+        </li>
+        <li class="list-group-item">
+             <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 5em;">
+        </li>
+        <li class="list-group-item">
+             <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 5em;">
+        </li>
+      </ul>
+
+      @* <div class="card-body">
+        <h5 class="card-title">MULTIMEDIA</h5>
+      </div> *@
+    </div>
+  </div>
+
+  <div class="col mb-4">
+    <div class="card">
+      <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 3em;">
+      <div class="card-body">
+        <h5 class="card-title">ATRIBUTOS</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+</div>
+
+  <div class="col mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">DISPONIBILIDAD</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 <div>
     <h4>Instrumento</h4>
