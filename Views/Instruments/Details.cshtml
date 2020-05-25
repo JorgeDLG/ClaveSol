@@ -7,8 +7,6 @@
     <link href="@Url.Content("~/css/instrDetails.css")" rel="stylesheet" type="text/css" />
 </head>
 
-@* <h1>Detalles</h1> *@
-
 
 @{
     string categName = @ViewBag.catName;
@@ -40,7 +38,6 @@
         @* ##### MULTIMEDIA ##### *@
   @if(String.IsNullOrEmpty(Model.MediaDir))
   {
-    @* <div class="col mb-4"> *@
      <div class="card multimedia">
          <div id="escenario">
             <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="...">  @*MAIN PIC*@
@@ -64,120 +61,44 @@
          </li>
        </ul>
      </div>
-   @* </div> *@
   }
   else
   {
     //% GET MEDIA FOR INSTRUMENT USING MediaDir
   }
 
-  @* <div class="col mb-4"> *@
-    <div class="card">
-      <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 3em;">
-      <div class="card-body">
-        <h5 class="card-title">ATRIBUTOS</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
 
-    <div class="card disponibilidad">
-      <div class="card-body">
-        <h5 class="card-title">DISPONIBILIDAD</h5>
-        <p >@Html.DisplayFor(model => model.State)</p>
-        <span class="font-weight-bold"> Alicante</span>
-        <h3 class="text-success border border-success">AÑADIR</h3>
-      </div>
-    </div>
+
+
+    @* TODO
+        1- Get all atributes organized by type.
+        2- parse 'Colors' & Select list for the rest
+        3- Send it all over form when AÑADIR.
+     *@
+    @{
+        Dictionary<string,string> attribs = ViewBag.attribs;
+        @attribs
+    } 
+    <form>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">ATRIBUTOS</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+
+        <div class="card disponibilidad">
+          <div class="card-body">
+            <h5 class="card-title">DISPONIBILIDAD</h5>
+            <p >@Html.DisplayFor(model => model.State)</p>
+            <span class="font-weight-bold"> Alicante</span>
+            <h3 class="text-success border border-success">AÑADIR</h3>
+          </div>
+        </div>
+    </form>
 
 </div>
 
-  @* <div class="col mb-4"> *@
-  @* </div> *@
-@* </div> *@
-@* </div> *@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--div>
-    <h4>Instrumento</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Brand)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.State)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MediaDir)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MediaDir)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SubCategory)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubCategory.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LineOrder)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LineOrder.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InstrumentId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InstrumentId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.shInsId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.shInsId)
-        </dd>
-    </dl>
-</div-->
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Volver al listado</a>

@@ -1,3 +1,4 @@
+using System.Xml.Linq;
 using System.Runtime.CompilerServices;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,19 @@ namespace ClaveSol.Controllers
                select c.Name;
                 ViewBag.catName = CatName.FirstOrDefault();
             //
+
+            //get Attribs and sent to View
+            Dictionary<string, string> attribs = new Dictionary<string, string>();
+
+            //get Attribs for that Instr 
+            var Attribs = from ins in _context.Instrument
+            join attr in _context.Attribut on ins.Id equals attr.Id into test 
+            from attr2 in test
+            where ins.Id == instrument.Id 
+            select attr2;
+
+            //attribs.Add();
+            ViewBag.attribs = Attribs.ToDictionary(k => k.Type,v => v.Value);
 
             return View(instrument);
         }
