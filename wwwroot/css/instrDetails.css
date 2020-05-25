@@ -4,6 +4,45 @@
 #brandPrice h2{
 display: inline-block;
 }
-.multimedia ul, .multimedia img{
+
+.multimedia > *{
     margin: 0 auto;
+}
+.multimedia video{
+    border: 1.5px solid red;
+}
+.multimedia img{
+    border: 1px solid rgba(0,0,0,.125); 
+}
+#escenario > *{
+    max-width: 30em;
+}
+/*< 523 width 20em*/
+/* @media(max-width: 523px){
+    #escenario > *{
+        max-width: 15em;
+    }
+} */
+.planos img,.planos video{
+    width: 5em;
+}
+
+@media (max-width: 1090px) {
+    ul{
+        flex-direction: column !important;
+    }
+  }
+
+  /* DISPONIBILIDAD */
+.disponibilidad p, .disponibilidad h3{
+    display: inline-block;
+}
+.disponibilidad h3{
+    border-radius: 0.3em;
+    padding: 0.1em;
+    float: right;
+}
+.disponibilidad h3:hover{
+    background-color: limegreen;
+    color:white !important;
 }

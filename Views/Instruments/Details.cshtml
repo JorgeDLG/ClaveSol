@@ -25,41 +25,53 @@
 </nav>
 
 
-<div class="container">
-    <h1 class="text-center">@Html.DisplayFor(model => model.Name)</h1>
+<div class="card-columns">
+    <div class="card">
+        <h1 class="text-center">@Html.DisplayFor(model => model.Name)</h1>
     
-    <div id="brandPrice">
-        <h2>@Html.DisplayFor(model => model.Brand)</h2>
-        <money>@Html.DisplayFor(model => model.Price)<currency>€</currency></money>
+        <div id="brandPrice">
+            <h2>@Html.DisplayFor(model => model.Brand)</h2>
+            <money>@Html.DisplayFor(model => model.Price)<currency>€</currency></money>
+        </div>
+        <p class="text-center">@Html.DisplayFor(model => model.Description)</p>
     </div>
-    <p class="text-center">@Html.DisplayFor(model => model.Description)</p>
 
 
         @* ##### MULTIMEDIA ##### *@
+  @if(String.IsNullOrEmpty(Model.MediaDir))
+  {
+    @* <div class="col mb-4"> *@
+     <div class="card multimedia">
+         <div id="escenario">
+            <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="...">  @*MAIN PIC*@
+         </div>
 
-  <div class="col mb-4">
-    <div class="card multimedia">
-      <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 14em;">
-      @* LISTA MEDIA *@
-      <ul class="list-group list-group-horizontal-md">
-        <li class="list-group-item">
-             <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 5em;">
-        </li>
-        <li class="list-group-item">
-             <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 5em;">
-        </li>
-        <li class="list-group-item">
-             <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 5em;">
-        </li>
-      </ul>
+       @* LISTA MEDIA *@
+       <ul class="list-group list-group-horizontal-md planos">
+         <li id="plano" class="list-group-item"> @*VIDEO*@
+             <video class="card-img-top" controls>
+                 <source src="~/assets/defaultIns.webm" type="video/webm"> 
+             </video>
+         </li>
+         <li id="2plano" class="list-group-item">
+              <img src="~/assets/defaultIns2.jpg" class="card-img-top" alt="...">
+         </li>
+         <li id="3plano" class="list-group-item">
+              <img src="~/assets/defaultIns3.jpg" class="card-img-top" alt="...">
+         </li>
+         <li id="4plano" class="list-group-item">
+              <img src="~/assets/defaultIns4.jpg" class="card-img-top" alt="...">
+         </li>
+       </ul>
+     </div>
+   @* </div> *@
+  }
+  else
+  {
+    //% GET MEDIA FOR INSTRUMENT USING MediaDir
+  }
 
-      @* <div class="card-body">
-        <h5 class="card-title">MULTIMEDIA</h5>
-      </div> *@
-    </div>
-  </div>
-
-  <div class="col mb-4">
+  @* <div class="col mb-4"> *@
     <div class="card">
       <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="..." style="width: 3em;">
       <div class="card-body">
@@ -67,20 +79,40 @@
         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
       </div>
     </div>
-</div>
 
-  <div class="col mb-4">
-    <div class="card">
+    <div class="card disponibilidad">
       <div class="card-body">
         <h5 class="card-title">DISPONIBILIDAD</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p >@Html.DisplayFor(model => model.State)</p>
+        <span class="font-weight-bold"> Alicante</span>
+        <h3 class="text-success border border-success">AÑADIR</h3>
       </div>
     </div>
-  </div>
-</div>
+
 </div>
 
-<div>
+  @* <div class="col mb-4"> *@
+  @* </div> *@
+@* </div> *@
+@* </div> *@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--div>
     <h4>Instrumento</h4>
     <hr />
     <dl class="row">
@@ -145,8 +177,12 @@
             @Html.DisplayFor(model => model.shInsId)
         </dd>
     </dl>
-</div>
+</div-->
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Volver al listado</a>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/insDetails.js" asp-append-version="true"></script>
