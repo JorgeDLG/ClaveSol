@@ -75,8 +75,7 @@ namespace ClaveSol.Controllers
             where ins.Id == instrument.Id 
             select attr2;
 
-            //attribs.Add();
-            ViewBag.attribs = Attribs.ToDictionary(k => k.Type,v => v.Value);
+            ViewBag.attribs = Attribs.ToList();
 
             return View(instrument);
         }

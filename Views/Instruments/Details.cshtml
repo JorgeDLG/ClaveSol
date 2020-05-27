@@ -70,20 +70,63 @@
 
 
 
+
     @* TODO
-        1- Get all atributes organized by type.
+        1- GET ATTRIBUTES DATA AND RENDER SORTED BY TYPE (KEY)
         2- parse 'Colors' & Select list for the rest
         3- Send it all over form when AÑADIR.
      *@
-    @{
-        Dictionary<string,string> attribs = ViewBag.attribs;
-        @attribs
+    @{ //GET ATTRIBUTES DATA AND RENDER SORTED BY TYPE (KEY)
+        Dictionary<string,List<string>> attrs = new Dictionary<string,List<string>>();
+        var attribsQuery = ViewBag.attribs;
+
+        foreach (var att in attribsQuery)
+        {
+          List<string> valUeList = new List<string>();
+
+          if (attrs.ContainsKey(att.Type))
+          {
+             //APEND Value for this Type (key) 
+             valUeList = attrs[att.Type];
+             valUeList.Add(att.Value);
+
+          }else{
+            //CREATE new Key with new List with Value
+           valUeList.Add(att.Value);
+           attrs.Add(att.Type,valUeList);
+          }
+        }
     } 
     <form>
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">ATRIBUTOS</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+            @{
+              List<string> valueList = new List<string>();
+              foreach (var key in attrs)
+              {
+                string Type = key.Key;
+                valueList = @key.Value;
+
+                <h5>@Type</h5>
+
+                @foreach (var value in valueList)
+                {
+                  @if (@Type == "Color")
+                  {
+                    <div id="@Type">
+                        <div id="@value"></div>
+                    </div>
+                  }
+                  else
+                  {
+                    <select name="@Type" id="@Type">
+                       <option value="@value">@value</option>
+                    </select>
+                  }
+                }
+              }
+            }
           </div>
         </div>
 

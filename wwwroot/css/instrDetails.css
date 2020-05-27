@@ -33,6 +33,32 @@ display: inline-block;
     }
   }
 
+  /* ATTRIBUTES */
+
+#Color{
+    border: 1px solid rgba(0,0,0,.125); 
+    width: fit-content;
+    display: inline-block;
+}
+#Color div{
+    width: 2em;
+    display: inline-block;
+    height: 1.8em;
+    /* border: 1px solid green; */
+    vertical-align: middle;
+    margin: 0.1em;
+}
+#Color div#Rojo{
+    background-color: red;
+}
+#Color div#Verde{
+    background-color: green;
+}
+#Color div#Azul{
+    background-color: blue;
+}
+
+
   /* DISPONIBILIDAD */
 .disponibilidad p, .disponibilidad h3{
     display: inline-block;
