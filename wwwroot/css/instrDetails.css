@@ -57,7 +57,9 @@ display: inline-block;
 #Color div#Azul{
     background-color: blue;
 }
-
+.selected{
+    border: 1px solid orange;
+}
 
   /* DISPONIBILIDAD */
 .disponibilidad p, .disponibilidad h3{

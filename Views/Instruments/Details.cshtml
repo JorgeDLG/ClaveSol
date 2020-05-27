@@ -115,7 +115,10 @@
                   @if (@Type == "Color")
                   {
                     <div id="@Type">
-                        <div id="@value"></div>
+                        <div id="@value">
+                          @* Make it selected: checked="checked" *@
+                          <input hidden type="radio" id="@value" name="radioColor" value="@value">
+                        </div>
                     </div>
                   }
                   else
