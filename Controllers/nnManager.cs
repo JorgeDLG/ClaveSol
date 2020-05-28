@@ -30,6 +30,7 @@ namespace ClaveSol.Controllers
                 ShopIns = await _context.Shop_Ins.ToListAsync()
             };
             return View(nnModels);
-        } 
+        }
+
     }
 }
