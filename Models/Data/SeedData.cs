@@ -52,7 +52,6 @@ namespace ClaveSol.Data
                 normalUsers[i, 3] = normal.Id;
             }
             SeedAppDB(context, normalUsers);
-
             SeedAppTables(context);
         }
         private static async Task<IdentityUser> EnsureUser(IServiceProvider serviceProvider,
@@ -161,7 +160,7 @@ namespace ClaveSol.Data
         private static void SeedAppTables(ClaveSolDbContext cnt)
         {
             if (cnt.Attribut.Any() || cnt.Instrument.Any() || cnt.Category.Any() || cnt.SubCategory.Any() ||
-                cnt.List.Any() /*|| cnt.Attibut_Ins.Any() || cnt.List_Instrument.Any() */
+                cnt.List.Any() || cnt.Attribut_Ins.Any() || cnt.List_Instrument.Any() || cnt.Shop_Ins.Any()
             )
                 return; //already seeded
             
@@ -222,6 +221,7 @@ namespace ClaveSol.Data
                 cnt.SaveChanges(); 
 
                 // N-N TABLES
+
                 List<Attribut_Ins> Attr_Inss = new List<Attribut_Ins>();
                     //cosas rojas
                 Attr_Inss.Add(new Attribut_Ins {AttributId=1,InstrumentId=1});
@@ -234,11 +234,56 @@ namespace ClaveSol.Data
                     //cosas azules
                 Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=2});
                 Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=5});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=7});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=7});  
+                    //cosas de madera
+                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=1});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=2});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=3});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=4});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=6});
+                    //cosas de plastico
+                Attr_Inss.Add(new Attribut_Ins {AttributId=5,InstrumentId=2});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=5,InstrumentId=5});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=5,InstrumentId=7});
+                    //cosas de metal
+                Attr_Inss.Add(new Attribut_Ins {AttributId=6,InstrumentId=2});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=6,InstrumentId=5});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=6,InstrumentId=6});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=6,InstrumentId=7});
+                    //con set puas
+                Attr_Inss.Add(new Attribut_Ins {AttributId=7,InstrumentId=3});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=7,InstrumentId=5});
+                    //con set puas
+                Attr_Inss.Add(new Attribut_Ins {AttributId=8,InstrumentId=5});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=8,InstrumentId=7});
                 cnt.Attribut_Ins.AddRange(Attr_Inss);
                 cnt.SaveChanges(); 
 
-            }
+                List<List_Instrument> list_ListIns = new List<List_Instrument>();
+                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=1});
+                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=2});
+                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=3});
+                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=4});
+                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=5});
+                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=6});
+                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=7});
+                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=1});
+                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=5});
+                cnt.List_Instrument.AddRange(list_ListIns);
+                cnt.SaveChanges(); 
+
+                List<Shop_Ins> list_ShopIns = new List<Shop_Ins>();
+                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=1});
+                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=2});
+                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=3});
+                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=4});
+                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=5});
+                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=6});
+                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=7});
+                cnt.Shop_Ins.AddRange(list_ShopIns);
+                cnt.SaveChanges(); 
+
+            } //1.FLAUTA 2.ARMONICA 3.ANDALUZA 4.PIANO 5.ELECTRICA 6.OBOE 7.BATERIA
             catch (System.Exception)
             {
                 throw;

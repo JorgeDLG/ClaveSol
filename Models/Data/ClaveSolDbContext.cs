@@ -76,7 +76,7 @@ namespace ClaveSol.Data
 
         //N-N DBSETS
         public DbSet<Attribut_Ins> Attribut_Ins { get; set; }
-        public DbSet<List_Instrument> List_Instruments { get; set; }
+        public DbSet<List_Instrument> List_Instrument { get; set; }
         public DbSet<Shop_Ins> Shop_Ins { get; set; }
     }
 }
