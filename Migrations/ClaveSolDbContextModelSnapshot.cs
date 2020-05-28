@@ -46,6 +46,9 @@ namespace ClaveSol.Migrations
                     b.Property<int>("InstrumentId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("AttributId", "InstrumentId");
 
                     b.HasIndex("InstrumentId");
@@ -258,6 +261,9 @@ namespace ClaveSol.Migrations
                     b.Property<int>("InstrumentId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("ListId", "InstrumentId");
 
                     b.HasIndex("InstrumentId");
@@ -329,6 +335,9 @@ namespace ClaveSol.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("InstrumentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ShopId", "InstrumentId");

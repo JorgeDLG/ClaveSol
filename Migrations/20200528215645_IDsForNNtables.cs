@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ClaveSol.Migrations
 {
-    public partial class fixAzure : Migration
+    public partial class IDsForNNtables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -268,7 +268,8 @@ namespace ClaveSol.Migrations
                 columns: table => new
                 {
                     AttributId = table.Column<int>(nullable: false),
-                    InstrumentId = table.Column<int>(nullable: false)
+                    InstrumentId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -323,7 +324,8 @@ namespace ClaveSol.Migrations
                 columns: table => new
                 {
                     ListId = table.Column<int>(nullable: false),
-                    InstrumentId = table.Column<int>(nullable: false)
+                    InstrumentId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -347,7 +349,8 @@ namespace ClaveSol.Migrations
                 columns: table => new
                 {
                     ShopId = table.Column<int>(nullable: false),
-                    InstrumentId = table.Column<int>(nullable: false)
+                    InstrumentId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

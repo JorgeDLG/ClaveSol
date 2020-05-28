@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClaveSol.Migrations
 {
     [DbContext(typeof(ClaveSolDbContext))]
-    [Migration("20200511080359_fixAzure")]
-    partial class fixAzure
+    [Migration("20200528215645_IDsForNNtables")]
+    partial class IDsForNNtables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,9 @@ namespace ClaveSol.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("InstrumentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("AttributId", "InstrumentId");
@@ -260,6 +263,9 @@ namespace ClaveSol.Migrations
                     b.Property<int>("InstrumentId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("ListId", "InstrumentId");
 
                     b.HasIndex("InstrumentId");
@@ -331,6 +337,9 @@ namespace ClaveSol.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("InstrumentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ShopId", "InstrumentId");
