@@ -20606,6 +20606,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/nnManager/Details.cshtml",
+      "TargetPath": "Views\\nnManager\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Operators/Index.cshtml",
       "TargetPath": "Views\\Operators\\Index.cshtml",
       "FileKind": "mvc"
@@ -20678,6 +20683,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Shops/Index.cshtml",
       "TargetPath": "Views\\Shops\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/nnManager/Delete.cshtml",
+      "TargetPath": "Views\\nnManager\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20821,6 +20831,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/nnManager/Index.cshtml",
+      "TargetPath": "Views\\nnManager\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Create.cshtml",
       "TargetPath": "Views\\Comments\\Create.cshtml",
       "FileKind": "mvc"
@@ -20866,6 +20881,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/nnManager/Edit.cshtml",
+      "TargetPath": "Views\\nnManager\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Edit.cshtml",
       "TargetPath": "Views\\Comments\\Edit.cshtml",
       "FileKind": "mvc"
@@ -20893,6 +20913,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Operators/Create.cshtml",
       "TargetPath": "Views\\Operators\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/nnManager/Create.cshtml",
+      "TargetPath": "Views\\nnManager\\Create.cshtml",
       "FileKind": "mvc"
     },
     {

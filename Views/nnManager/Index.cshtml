@@ -1,0 +1,54 @@
+@model IEnumerable<ClaveSol.Models.nnModels>
+
+@{
+    ViewData["Title"] = "Tablas n-n";
+}
+
+<h1>Tablas N-N</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AttrIns.Count())
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Deleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListId)
+            </th>
+            <th></th> *@
+        </tr>
+    </thead>
+    <tbody>
+@*foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Mail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+*@
