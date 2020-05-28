@@ -52,6 +52,8 @@ namespace ClaveSol.Data
                 normalUsers[i, 3] = normal.Id;
             }
             SeedAppDB(context, normalUsers);
+
+            SeedAppTables(context);
         }
         private static async Task<IdentityUser> EnsureUser(IServiceProvider serviceProvider,
                                             string testUserPw, string UserName)
@@ -155,8 +157,94 @@ namespace ClaveSol.Data
 
             context.SaveChanges();
         }
-    }
 
+        private static void SeedAppTables(ClaveSolDbContext cnt)
+        {
+            if (cnt.Attribut.Any() || cnt.Instrument.Any() || cnt.Category.Any() || cnt.SubCategory.Any() ||
+                cnt.List.Any() /*|| cnt.Attibut_Ins.Any() || cnt.List_Instrument.Any() */
+            )
+                return; //already seeded
+            
+            try
+            {
+                List<Attribut> attributsList = new List<Attribut>();
+                attributsList.Add(new Attribut {Type = "Color",Value = "Rojo"}); //1
+                attributsList.Add(new Attribut {Type = "Color",Value = "Verde"}); //2
+                attributsList.Add(new Attribut {Type = "Color",Value = "Azul"}); //3
+                attributsList.Add(new Attribut {Type = "Material",Value = "Madera"}); //4
+                attributsList.Add(new Attribut {Type = "Material",Value = "Plástico"}); //5
+                attributsList.Add(new Attribut {Type = "Material",Value = "Metal"}); //6
+                attributsList.Add(new Attribut {Type = "Accesorio",Value = "Set Puas"}); //7
+                attributsList.Add(new Attribut {Type = "Accesorio",Value = "Pedal Distorsión"}); //8
+                cnt.Attribut.AddRange(attributsList);
+                cnt.SaveChanges(); 
+
+                List<Category> CatList = new List<Category>();
+                CatList.Add(new Category {Name="Viento"});
+                CatList.Add(new Category {Name="Cuerda"});
+                CatList.Add(new Category {Name="Percusión"});
+                cnt.Category.AddRange(CatList);
+                cnt.SaveChanges(); 
+
+                List<SubCategory> SubCatList = new List<SubCategory>();
+                SubCatList.Add(new SubCategory {Name="Flautas",CategoryId=1});
+                SubCatList.Add(new SubCategory {Name="Armonicas",CategoryId=1});
+                SubCatList.Add(new SubCategory {Name="Guitarras",CategoryId=2});
+                SubCatList.Add(new SubCategory {Name="Pianos",CategoryId=3});
+                SubCatList.Add(new SubCategory {Name="Oboes",CategoryId=1});
+                SubCatList.Add(new SubCategory {Name="Baterias",CategoryId=3});
+                cnt.SubCategory.AddRange(SubCatList);
+                cnt.SaveChanges(); 
+
+                List<Instrument> insList = new List<Instrument>();
+                insList.Add(new Instrument {Name="Flauta India",Brand="Native",Price=200,State="Disponible",SubCategoryId=1,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Armonica X",Brand="FXX",Price=50,State="Disponible",SubCategoryId=2,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Guitarra Andaluza X",Brand="El Cordobes",Price=300,State="Disponible",SubCategoryId=3,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Piano Y",Brand="Yamaha",Price=1000,State="Disponible",SubCategoryId=4,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Electric 900",Brand="Hendrix",Price=660,State="Disponible",SubCategoryId=3,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Oboe RK",Brand="Obs",Price=850,State="Disponible",SubCategoryId=5,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Bateria 10T",Brand="FXX",Price=700,State="Disponible",SubCategoryId=6,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                cnt.Instrument.AddRange(insList);
+                cnt.SaveChanges(); 
+
+                List<List> Lists = new List<List>();
+                Lists.Add(new List {Name="Deseos",Deleted=false,UserId=1});
+                Lists.Add(new List {Name="Deseos",Deleted=false,UserId=2});
+                Lists.Add(new List {Name="Deseos",Deleted=false,UserId=3});
+                cnt.SubCategory.AddRange(SubCatList);
+                cnt.SaveChanges(); 
+
+                List<Shop> Shops = new List<Shop>();
+                Shops.Add(new Shop {City="Alicante"});
+                Shops.Add(new Shop {City="Valencia"});
+                Shops.Add(new Shop {City="Murcia"});
+                cnt.SubCategory.AddRange(SubCatList);
+                cnt.SaveChanges(); 
+
+                // N-N TABLES
+                List<Attribut_Ins> Attr_Inss = new List<Attribut_Ins>();
+                    //cosas rojas
+                Attr_Inss.Add(new Attribut_Ins {AttributId=1,InstrumentId=1});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=1,InstrumentId=2});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=1,InstrumentId=4});
+                    //cosas verdes
+                Attr_Inss.Add(new Attribut_Ins {AttributId=2,InstrumentId=2});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=2,InstrumentId=5});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=2,InstrumentId=7});
+                    //cosas azules
+                Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=2});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=5});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=7});
+                cnt.Attribut_Ins.AddRange(Attr_Inss);
+                cnt.SaveChanges(); 
+
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+    }
 }
 
 
