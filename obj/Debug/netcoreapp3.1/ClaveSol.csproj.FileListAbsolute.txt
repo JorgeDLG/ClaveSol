@@ -245,3 +245,4 @@
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Attributs/Details.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Attributs/Edit.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Attributs/Index.cshtml.g.cs
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/Identity.db

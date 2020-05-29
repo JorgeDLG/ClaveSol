@@ -106,13 +106,13 @@
               foreach (var key in attrs)
               {
                 string Type = key.Key;
-                valueList = @key.Value;
+                valueList = @key.Value; //list of attrs
 
                 <h5>@Type</h5>
 
-                @foreach (var value in valueList)
+                if (@Type == "Color")
                 {
-                  @if (@Type == "Color")
+                  @foreach (var value in valueList)
                   {
                     <div id="@Type">
                         <div id="@value">
@@ -121,12 +121,14 @@
                         </div>
                     </div>
                   }
-                  else
-                  {
-                    <select name="@Type" id="@Type">
-                       <option value="@value">@value</option>
-                    </select>
-                  }
+                }else
+                {
+                  <select name="@Type" id="@Type">
+                    @foreach (var value in valueList)
+                    {
+                      <option value="@value">@value</option>
+                    }
+                  </select>
                 }
               }
             }

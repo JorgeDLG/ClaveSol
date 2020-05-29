@@ -69,11 +69,16 @@ namespace ClaveSol.Controllers
             Dictionary<string, string> attribs = new Dictionary<string, string>();
 
             //get Attribs for that Instr 
+            //var Attribs = from ins in _context.Instrument
+            //join attr in _context.Attribut on ins.Id equals attr.Id into test 
+            //from attr2 in test
+            //where ins.Id == instrument.Id 
+            //select attr2;
+
             var Attribs = from ins in _context.Instrument
-            join attr in _context.Attribut on ins.Id equals attr.Id into test 
-            from attr2 in test
-            where ins.Id == instrument.Id 
-            select attr2;
+            join attr in _context.Attribut on ins.Id equals attr.Id
+            //where ins.Id == instrument.Id 
+            select attr;
 
             ViewBag.attribs = Attribs.ToList();
 
