@@ -75,9 +75,11 @@ namespace ClaveSol.Controllers
             //where ins.Id == instrument.Id 
             //select attr2;
 
-            var Attribs = from ins in _context.Instrument
-            join attr in _context.Attribut on ins.Id equals attr.Id
-            //where ins.Id == instrument.Id 
+            var insId = instrument.Id;
+
+            var Attribs = from attr in _context.Attribut
+            join attIns in _context.Attribut_Ins on attr.Id equals attIns.AttributId
+            where attIns.InstrumentId == insId
             select attr;
 
             ViewBag.attribs = Attribs.ToList();
