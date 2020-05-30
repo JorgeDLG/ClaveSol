@@ -9,9 +9,9 @@
 <p>
     <a asp-action="Create">Crear Nuevo</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-hover table-responsive table-striped">
     <thead>
-        <tr>
+        <tr class="text-center">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -42,12 +42,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.shInsId)
             </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="text-center">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>

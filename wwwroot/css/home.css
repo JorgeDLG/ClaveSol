@@ -22,3 +22,35 @@
   transform: scale(1.4,1.4);
   color: green;
 }
+form{
+  border: 1px solid rgba(0,0,0,.125); 
+}
+h1{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: normal;
+
+  background: -webkit-gradient(linear, left top, right top, from(#068D9D), color-stop(50%, #E56399), to(#7F96FF));
+  background: linear-gradient(to right, #068D9D 0%, #E56399 50%, #7F96FF 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+h2{
+  display: inline-block;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 5em;
+  font-weight: bold;
+
+  background: -webkit-gradient(linear, left top, right top, from(#068D9D), color-stop(50%, #E56399), to(#7F96FF));
+  background: linear-gradient(to right, #068D9D 0%, #E56399 50%, #7F96FF 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h4{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: bold;
+}

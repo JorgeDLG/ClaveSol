@@ -72,6 +72,7 @@ body {
 
 
 /* PERSONAL STYLES */
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;500;600;700&display=swap');
 .logo {
   width: 15%;
   min-width: 5em;
