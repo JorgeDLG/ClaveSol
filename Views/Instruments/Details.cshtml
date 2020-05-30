@@ -112,15 +112,15 @@
 
                 if (@Type == "Color")
                 {
-                  @foreach (var value in valueList)
-                  {
-                    <div id="@Type">
-                        <div id="@value">
-                          @* Make it selected: checked="checked" *@
-                          <input hidden type="radio" id="@value" name="radioColor" value="@value">
-                        </div>
-                    </div>
-                  }
+                  <div id="@Type">
+                    @foreach (var value in valueList)
+                    {
+                      <div id="@value">
+                        @* Make it selected: checked="checked" *@
+                        <input hidden type="radio" id="@value" name="radioColor" value="@value">
+                      </div>
+                    }
+                  </div>
                 }else
                 {
                   <select name="@Type" id="@Type">

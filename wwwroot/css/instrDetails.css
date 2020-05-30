@@ -58,7 +58,7 @@ display: inline-block;
     background-color: blue;
 }
 .selected{
-    border: 1px solid orange;
+    border: 4px solid orange;
 }
 
   /* DISPONIBILIDAD */

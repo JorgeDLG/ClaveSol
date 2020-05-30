@@ -64,10 +64,10 @@ function ClickEvToPlanos() {
 
 ////////////////// ATTRIBUTES ////////////////////
 
-var colorsCont = $("#Color");
+var colorContainer = $("#Color");
 
 try {
-    var colorsOptions = colorsCont.find("div");
+    var colorsOptions = colorContainer.find("div");
 
     colorsOptions.each(function () {
         $(this).click(select);
@@ -78,8 +78,8 @@ try {
 }
 
 function select() {
-    colorsCont.find("input").removeAttr("checked");
-    colorsCont.find("input").removeClass("selected");
+    colorContainer.find("input").removeAttr("checked");
+    colorContainer.find("div").removeClass("selected");
 
     $(this).addClass("selected");
     $(this).find("input").attr("checked", "checked");
