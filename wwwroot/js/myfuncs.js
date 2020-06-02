@@ -1,6 +1,6 @@
 console.log("loaded myfuncs.js");
 
-var elements = $('body,nav,p,svg,.card-body,ol,div.card,li').not('.bi-bucket');
+var elements = $('body,nav,p,svg,.card-body,ol,div.card,li').not('.bi-cart4');
 var tables = $('table');
 
 if (localStorage.getItem('darkMode') == null) { //init rutine (inizialice darkMode to false)
