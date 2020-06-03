@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClaveSol.Migrations
 {
     [DbContext(typeof(ClaveSolDbContext))]
-    [Migration("20200603131543_InsLineOrdersFIX")]
-    partial class InsLineOrdersFIX
+    [Migration("20200603163728_LineOrderIntrumentIdFIX")]
+    partial class LineOrderIntrumentIdFIX
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -195,9 +195,6 @@ namespace ClaveSol.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("InstrumentId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("IntrumentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")

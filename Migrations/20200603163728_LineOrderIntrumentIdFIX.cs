@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ClaveSol.Migrations
 {
-    public partial class InsLineOrdersFIX : Migration
+    public partial class LineOrderIntrumentIdFIX : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -298,7 +298,6 @@ namespace ClaveSol.Migrations
                     UnitaryPrice = table.Column<decimal>(nullable: false),
                     TotalPrice = table.Column<decimal>(nullable: false),
                     OrderId = table.Column<int>(nullable: true),
-                    IntrumentId = table.Column<int>(nullable: true),
                     InstrumentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

@@ -59,7 +59,7 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Quantity,UnitaryPrice,TotalPrice,OrderId,IntrumentId")] LineOrder lineOrder)
+        public async Task<IActionResult> Create([Bind("Id,Name,Quantity,UnitaryPrice,TotalPrice,OrderId,InstrumentId")] LineOrder lineOrder)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace ClaveSol.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstrumentId"] = new SelectList(_context.Instrument, "Id", "Brand", lineOrder.IntrumentId);
+            ViewData["InstrumentId"] = new SelectList(_context.Instrument, "Id", "Brand", lineOrder.InstrumentId);
             ViewData["OrderId"] = new SelectList(_context.Order, "Id", "State", lineOrder.OrderId);
             return View(lineOrder);
         }
@@ -85,6 +85,7 @@ namespace ClaveSol.Controllers
             {
                 return NotFound();
             }
+            ViewData["InstrumentId"] = new SelectList(_context.Instrument, "Id", "Brand", lineOrder.InstrumentId);
             ViewData["OrderId"] = new SelectList(_context.Order, "Id", "State", lineOrder.OrderId);
             return View(lineOrder);
         }
@@ -94,7 +95,7 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Quantity,UnitaryPrice,TotalPrice,OrderId,IntrumentId")] LineOrder lineOrder)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Quantity,UnitaryPrice,TotalPrice,OrderId,InstrumentId")] LineOrder lineOrder)
         {
             if (id != lineOrder.Id)
             {
@@ -121,6 +122,7 @@ namespace ClaveSol.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["InstrumentId"] = new SelectList(_context.Instrument, "Id", "Brand", lineOrder.InstrumentId);
             ViewData["OrderId"] = new SelectList(_context.Order, "Id", "State", lineOrder.OrderId);
             return View(lineOrder);
         }
@@ -134,6 +136,7 @@ namespace ClaveSol.Controllers
             }
 
             var lineOrder = await _context.LineOrder
+                .Include(l => l.Instrument)
                 .Include(l => l.Order)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lineOrder == null)

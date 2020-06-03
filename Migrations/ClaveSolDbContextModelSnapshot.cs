@@ -195,9 +195,6 @@ namespace ClaveSol.Migrations
                     b.Property<int?>("InstrumentId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("IntrumentId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");

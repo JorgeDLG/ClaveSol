@@ -52,7 +52,7 @@ namespace ClaveSol.Models
                    Quantity = amount,
                    UnitaryPrice = instrument.Price,
                    TotalPrice = instrument.Price,
-                   IntrumentId = instrument.Id,
+                   InstrumentId = instrument.Id,
                    Instrument = instrument
                };
                _context.LineOrder.Add(lineOr); //No store on db? volatile LineOrders until Pay?
@@ -97,7 +97,7 @@ namespace ClaveSol.Models
             var lineOrds = from lOrds in _context.LineOrder
                                     select lOrds;
 
-            return lineOrds.Where(s => s.IntrumentId == ins.Id).FirstOrDefault();
+            return lineOrds.Where(s => s.InstrumentId == ins.Id).FirstOrDefault();
         }
 
     }
