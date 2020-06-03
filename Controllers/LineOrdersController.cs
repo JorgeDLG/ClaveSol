@@ -22,7 +22,7 @@ namespace ClaveSol.Controllers
         // GET: LineOrders
         public async Task<IActionResult> Index()
         {
-            var claveSolDbContext = _context.LineOrder.Include(l => l.Order);
+            var claveSolDbContext = _context.LineOrder.Include(l => l.Instrument).Include(l => l.Order);
             return View(await claveSolDbContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace ClaveSol.Controllers
             }
 
             var lineOrder = await _context.LineOrder
+                .Include(l => l.Instrument)
                 .Include(l => l.Order)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lineOrder == null)
@@ -48,6 +49,7 @@ namespace ClaveSol.Controllers
         // GET: LineOrders/Create
         public IActionResult Create()
         {
+            ViewData["InstrumentId"] = new SelectList(_context.Instrument, "Id", "Brand");
             ViewData["OrderId"] = new SelectList(_context.Order, "Id", "State");
             return View();
         }
@@ -65,6 +67,7 @@ namespace ClaveSol.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["InstrumentId"] = new SelectList(_context.Instrument, "Id", "Brand", lineOrder.IntrumentId);
             ViewData["OrderId"] = new SelectList(_context.Order, "Id", "State", lineOrder.OrderId);
             return View(lineOrder);
         }
