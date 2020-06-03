@@ -251,3 +251,4 @@
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Instruments/Edit.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Instruments/Index.cshtml.g.cs
 /home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/bin/Debug/netcoreapp3.1/Identity.db
+/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/obj/Debug/netcoreapp3.1/Razor/Views/Orders/CartHome.cshtml.g.cs
