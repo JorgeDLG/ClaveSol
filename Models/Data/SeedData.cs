@@ -171,115 +171,147 @@ namespace ClaveSol.Data
                 attributsList.Add(new Attribut {Type = "Color",Value = "Verde"}); //2
                 attributsList.Add(new Attribut {Type = "Color",Value = "Azul"}); //3
                 attributsList.Add(new Attribut {Type = "Material",Value = "Madera"}); //4
-                attributsList.Add(new Attribut {Type = "Material",Value = "Plástico"}); //5
+                attributsList.Add(new Attribut {Type = "Material",Value = "Plastico"}); //5
                 attributsList.Add(new Attribut {Type = "Material",Value = "Metal"}); //6
                 attributsList.Add(new Attribut {Type = "Accesorio",Value = "Set Puas"}); //7
-                attributsList.Add(new Attribut {Type = "Accesorio",Value = "Pedal Distorsión"}); //8
+                attributsList.Add(new Attribut {Type = "Accesorio",Value = "Pedal Distorsion"}); //8
                 cnt.Attribut.AddRange(attributsList);
                 cnt.SaveChanges(); 
 
                 List<Category> CatList = new List<Category>();
                 CatList.Add(new Category {Name="Viento"});
                 CatList.Add(new Category {Name="Cuerda"});
-                CatList.Add(new Category {Name="Percusión"});
+                CatList.Add(new Category {Name="Percusion"});
                 cnt.Category.AddRange(CatList);
                 cnt.SaveChanges(); 
 
+                int idCatViento = getCatIdByName("Viento");
+                int idCatCuerda = getCatIdByName("Cuerda");
+                int idCatPercusion = getCatIdByName("Percusion");
+
                 List<SubCategory> SubCatList = new List<SubCategory>();
-                SubCatList.Add(new SubCategory {Name="Flautas",CategoryId=1});
-                SubCatList.Add(new SubCategory {Name="Armonicas",CategoryId=1});
-                SubCatList.Add(new SubCategory {Name="Guitarras",CategoryId=2});
-                SubCatList.Add(new SubCategory {Name="Pianos",CategoryId=3});
-                SubCatList.Add(new SubCategory {Name="Oboes",CategoryId=1});
-                SubCatList.Add(new SubCategory {Name="Baterias",CategoryId=3});
+                SubCatList.Add(new SubCategory {Name="Flautas",CategoryId=idCatViento});
+                SubCatList.Add(new SubCategory {Name="Armonicas",CategoryId=idCatViento});
+                SubCatList.Add(new SubCategory {Name="Guitarras",CategoryId=idCatCuerda});
+                SubCatList.Add(new SubCategory {Name="Pianos",CategoryId=idCatPercusion});
+                SubCatList.Add(new SubCategory {Name="Oboes",CategoryId=idCatViento});
+                SubCatList.Add(new SubCategory {Name="Baterias",CategoryId=idCatPercusion});
                 cnt.SubCategory.AddRange(SubCatList);
                 cnt.SaveChanges(); 
 
+                int idSubCatFlautas = getSubCatIdByName("Flautas");
+                int idSubCatArmonicas = getSubCatIdByName("Armonicas");
+                int idSubCatGuitarras = getSubCatIdByName("Guitarras");
+                int idSubCatPianos = getSubCatIdByName("Pianos");
+                int idSubCatOboes = getSubCatIdByName("Oboes");
+                int idSubCatBaterias = getSubCatIdByName("Baterias");
+
                 List<Instrument> insList = new List<Instrument>();
-                insList.Add(new Instrument {Name="Flauta India",Brand="Native",Price=200,State="Disponible",SubCategoryId=1,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
-                insList.Add(new Instrument {Name="Armonica X",Brand="FXX",Price=50,State="Disponible",SubCategoryId=2,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
-                insList.Add(new Instrument {Name="Guitarra Andaluza X",Brand="El Cordobes",Price=300,State="Disponible",SubCategoryId=3,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
-                insList.Add(new Instrument {Name="Piano Y",Brand="Yamaha",Price=1000,State="Disponible",SubCategoryId=4,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
-                insList.Add(new Instrument {Name="Electric 900",Brand="Hendrix",Price=660,State="Disponible",SubCategoryId=3,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
-                insList.Add(new Instrument {Name="Oboe RK",Brand="Obs",Price=850,State="Disponible",SubCategoryId=5,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
-                insList.Add(new Instrument {Name="Bateria 10T",Brand="FXX",Price=700,State="Disponible",SubCategoryId=6,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Flauta India",Brand="Native",Price=200,State="Disponible",SubCategoryId=idSubCatFlautas,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Armonica X",Brand="FXX",Price=50,State="Disponible",SubCategoryId=idSubCatArmonicas,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Guitarra Andaluza X",Brand="El Cordobes",Price=300,State="Disponible",SubCategoryId=idSubCatGuitarras,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Piano Y",Brand="Yamaha",Price=1000,State="Disponible",SubCategoryId=idSubCatPianos,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Electric 900",Brand="Hendrix",Price=660,State="Disponible",SubCategoryId=idSubCatGuitarras,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Oboe RK",Brand="Obs",Price=850,State="Disponible",SubCategoryId=idSubCatOboes,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
+                insList.Add(new Instrument {Name="Bateria 10T",Brand="FXX",Price=700,State="Disponible",SubCategoryId=idSubCatBaterias,Description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."});
                 cnt.Instrument.AddRange(insList);
                 cnt.SaveChanges(); 
 
-                List<List> Lists = new List<List>();
-                Lists.Add(new List {Name="Deseos",Deleted=false,UserId=1});
-                Lists.Add(new List {Name="Deseos",Deleted=false,UserId=2});
-                Lists.Add(new List {Name="Deseos",Deleted=false,UserId=3});
-                cnt.SubCategory.AddRange(SubCatList);
+                List<List> ListList = new List<List>();
+                ListList.Add(new List {Name="Deseos",Deleted=false,UserId=1});
+                ListList.Add(new List {Name="Deseos",Deleted=false,UserId=2});
+                ListList.Add(new List {Name="Deseos",Deleted=false,UserId=3});
+                cnt.List.AddRange(ListList);
                 cnt.SaveChanges(); 
 
-                List<Shop> Shops = new List<Shop>();
-                Shops.Add(new Shop {City="Alicante"});
-                Shops.Add(new Shop {City="Valencia"});
-                Shops.Add(new Shop {City="Murcia"});
-                cnt.SubCategory.AddRange(SubCatList);
+                List<Shop> ShopList = new List<Shop>();
+                ShopList.Add(new Shop {City="Alicante"});
+                ShopList.Add(new Shop {City="Valencia"});
+                ShopList.Add(new Shop {City="Murcia"});
+                cnt.Shop.AddRange(ShopList);
                 cnt.SaveChanges(); 
 
                 // N-N TABLES
 
+                int idAttRed = getAttributeIdByValue("Rojo");
+                int idAttGreen = getAttributeIdByValue("Verde");
+                int idAttBlue = getAttributeIdByValue("Azul");
+                int idAttMadera = getAttributeIdByValue("Madera");
+                int idAttPlastico = getAttributeIdByValue("Plastico");
+                int idAttMetal = getAttributeIdByValue("Metal");
+                int idAttPuas = getAttributeIdByValue("Set Puas");
+                int idAttPedal = getAttributeIdByValue("Pedal Distorsion");
+
+                int idInsFlauta = getInstrumIdByName("Flauta India");
+                int idInsArmonica = getInstrumIdByName("Armonica X");
+                int idInsAndaluza = getInstrumIdByName("Guitarra Andaluza X");
+                int idInsPiano = getInstrumIdByName("Piano Y");
+                int idInsElectric = getInstrumIdByName("Electric 900");
+                int idInsOboe = getInstrumIdByName("Oboe RK");
+                int idInsBateria = getInstrumIdByName("Bateria 10T");
+
+                int idShopAlicante = getShopIdByCity("Alicante");
+                int idShopValencia = getShopIdByCity("Valencia");
+                int idShopMurcia = getShopIdByCity("Murcia");
+
                 List<Attribut_Ins> Attr_Inss = new List<Attribut_Ins>();
                     //cosas rojas
-                Attr_Inss.Add(new Attribut_Ins {AttributId=1,InstrumentId=1});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=1,InstrumentId=2});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=1,InstrumentId=4});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttRed,InstrumentId=idInsFlauta});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttRed,InstrumentId=idInsArmonica});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttRed,InstrumentId=idInsPiano});
                     //cosas verdes
-                Attr_Inss.Add(new Attribut_Ins {AttributId=2,InstrumentId=2});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=2,InstrumentId=5});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=2,InstrumentId=7});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttGreen,InstrumentId=idInsArmonica});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttGreen,InstrumentId=idInsElectric});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttGreen,InstrumentId=idInsBateria});
                     //cosas azules
-                Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=2});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=5});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=3,InstrumentId=7});  
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttBlue,InstrumentId=idInsArmonica});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttBlue,InstrumentId=idInsElectric});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttBlue,InstrumentId=idInsBateria});  
                     //cosas de madera
-                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=1});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=2});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=3});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=4});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=4,InstrumentId=6});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMadera,InstrumentId=idInsFlauta});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMadera,InstrumentId=idInsArmonica});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMadera,InstrumentId=idInsAndaluza});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMadera,InstrumentId=idInsPiano});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMadera,InstrumentId=idInsOboe});
                     //cosas de plastico
-                Attr_Inss.Add(new Attribut_Ins {AttributId=5,InstrumentId=2});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=5,InstrumentId=5});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=5,InstrumentId=7});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttPlastico,InstrumentId=idInsArmonica});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttPlastico,InstrumentId=idInsElectric});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttPlastico,InstrumentId=idInsBateria});
                     //cosas de metal
-                Attr_Inss.Add(new Attribut_Ins {AttributId=6,InstrumentId=2});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=6,InstrumentId=5});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=6,InstrumentId=6});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=6,InstrumentId=7});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMetal,InstrumentId=idInsArmonica});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMetal,InstrumentId=idInsElectric});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMetal,InstrumentId=idInsOboe});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttMetal,InstrumentId=idInsBateria});
                     //con set puas
-                Attr_Inss.Add(new Attribut_Ins {AttributId=7,InstrumentId=3});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=7,InstrumentId=5});
-                    //con set puas
-                Attr_Inss.Add(new Attribut_Ins {AttributId=8,InstrumentId=5});
-                Attr_Inss.Add(new Attribut_Ins {AttributId=8,InstrumentId=7});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttPuas,InstrumentId=idInsAndaluza});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttPuas,InstrumentId=idInsElectric});
+                    //con pedal d. 
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttPedal,InstrumentId=idInsElectric});
+                Attr_Inss.Add(new Attribut_Ins {AttributId=idAttPedal,InstrumentId=idInsBateria});
                 cnt.Attribut_Ins.AddRange(Attr_Inss);
                 cnt.SaveChanges(); 
 
                 List<List_Instrument> list_ListIns = new List<List_Instrument>();
-                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=1});
-                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=2});
-                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=3});
-                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=4});
-                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=5});
-                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=6});
-                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=7});
-                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=1});
-                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=5});
+                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=idInsFlauta});
+                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=idInsArmonica});
+                list_ListIns.Add(new List_Instrument {ListId=1,InstrumentId=idInsAndaluza});
+                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=idInsPiano});
+                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=idInsElectric});
+                list_ListIns.Add(new List_Instrument {ListId=2,InstrumentId=idInsOboe});
+                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=idInsBateria});
+                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=idInsFlauta});
+                list_ListIns.Add(new List_Instrument {ListId=3,InstrumentId=idInsElectric});
                 cnt.List_Instrument.AddRange(list_ListIns);
                 cnt.SaveChanges(); 
 
                 List<Shop_Ins> list_ShopIns = new List<Shop_Ins>();
-                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=1});
-                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=2});
-                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=3});
-                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=4});
-                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=5});
-                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=6});
-                list_ShopIns.Add(new Shop_Ins {ShopId=1,InstrumentId=7});
+                list_ShopIns.Add(new Shop_Ins {ShopId=idShopAlicante,InstrumentId=idInsFlauta});
+                list_ShopIns.Add(new Shop_Ins {ShopId=idShopAlicante,InstrumentId=idInsArmonica});
+                list_ShopIns.Add(new Shop_Ins {ShopId=idShopAlicante,InstrumentId=idInsAndaluza});
+                list_ShopIns.Add(new Shop_Ins {ShopId=idShopAlicante,InstrumentId=idInsPiano});
+                list_ShopIns.Add(new Shop_Ins {ShopId=idShopAlicante,InstrumentId=idInsElectric});
+                list_ShopIns.Add(new Shop_Ins {ShopId=idShopAlicante,InstrumentId=idInsOboe});
+                list_ShopIns.Add(new Shop_Ins {ShopId=idShopAlicante,InstrumentId=idInsBateria});
                 cnt.Shop_Ins.AddRange(list_ShopIns);
                 cnt.SaveChanges(); 
 
@@ -288,6 +320,60 @@ namespace ClaveSol.Data
             {
                 throw;
             }
+
+            //FUNCTIONS
+            int getAttributeIdByValue(string value)
+            {
+                int idAttribute = 0;
+                var idAttQuery = from att in cnt.Attribut
+                where att.Value == value 
+                select att.Id;
+
+                idAttribute = idAttQuery.FirstOrDefault();
+                return idAttribute;
+            }
+            int getInstrumIdByName(string name)
+            {
+                int idInstrument = 0;
+                var idInsQuery = from ins in cnt.Instrument
+                where ins.Name == name 
+                select ins.Id;
+
+                idInstrument = idInsQuery.FirstOrDefault();
+                return idInstrument;
+            }
+            int getShopIdByCity(string city)
+            {
+                int idShop = 0;
+                var idShopQuery = from sh in cnt.Shop
+                where sh.City == city 
+                select sh.Id;
+
+                idShop = idShopQuery.FirstOrDefault();
+                return idShop;
+            }
+            
+            int getCatIdByName(string name)
+            {
+                int idCat = 0;
+                var idCatQuery = from cat in cnt.Category
+                where cat.Name == name 
+                select cat.Id;
+
+                idCat = idCatQuery.FirstOrDefault();
+                return idCat;
+            }
+            int getSubCatIdByName(string name)
+            {
+                int idSubCat = 0;
+                var idSubCatQuery = from subCat in cnt.SubCategory
+                where subCat.Name == name 
+                select subCat.Id;
+
+                idSubCat = idSubCatQuery.FirstOrDefault();
+                return idSubCat;
+            }
+
         }
     }
 }

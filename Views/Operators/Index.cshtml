@@ -9,15 +9,15 @@
 <p>
     <a asp-action="Create">Crear Nuevo</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-hover table-responsive table-striped">
     <thead>
-        <tr>
-            <th></th>
+        <tr class="text-center">
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="text-center">
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |

@@ -156,9 +156,6 @@ namespace ClaveSol.Migrations
                     b.Property<int?>("InstrumentId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("LineOrderId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("MediaDir")
                         .HasColumnType("TEXT");
 
@@ -184,9 +181,6 @@ namespace ClaveSol.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LineOrderId")
-                        .IsUnique();
-
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("Instrument");
@@ -196,6 +190,9 @@ namespace ClaveSol.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("InstrumentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("IntrumentId")
@@ -218,6 +215,8 @@ namespace ClaveSol.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InstrumentId");
 
                     b.HasIndex("OrderId");
 
@@ -466,10 +465,6 @@ namespace ClaveSol.Migrations
 
             modelBuilder.Entity("ClaveSol.Models.Instrument", b =>
                 {
-                    b.HasOne("ClaveSol.Models.LineOrder", "LineOrder")
-                        .WithOne("Instrument")
-                        .HasForeignKey("ClaveSol.Models.Instrument", "LineOrderId");
-
                     b.HasOne("ClaveSol.Models.SubCategory", "SubCategory")
                         .WithMany("Instrument")
                         .HasForeignKey("SubCategoryId");
@@ -477,6 +472,10 @@ namespace ClaveSol.Migrations
 
             modelBuilder.Entity("ClaveSol.Models.LineOrder", b =>
                 {
+                    b.HasOne("ClaveSol.Models.Instrument", "Instrument")
+                        .WithMany("LineOrders")
+                        .HasForeignKey("InstrumentId");
+
                     b.HasOne("ClaveSol.Models.Order", "Order")
                         .WithMany("LineOrders")
                         .HasForeignKey("OrderId");

@@ -36,8 +36,9 @@ namespace ClaveSol.Models
         //NAV Props
         public int? SubCategoryId {get; set;} //FK
         public SubCategory SubCategory {get; set;}
-        public int? LineOrderId {get; set;} //FK
-        public LineOrder LineOrder {get; set;}
+        // public int? LineOrderId {get; set;} //FK
+        // public LineOrder LineOrder {get; set;}
+        public ICollection<LineOrder> LineOrders {get; set;}
         public ICollection<Comment> Comments {get; set;}
 
         //% N-N relations (Materials and Colors too) 
