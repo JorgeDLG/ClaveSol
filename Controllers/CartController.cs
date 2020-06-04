@@ -75,10 +75,15 @@ namespace ClaveSol.Controllers
                UnitaryPrice = instrument.Price,
                TotalPrice = instrument.Price
             };
-            _context.LineOrder.Add(lineOr);
-            _context.SaveChanges();
+            try
+            {
+                _context.LineOrder.Add(lineOr);
+                _context.SaveChanges();
+            }
+            catch (System.Exception)
+            {throw;}
             
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Cart");
         }
 
         [HttpGet]
@@ -91,7 +96,13 @@ namespace ClaveSol.Controllers
             if(linea == null)
                 return StatusCode(404); //not found
             
-            return View(linea);
+            //return View(linea);
+
+            //Temporal until SureDelete View Created:
+
+            _context.LineOrder.Remove(linea);
+            _context.SaveChanges();
+            return RedirectToAction("Index","Cart");
         }
 
         [HttpPost]
@@ -108,7 +119,7 @@ namespace ClaveSol.Controllers
         {
             try
             {
-                var claimUser = _signInManager.Context.User;
+                var claimUser = _signInManager.Context.User; //%if no LOGIN throw EXCEP
                 string ideUserId = _signInManager.UserManager.GetUserId(claimUser);
                 return _context.User.Where(x => x.OwnerID == ideUserId).FirstOrDefault();
             }
