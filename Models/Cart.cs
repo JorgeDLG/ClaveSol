@@ -27,17 +27,17 @@ namespace ClaveSol.Models
         }
 
         public string cartId {get; set;}
+        public Order cartOrder {get; set;} //All as cartOrder?
         public List<LineOrder> LineOrders {get; set;}
 
         public Cart GetCart()
         {
             ISession session = _signInManager.Context.Session;
-            var context = _context;
 
             string carTid = session.GetString("CartId") ?? Guid.NewGuid().ToString(); 
             session.SetString("CartId",carTid);
 
-            return new Cart(context, _signInManager){cartId = carTid};
+            return new Cart(_context, _signInManager){cartId = carTid};
         }
 
         public void addToCart(Instrument instrument, int amount = 1)
@@ -87,17 +87,12 @@ namespace ClaveSol.Models
             return localAmount;
         }
 
-        // public List<LineOrder> GetLineOrders()
-        // {
-        //     return LineOrders ??
-
-        // }
         public LineOrder GetLineOrder(Instrument ins)
         {
             var lineOrds = from lOrds in _context.LineOrder
                                     select lOrds;
 
-            return lineOrds.Where(s => s.InstrumentId == ins.Id).FirstOrDefault();
+            return lineOrds.Where(lo => lo.InstrumentId == ins.Id && lo.OrderId == cartOrder.Id).FirstOrDefault();
         }
 
     }

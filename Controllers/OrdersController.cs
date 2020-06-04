@@ -180,6 +180,7 @@ namespace ClaveSol.Controllers
         // [ValidateAntiForgeryToken]
         public IActionResult addToCart(Instrument instrument)
         {
+
             var cartState = 0;
             return Json(cartState);
         }
