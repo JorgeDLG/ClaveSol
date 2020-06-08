@@ -5,3 +5,14 @@
 function testScriptAccess() {
     alert("Script site.js accessed");
 }
+refreshCounter();
+
+function refreshCounter() {
+    $.ajax({
+        url: `/Cart/getNlinesCart/`
+    }).done(function (data) {
+        $(".badge").empty();
+        $(".badge").append(data);
+    });
+    
+}

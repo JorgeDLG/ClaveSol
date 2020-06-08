@@ -91,8 +91,8 @@ namespace ClaveSol.Controllers
             catch (System.Exception)
             {throw;}
 
-            lineOr.Order.nLines++;
             int nLineOrders = countCartLines(session);
+
             //return RedirectToAction("Index","Cart");
 
             if (nLineOrders == -1)
@@ -100,6 +100,7 @@ namespace ClaveSol.Controllers
                 return StatusCode(400);
             }else
             {
+                updateOrderNlines(nLineOrders);//$ FULL-SPAGUETTI 
                 return StatusCode(200,nLineOrders);
             }
         }
@@ -138,7 +139,8 @@ namespace ClaveSol.Controllers
             Order cart;
             User user = retrieveUser(); 
 
-            if (user.Orders == null || user.Orders.Where(o => o.State == "Cart").Count() == 0)
+            var orders =  _context.Order.Where(o => o.UserId == user.Id);
+            if (orders.Where(o => o.State == "Cart").Count() == 0)
             {
                 cart = new Order{
                     Date = System.DateTime.Now,
@@ -150,9 +152,9 @@ namespace ClaveSol.Controllers
                 _context.SaveChanges();
             }else
             {
-                if (user.Orders.Where(o => o.State == "Cart").Count() == 1)
+                if (orders.Where(o => o.State == "Cart").Count() == 1)
                 {
-                   cart = user.Orders.Where(o => o.State == "Cart").FirstOrDefault(); 
+                   cart = orders.Where(o => o.State == "Cart").FirstOrDefault(); 
                 }else
                 {
                     throw new System.ArgumentException("More that 1 Cart for this user", "original");
@@ -171,11 +173,13 @@ namespace ClaveSol.Controllers
             {
                 return StatusCode(400,"session var 'cartId' NOT SET on errOn[countCartLines()]"); //bad request
             }
+            updateOrderNlines(nLineOrders);//$ FULL-SPAGUETTI 
             return StatusCode(200,nLineOrders);
         }
         public int countCartLines(ISession session)
         {
             int nLines = -1; //cartId null , bad query ...
+            var cart = retrieveCart(session);
 
             int? CartId = session.GetInt32("cartId");
             if (CartId != null)
@@ -183,6 +187,22 @@ namespace ClaveSol.Controllers
                 nLines = _context.LineOrder.Where(s => s.OrderId == CartId).Count();
             }
             return nLines;
+        }
+        public void updateOrderNlines(int nlines)
+        {
+           User user = retrieveUser(); 
+           Order order = _context.Order.Where(o => o.UserId == user.Id && o.State == "Cart").FirstOrDefault();
+           order.nLines = nlines;
+           try
+           {
+               _context.Order.Update(order);
+               _context.SaveChanges();
+           }
+           catch (System.Exception)
+           {
+               
+               throw;
+           }
         }
         public User retrieveUser()
         {
