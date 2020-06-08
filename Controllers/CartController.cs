@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,7 @@ using ClaveSol.Models;
 
 namespace ClaveSol.Controllers
 {
+    // [Authorize]
     public class CartController : Controller
     {
         private readonly ClaveSolDbContext _context;
@@ -65,6 +67,7 @@ namespace ClaveSol.Controllers
             }
 
             Instrument instrument = _context.Instrument.Find(id);
+
             LineOrder lineOr = new LineOrder{
                Order = _context.Order.Find((int)session.GetInt32("cartId")),  
                OrderId = (int)session.GetInt32("cartId"),
@@ -82,12 +85,21 @@ namespace ClaveSol.Controllers
             }
             catch (System.Exception)
             {throw;}
-            
-            return RedirectToAction("Index","Cart");
+
+            int nLineOrders = countCartLines(session);
+            //return RedirectToAction("Index","Cart");
+
+            if (nLineOrders == -1)
+            {
+                return StatusCode(400);
+            }else
+            {
+                return StatusCode(200,nLineOrders);
+            }
         }
 
         [HttpGet]
-        public ActionResult deleteLine(int? id)
+        public ActionResult deleteLine(int? id) //SELECT INSTRUMENT  ON TABLE (PASS ID)
         {
             if(id == null)
                 return StatusCode(400); //bad request
@@ -98,7 +110,7 @@ namespace ClaveSol.Controllers
             
             //return View(linea);
 
-            //Temporal until SureDelete View Created:
+            //tmp until SureDelete View Created:
 
             _context.LineOrder.Remove(linea);
             _context.SaveChanges();
@@ -108,12 +120,38 @@ namespace ClaveSol.Controllers
         [HttpPost]
         [ActionName("deleteLine")]
         [ValidateAntiForgeryToken]
+        public Order retrieveCart(ISession session)
+        {
+
+        }
         public ActionResult deleteLinePost(int? id)
         {
             LineOrder linea = _context.LineOrder.Find(id);
             _context.LineOrder.Remove(linea);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult getNlinesCart()
+        {
+            ISession session = _signInManager.Context.Session;
+            int nLineOrders = countCartLines(session);
+
+            if (nLineOrders == -1)
+            {
+                return StatusCode(400,"session var 'cartId' NOT SET on errOn[countCartLines()]"); //bad request
+            }
+            return StatusCode(200,nLineOrders);
+        }
+        public int countCartLines(ISession session)
+        {
+            int nLines = -1; //cartId null , bad query ...
+
+            int? CartId = session.GetInt32("cartId");
+            if (CartId != null)
+            {
+                nLines = _context.LineOrder.Where(s => s.OrderId == CartId).Count();
+            }
+            return nLines;
         }
         public User retrieveUser()
         {
