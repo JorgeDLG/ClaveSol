@@ -16,7 +16,7 @@ using ClaveSol.Models;
 
 namespace ClaveSol.Controllers
 {
-    // [Authorize]
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ClaveSolDbContext _context;
@@ -30,15 +30,18 @@ namespace ClaveSol.Controllers
         public ActionResult Index()
         {
             ISession session = _signInManager.Context.Session;
+            int cartId;
 
             if(session.GetInt32("cartId") == null)
             {
-                return View(_context.LineOrder.ToList());
+                var Cart = retrieveCart(session); //HERE set session."cartId"
+
+                //return View(_context.LineOrder.ToList());
                 //return StatusCode(406);
                 //return RedirectToAction("emptyCart");
             }
             
-            int cartId = (int)session.GetInt32("cartId"); //OrderID
+            cartId = (int)session.GetInt32("cartId"); //OrderID
             var lineas = _context.LineOrder.Where(a => a.OrderId == cartId);
 
             ViewBag.cartId = cartId;
@@ -48,12 +51,14 @@ namespace ClaveSol.Controllers
         public ActionResult addToCart(int id) //Product obj as param?, Quantity?
         {
             ISession session = _signInManager.Context.Session;
-            User user;
+            //User user;
             Order cartOrder;
 
-            if(session.GetInt32("cartId") == null)
+            if(session.GetInt32("cartId") == null) //retrieve CART
             {
-               user = retrieveUser(); 
+                cartOrder = retrieveCart(session);
+
+               /*user = retrieveUser(); 
                cartOrder = new Order{
                 Date = System.DateTime.Now,
                 nLines = 0,
@@ -63,7 +68,7 @@ namespace ClaveSol.Controllers
 
                _context.Order.Add(cartOrder);
                _context.SaveChanges();
-               session.SetInt32("cartId",cartOrder.Id);
+               session.SetInt32("cartId",cartOrder.Id);*/
             }
 
             Instrument instrument = _context.Instrument.Find(id);
@@ -86,6 +91,7 @@ namespace ClaveSol.Controllers
             catch (System.Exception)
             {throw;}
 
+            lineOr.Order.nLines++;
             int nLineOrders = countCartLines(session);
             //return RedirectToAction("Index","Cart");
 
@@ -120,16 +126,41 @@ namespace ClaveSol.Controllers
         [HttpPost]
         [ActionName("deleteLine")]
         [ValidateAntiForgeryToken]
-        public Order retrieveCart(ISession session)
-        {
-
-        }
         public ActionResult deleteLinePost(int? id)
         {
             LineOrder linea = _context.LineOrder.Find(id);
             _context.LineOrder.Remove(linea);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public Order retrieveCart(ISession session)
+        {
+            Order cart;
+            User user = retrieveUser(); 
+
+            if (user.Orders == null || user.Orders.Where(o => o.State == "Cart").Count() == 0)
+            {
+                cart = new Order{
+                    Date = System.DateTime.Now,
+                    nLines = 0,
+                    State = "Cart", //Mark order AS CART
+                    User = user
+                };
+                _context.Order.Add(cart);
+                _context.SaveChanges();
+            }else
+            {
+                if (user.Orders.Where(o => o.State == "Cart").Count() == 1)
+                {
+                   cart = user.Orders.Where(o => o.State == "Cart").FirstOrDefault(); 
+                }else
+                {
+                    throw new System.ArgumentException("More that 1 Cart for this user", "original");
+                }
+            }
+            session.SetInt32("cartId",cart.Id);
+            return cart;
+
         }
         public ActionResult getNlinesCart()
         {
