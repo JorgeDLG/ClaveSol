@@ -44,52 +44,52 @@ namespace ClaveSol.Controllers
             cartId = (int)session.GetInt32("cartId"); //OrderID
             var lineas = _context.LineOrder.Where(a => a.OrderId == cartId);
 
-            ViewBag.cartId = cartId;
+            //ViewBag.cartId = cartId;
 
             return View(lineas.ToList());
         }
-        public ActionResult addToCart(int id) //Product obj as param?, Quantity?
+        public ActionResult addToCart(int id)
         {
             ISession session = _signInManager.Context.Session;
-            //User user;
-            Order cartOrder;
+            //OPTIMIZA Y TESTEA ESTA SHIT DE CODIGO !!
+            Order cartOrder = retrieveCart(session);
 
-            if(session.GetInt32("cartId") == null) //retrieve CART
-            {
-                cartOrder = retrieveCart(session);
-
-               /*user = retrieveUser(); 
-               cartOrder = new Order{
-                Date = System.DateTime.Now,
-                nLines = 0,
-                State = "Cart", //Mark order AS CART
-                User = user
-               };
-
-               _context.Order.Add(cartOrder);
-               _context.SaveChanges();
-               session.SetInt32("cartId",cartOrder.Id);*/
-            }
+            // if(session.GetInt32("cartId") == null) 
+            // {
+            //     cartOrder = retrieveCart(session);
+            // }
 
             Instrument instrument = _context.Instrument.Find(id);
 
-            LineOrder lineOr = new LineOrder{
-               Order = _context.Order.Find((int)session.GetInt32("cartId")),  
-               OrderId = (int)session.GetInt32("cartId"),
-               Instrument = instrument,
-               InstrumentId = instrument.Id,
-               Name = instrument.Name,
-               Quantity = 1,
-               UnitaryPrice = instrument.Price,
-               TotalPrice = instrument.Price
-            };
+            LineOrder lineOr = GetLineOrder(id,cartOrder); //lineOr NULL
+
             try
             {
-                _context.LineOrder.Add(lineOr);
-                _context.SaveChanges();
+                if (lineOr != null && instrument == lineOr.Instrument) //lineOr.Instrument NULL
+                {
+                   lineOr.Quantity++; 
+                   //UPDATE LINE ORDER ON DB
+                   _context.LineOrder.Update(lineOr);
+                   _context.SaveChanges();
+                }else
+                {
+                    lineOr = new LineOrder{
+                       //Order = _context.Order.Find((int)session.GetInt32("cartId")),  
+                       Order = cartOrder,  
+                       OrderId = (int)session.GetInt32("cartId"),
+                       Instrument = instrument,
+                       InstrumentId = instrument.Id,
+                       Name = instrument.Name,
+                       Quantity = 1,
+                       UnitaryPrice = instrument.Price,
+                       TotalPrice = instrument.Price
+                    };
+                    _context.LineOrder.Add(lineOr);
+                    _context.SaveChanges();
+                }
             }
-            catch (System.Exception)
-            {throw;}
+            catch (System.Exception){throw;}
+
 
             int nLineOrders = countCartLines(session);
 
@@ -230,6 +230,13 @@ namespace ClaveSol.Controllers
             {
                 throw;
             }
+        }
+        public LineOrder GetLineOrder(int insId, Order cartOrder)
+        {
+            var lineOrds = from lOrds in _context.LineOrder
+                                    select lOrds;
+
+            return lineOrds.Where(lo => lo.InstrumentId == insId && lo.OrderId == cartOrder.Id).FirstOrDefault();
         }
         public ActionResult emptyCart()
         {
