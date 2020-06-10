@@ -14,5 +14,23 @@ function refreshCounter() {
         $(".badge").empty();
         $(".badge").append(data);
     });
-    
+}
+
+var linksDeleteLine = $(".deleteLineOrderlink");
+linksDeleteLine.each(function () {
+    //NO PILLA BIEN ID
+  let tdId = $(this).parent().siblings(".lineIds");
+  let lineId = tdId[0].innerText;
+  $(this).click(() => ajaxDeleteLine(lineId));
+});
+
+function ajaxDeleteLine(lineOrderId) {
+    $.ajax({
+        url: `/Cart/deleteLine/${lineOrderId}`
+
+    }).done(function (data){
+        //why can't render data? 
+        alert("Nlines in cart:",String(data));
+        location.reload();
+    });
 }

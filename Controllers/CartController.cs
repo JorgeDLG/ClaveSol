@@ -106,7 +106,7 @@ namespace ClaveSol.Controllers
         }
 
         [HttpGet]
-        public ActionResult deleteLine(int? id) //SELECT INSTRUMENT  ON TABLE (PASS ID)
+        public ActionResult deleteLine(int? id) 
         {
             if(id == null)
                 return StatusCode(400); //bad request
@@ -121,7 +121,21 @@ namespace ClaveSol.Controllers
 
             _context.LineOrder.Remove(linea);
             _context.SaveChanges();
-            return RedirectToAction("Index","Cart");
+
+            ISession session = _signInManager.Context.Session;
+            int nLineOrders = countCartLines(session);
+
+            //return RedirectToAction("Index","Cart");
+
+            if (nLineOrders == -1)
+            {
+                return StatusCode(400);
+            }else
+            {
+                updateOrderNlines(nLineOrders);//$ FULL-SPAGUETTI 
+                return StatusCode(200,nLineOrders);
+                //return RedirectToAction("Index","Cart");
+            }
         }
 
         [HttpPost]

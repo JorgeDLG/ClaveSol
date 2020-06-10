@@ -18,17 +18,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            @* <th>Acciones</th> *@
+            <th>Eliminar</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr class="text-center">
-            <td>
+            <td class="lineIds">
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+               <a class="deleteLineOrderlink">Eliminar</a>  
             </td>
             @* <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |

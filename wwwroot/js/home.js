@@ -27,13 +27,12 @@ function switchDarkMode() { //User input Event
 }
 
 //addToCart ajax button
-var svgButtons = $(".btnAddCart");
-svgButtons.each(function () {
+var linksDeleteLine = $(".btnAddCart");
+linksDeleteLine.each(function () {
   let aInstrument = $(this).prev();  
   let insHref = aInstrument.attr("href");
   let insId = insHref.slice(insHref.lastIndexOf("/")+1);
   $(this).click(() => ajaxAddToCart(insId));
-
 });
 
 function ajaxAddToCart(insId) {
