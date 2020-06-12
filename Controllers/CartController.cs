@@ -242,5 +242,35 @@ namespace ClaveSol.Controllers
         {
             return View();
         }
+
+        public ActionResult quantityBy1(int? id,int operation) 
+        {
+            ISession session = _signInManager.Context.Session;
+            Order cartOrder = retrieveCart(session);
+            Instrument instrument = _context.Instrument.Find(id);
+
+            //LineOrder lineOr = GetLineOrder((int)id,cartOrder); //lineOr NULL
+            LineOrder lineOr = _context.LineOrder.Find(id);
+
+
+            if (operation < 0)
+                lineOr.Quantity--;
+            else
+                lineOr.Quantity++;
+
+            _context.LineOrder.Update(lineOr);
+            _context.SaveChanges();            
+
+            int nLineOrders = countCartLines(session);
+
+            if (nLineOrders == -1)
+            {
+                return StatusCode(400);
+            }else
+            {
+                updateOrderNlines(nLineOrders);//$ FULL-SPAGUETTI 
+                return StatusCode(200,nLineOrders);
+            }
+        }
     }
 }
