@@ -157,7 +157,7 @@ namespace ClaveSol.Controllers
             try
             {
                 var orders =  _context.Order.Where(o => o.UserId == user.Id);
-                if (orders.Where(o => o.State == "Cart").Count() == 0)
+                if (orders == null || orders.Where(o => o.State == "Cart").Count() == 0)
                 {
                     cart = new Order{
                         Date = System.DateTime.Now,
