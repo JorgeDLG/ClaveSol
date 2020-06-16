@@ -45,6 +45,7 @@ namespace ClaveSol.Controllers
             var lineas = _context.LineOrder.Where(a => a.OrderId == cartId);
 
             //ViewBag.cartId = cartId;
+            ViewBag.totalOrderPrice = updateTotalOrderPrice(lineas.ToList());
 
             return View(lineas.ToList());
         }
@@ -100,7 +101,7 @@ namespace ClaveSol.Controllers
                 return StatusCode(400);
             }else
             {
-                updateOrderNlines(nLineOrders);//$ FULL-SPAGUETTI 
+                updateOrder(nLineOrders);//$ FULL-SPAGUETTI 
                 return StatusCode(200,nLineOrders);
             }
         }
@@ -132,7 +133,7 @@ namespace ClaveSol.Controllers
                 return StatusCode(400);
             }else
             {
-                updateOrderNlines(nLineOrders);//$ FULL-SPAGUETTI 
+                updateOrder(nLineOrders);//$ FULL-SPAGUETTI 
                 return StatusCode(200,nLineOrders);
                 //return RedirectToAction("Index","Cart");
             }
@@ -187,7 +188,7 @@ namespace ClaveSol.Controllers
             {
                 return StatusCode(400,"session var 'cartId' NOT SET on errOn[countCartLines()]"); //bad request
             }
-            updateOrderNlines(nLineOrders);//$ FULL-SPAGUETTI 
+            updateOrder(nLineOrders);//$ FULL-SPAGUETTI 
             return StatusCode(200,nLineOrders);
         }
         public int countCartLines(ISession session)
@@ -202,11 +203,20 @@ namespace ClaveSol.Controllers
             }
             return nLines;
         }
-        public void updateOrderNlines(int nlines)
+        public void updateOrder(int nlines)
         {
            User user = retrieveUser(); 
            Order order = _context.Order.Where(o => o.UserId == user.Id && o.State == "Cart").FirstOrDefault();
            order.nLines = nlines;
+
+           var lineOrList = _context.LineOrder.Where(l => l.OrderId == order.Id).ToList();
+
+            //BUG:LINEOR.TOTALPRICE NO TIENE EN CUENTA EL MULTIPLIACDOR POR QUANTITY
+            // Guarda el TotalPrice bien con *Quantity
+           //decimal totalOrderPrice = lineOrList.Sum(l => l.TotalPrice);  
+           //order.Price = totalOrderPrice;
+           ViewBag.totalOrderPrice = updateTotalOrderPrice(lineOrList);
+
            try
            {
                _context.Order.Update(order);
@@ -217,6 +227,34 @@ namespace ClaveSol.Controllers
                
                throw;
            }
+        }
+        public decimal updateTotalOrderPrice(List<LineOrder> lines)
+        {
+            if (lines.Count == 0)
+            {
+                ISession session = _signInManager.Context.Session;
+                Order ordeR = retrieveCart(session);
+                ordeR.Price = 0;
+                _context.Order.Update(ordeR);
+                _context.SaveChanges();
+                return 0;
+                
+            }
+            List<decimal> linesTotalPrices = new List<decimal>();
+            foreach (var line in lines)
+            {
+               line.TotalPrice = line.Quantity * line.UnitaryPrice;
+               _context.LineOrder.Update(line);
+               linesTotalPrices.Add(line.TotalPrice); 
+            }
+
+            decimal totalOrderPrice = linesTotalPrices.Sum();
+            var order = _context.Order.Find(lines[0].OrderId); //CRASH null when lines=0
+            order.Price = totalOrderPrice;
+            _context.Order.Update(order);
+            _context.SaveChanges();
+
+            return order.Price;
         }
         public User retrieveUser()
         {
@@ -268,7 +306,7 @@ namespace ClaveSol.Controllers
                 return StatusCode(400);
             }else
             {
-                updateOrderNlines(nLineOrders);//$ FULL-SPAGUETTI 
+                updateOrder(nLineOrders);//$ FULL-SPAGUETTI 
                 return StatusCode(200,nLineOrders);
             }
         }

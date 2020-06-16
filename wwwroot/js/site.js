@@ -28,8 +28,7 @@ function ajaxDeleteLine(lineOrderId) {
         url: `/Cart/deleteLine/${lineOrderId}`
 
     }).done(function (data){
-        //why can't render data? 
-        alert("Nlines in cart:",String(data));
+        //alert("Nlines in cart:",String(data)); //why NULL?
         location.reload();
     });
 }
