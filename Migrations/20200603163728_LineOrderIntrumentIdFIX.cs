@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ClaveSol.Migrations
 {
-    public partial class fixAzure : Migration
+    public partial class LineOrderIntrumentIdFIX : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -175,25 +175,29 @@ namespace ClaveSol.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LineOrder",
+                name: "Instrument",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    UnitaryPrice = table.Column<decimal>(nullable: false),
-                    TotalPrice = table.Column<decimal>(nullable: false),
-                    OrderId = table.Column<int>(nullable: true),
-                    IntrumentId = table.Column<int>(nullable: true)
+                    Brand = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    State = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    MediaDir = table.Column<string>(nullable: true),
+                    SubCategoryId = table.Column<int>(nullable: true),
+                    InstrumentId = table.Column<int>(nullable: true),
+                    shInsId = table.Column<int>(nullable: true),
+                    attrInsId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LineOrder", x => x.Id);
+                    table.PrimaryKey("PK_Instrument", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LineOrder_Order_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Order",
+                        name: "FK_Instrument_SubCategory_SubCategoryId",
+                        column: x => x.SubCategoryId,
+                        principalTable: "SubCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -224,41 +228,6 @@ namespace ClaveSol.Migrations
                         name: "FK_Tiket_Order_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Order",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Instrument",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: false),
-                    Brand = table.Column<string>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    State = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    MediaDir = table.Column<string>(nullable: true),
-                    SubCategoryId = table.Column<int>(nullable: true),
-                    LineOrderId = table.Column<int>(nullable: true),
-                    InstrumentId = table.Column<int>(nullable: true),
-                    shInsId = table.Column<int>(nullable: true),
-                    attrInsId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Instrument", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Instrument_LineOrder_LineOrderId",
-                        column: x => x.LineOrderId,
-                        principalTable: "LineOrder",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Instrument_SubCategory_SubCategoryId",
-                        column: x => x.SubCategoryId,
-                        principalTable: "SubCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -314,6 +283,36 @@ namespace ClaveSol.Migrations
                         name: "FK_Comment_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LineOrder",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    UnitaryPrice = table.Column<decimal>(nullable: false),
+                    TotalPrice = table.Column<decimal>(nullable: false),
+                    OrderId = table.Column<int>(nullable: true),
+                    InstrumentId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LineOrder", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LineOrder_Instrument_InstrumentId",
+                        column: x => x.InstrumentId,
+                        principalTable: "Instrument",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LineOrder_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -392,15 +391,14 @@ namespace ClaveSol.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Instrument_LineOrderId",
-                table: "Instrument",
-                column: "LineOrderId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Instrument_SubCategoryId",
                 table: "Instrument",
                 column: "SubCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LineOrder_InstrumentId",
+                table: "LineOrder",
+                column: "InstrumentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LineOrder_OrderId",
@@ -455,6 +453,9 @@ namespace ClaveSol.Migrations
                 name: "Comment");
 
             migrationBuilder.DropTable(
+                name: "LineOrder");
+
+            migrationBuilder.DropTable(
                 name: "List_Instrument");
 
             migrationBuilder.DropTable(
@@ -479,19 +480,16 @@ namespace ClaveSol.Migrations
                 name: "Operator");
 
             migrationBuilder.DropTable(
-                name: "LineOrder");
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "SubCategory");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "User");
         }
     }
 }

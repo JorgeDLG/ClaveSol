@@ -20531,6 +20531,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Cart/Index.cshtml",
+      "TargetPath": "Views\\Cart\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Comments/Delete.cshtml",
       "TargetPath": "Views\\Comments\\Delete.cshtml",
       "FileKind": "mvc"
@@ -20696,6 +20701,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instrument/Edit.cshtml",
+      "TargetPath": "Views\\Instrument\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instruments/Delete.cshtml",
       "TargetPath": "Views\\Instruments\\Delete.cshtml",
       "FileKind": "mvc"
@@ -20726,6 +20736,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instrument/Create.cshtml",
+      "TargetPath": "Views\\Instrument\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Users/Create.cshtml",
       "TargetPath": "Views\\Users\\Create.cshtml",
       "FileKind": "mvc"
@@ -20748,6 +20763,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Tikets/Index.cshtml",
       "TargetPath": "Views\\Tikets\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instrument/Delete.cshtml",
+      "TargetPath": "Views\\Instrument\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20831,6 +20851,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Orders/CartHome.cshtml",
+      "TargetPath": "Views\\Orders\\CartHome.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Areas/Identity/Pages/Account/Register.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Register.cshtml",
       "FileKind": "mvc"
@@ -20848,6 +20873,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instruments/Details.cshtml",
       "TargetPath": "Views\\Instruments\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instrument/Details.cshtml",
+      "TargetPath": "Views\\Instrument\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20913,6 +20943,11 @@
     {
       "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Areas/Identity/Pages/_ViewStart.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/dlag/DAW/PROYECTO-FINAL-DAW/ClaveSol/Views/Instrument/Index.cshtml",
+      "TargetPath": "Views\\Instrument\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

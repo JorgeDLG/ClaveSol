@@ -1,5 +1,3 @@
-using System.Xml.Linq;
-using System.Runtime.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,21 +22,15 @@ namespace ClaveSol.Controllers
         // GET: Instruments
         public async Task<IActionResult> Index()
         {
-            var claveSolDbContext = _context.Instrument.Include(i => i.LineOrder).Include(i => i.SubCategory);
+            var claveSolDbContext = _context.Instrument.Include(i => i.SubCategory);
 
-            //return View(await claveSolDbContext.ToListAsync());
-
-            //Query to get Instruments with attrib Color=Red
             var insAttrRed = from ins in _context.Instrument
             join attr in _context.Attribut on ins.Id equals attr.Id into test 
             from attr2 in test
             where attr2.Id == 1
             select ins;
 
-            return View(await insAttrRed.ToListAsync());
-
-            //claveSolDbContext = _context.Instrument.Where(x => x.Attribut_Inss.Any(s => s.AttributId == Attribut.Id));
-            // context.Clinics.Where(x => x.Doctors.Any(d => d.Specialties.Any(s => s.SpecialtyId == specialtyId)))
+            return View(await claveSolDbContext.ToListAsync());
         }
 
         // GET: Instruments/Details/5
@@ -50,7 +42,6 @@ namespace ClaveSol.Controllers
             }
 
             var instrument = await _context.Instrument
-                .Include(i => i.LineOrder)
                 .Include(i => i.SubCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (instrument == null)
@@ -90,7 +81,6 @@ namespace ClaveSol.Controllers
         // GET: Instruments/Create
         public IActionResult Create()
         {
-            ViewData["LineOrderId"] = new SelectList(_context.LineOrder, "Id", "Name");
             ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "Id", "Name");
             return View();
         }
@@ -100,7 +90,7 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,LineOrderId,InstrumentId,shInsId")] Instrument instrument)
+        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,InstrumentId,shInsId,attrInsId")] Instrument instrument)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +98,6 @@ namespace ClaveSol.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LineOrderId"] = new SelectList(_context.LineOrder, "Id", "Name", instrument.LineOrderId);
             ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "Id", "Name", instrument.SubCategoryId);
             return View(instrument);
         }
@@ -126,7 +115,6 @@ namespace ClaveSol.Controllers
             {
                 return NotFound();
             }
-            ViewData["LineOrderId"] = new SelectList(_context.LineOrder, "Id", "Name", instrument.LineOrderId);
             ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "Id", "Name", instrument.SubCategoryId);
             return View(instrument);
         }
@@ -136,7 +124,7 @@ namespace ClaveSol.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,LineOrderId,InstrumentId,shInsId")] Instrument instrument)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Price,State,Description,MediaDir,SubCategoryId,InstrumentId,shInsId,attrInsId")] Instrument instrument)
         {
             if (id != instrument.Id)
             {
@@ -163,7 +151,6 @@ namespace ClaveSol.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LineOrderId"] = new SelectList(_context.LineOrder, "Id", "Name", instrument.LineOrderId);
             ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "Id", "Name", instrument.SubCategoryId);
             return View(instrument);
         }
@@ -177,7 +164,6 @@ namespace ClaveSol.Controllers
             }
 
             var instrument = await _context.Instrument
-                .Include(i => i.LineOrder)
                 .Include(i => i.SubCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (instrument == null)

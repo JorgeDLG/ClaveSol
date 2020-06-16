@@ -25,6 +25,15 @@ namespace ClaveSol {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
+
+            //SESSIONS
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             //DB CONTEXTS
             services.AddDbContext<ApplicationDbContext> (options =>
                 options.UseSqlite (
@@ -40,7 +49,8 @@ namespace ClaveSol {
                 .AddEntityFrameworkStores<ApplicationDbContext> ();
 
             services.AddControllersWithViews ();
-            //
+            services.AddHttpContextAccessor();
+ 
             //services.AddRazorPages();
             //services.AddMvc();
 
@@ -98,6 +108,9 @@ namespace ClaveSol {
 
             app.UseAuthentication (); //deja obsoleto a  app.UseIdentity();
             app.UseAuthorization ();
+
+            //for Cart
+            app.UseSession ();
 
             //From Pro Asp.Net core mvc Book
             app.UseStatusCodePages ();

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClaveSol.Migrations
 {
     [DbContext(typeof(ClaveSolDbContext))]
-    [Migration("20200511080359_fixAzure")]
-    partial class fixAzure
+    [Migration("20200603163728_LineOrderIntrumentIdFIX")]
+    partial class LineOrderIntrumentIdFIX
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -158,9 +158,6 @@ namespace ClaveSol.Migrations
                     b.Property<int?>("InstrumentId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("LineOrderId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("MediaDir")
                         .HasColumnType("TEXT");
 
@@ -186,9 +183,6 @@ namespace ClaveSol.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LineOrderId")
-                        .IsUnique();
-
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("Instrument");
@@ -200,7 +194,7 @@ namespace ClaveSol.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("IntrumentId")
+                    b.Property<int?>("InstrumentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -220,6 +214,8 @@ namespace ClaveSol.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InstrumentId");
 
                     b.HasIndex("OrderId");
 
@@ -468,10 +464,6 @@ namespace ClaveSol.Migrations
 
             modelBuilder.Entity("ClaveSol.Models.Instrument", b =>
                 {
-                    b.HasOne("ClaveSol.Models.LineOrder", "LineOrder")
-                        .WithOne("Instrument")
-                        .HasForeignKey("ClaveSol.Models.Instrument", "LineOrderId");
-
                     b.HasOne("ClaveSol.Models.SubCategory", "SubCategory")
                         .WithMany("Instrument")
                         .HasForeignKey("SubCategoryId");
@@ -479,6 +471,10 @@ namespace ClaveSol.Migrations
 
             modelBuilder.Entity("ClaveSol.Models.LineOrder", b =>
                 {
+                    b.HasOne("ClaveSol.Models.Instrument", "Instrument")
+                        .WithMany("LineOrders")
+                        .HasForeignKey("InstrumentId");
+
                     b.HasOne("ClaveSol.Models.Order", "Order")
                         .WithMany("LineOrders")
                         .HasForeignKey("OrderId");

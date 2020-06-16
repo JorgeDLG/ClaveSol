@@ -1,0 +1,157 @@
+@model ClaveSol.Models.Instrument
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+<head>
+    <link href="@Url.Content("~/css/instrDetails.css")" rel="stylesheet" type="text/css" />
+</head>
+
+
+@{
+    string categName = @ViewBag.catName;
+}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"> @*Categoria => details*@
+        @Html.ActionLink(@categName, "Details", "Categories", new { id = @Model.SubCategory.CategoryId }, null)
+    <li class="breadcrumb-item"> @*SubCategoria => details*@
+        @Html.ActionLink(Model.SubCategory.Name, "Details", "SubCategories", new { id = @Model.SubCategoryId }, null)
+    </li> 
+    <li class="breadcrumb-item active" aria-current="page">@Model.Name</li> @*Instrumento*@
+  </ol>
+</nav>
+
+
+<div class="card-columns">
+    <div class="card">
+        <h1 class="text-center">@Html.DisplayFor(model => model.Name)</h1>
+    
+        <div id="brandPrice">
+            <h2>@Html.DisplayFor(model => model.Brand)</h2>
+            <money>@Html.DisplayFor(model => model.Price)<currency>€</currency></money>
+        </div>
+        <p class="text-center">@Html.DisplayFor(model => model.Description)</p>
+    </div>
+
+
+        @* ##### MULTIMEDIA ##### *@
+  @if(String.IsNullOrEmpty(Model.MediaDir))
+  {
+     <div class="card multimedia">
+         <div id="escenario">
+            <img src="~/assets/defaultIns.jpg" class="card-img-top" alt="...">  @*MAIN PIC*@
+         </div>
+
+       @* LISTA MEDIA *@
+       <ul class="list-group list-group-horizontal-md planos">
+         <li id="plano" class="list-group-item"> @*VIDEO*@
+             <video class="card-img-top" controls>
+                 <source src="~/assets/defaultIns.webm" type="video/webm"> 
+             </video>
+         </li>
+         <li id="2plano" class="list-group-item">
+              <img src="~/assets/defaultIns2.jpg" class="card-img-top" alt="...">
+         </li>
+         <li id="3plano" class="list-group-item">
+              <img src="~/assets/defaultIns3.jpg" class="card-img-top" alt="...">
+         </li>
+         <li id="4plano" class="list-group-item">
+              <img src="~/assets/defaultIns4.jpg" class="card-img-top" alt="...">
+         </li>
+       </ul>
+     </div>
+  }
+  else
+  {
+    //% GET MEDIA FOR INSTRUMENT USING MediaDir
+  }
+
+
+
+
+
+    @* TODO
+        1- GET ATTRIBUTES DATA AND RENDER SORTED BY TYPE (KEY)
+        2- parse 'Colors' & Select list for the rest
+        3- Send it all over form when AÑADIR.
+     *@
+    @{ //GET ATTRIBUTES DATA AND RENDER SORTED BY TYPE (KEY)
+        Dictionary<string,List<string>> attrs = new Dictionary<string,List<string>>();
+        var attribsQuery = ViewBag.attribs;
+
+        foreach (var att in attribsQuery)
+        {
+          List<string> valUeList = new List<string>();
+
+          if (attrs.ContainsKey(att.Type))
+          {
+             //APEND Value for this Type (key) 
+             valUeList = attrs[att.Type];
+             valUeList.Add(att.Value);
+
+          }else{
+            //CREATE new Key with new List with Value
+           valUeList.Add(att.Value);
+           attrs.Add(att.Type,valUeList);
+          }
+        }
+    } 
+    <form>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">ATRIBUTOS</h5>
+            @{
+              List<string> valueList = new List<string>();
+              foreach (var key in attrs)
+              {
+                string Type = key.Key;
+                valueList = @key.Value; //list of attrs
+
+                <h5>@Type</h5>
+
+                if (@Type == "Color")
+                {
+                  <div id="@Type">
+                    @foreach (var value in valueList)
+                    {
+                      <div id="@value">
+                        @* Make it selected: checked="checked" *@
+                        <input hidden type="radio" id="@value" name="radioColor" value="@value">
+                      </div>
+                    }
+                  </div>
+                }else
+                {
+                  <select name="@Type" id="@Type">
+                    @foreach (var value in valueList)
+                    {
+                      <option value="@value">@value</option>
+                    }
+                  </select>
+                }
+              }
+            }
+          </div>
+        </div>
+
+        <div class="card disponibilidad">
+          <div class="card-body">
+            <h5 class="card-title">DISPONIBILIDAD</h5>
+            <p >@Html.DisplayFor(model => model.State)</p>
+            <span class="font-weight-bold"> Alicante</span>
+            <h3 class="text-success border border-success">AÑADIR</h3>
+          </div>
+        </div>
+    </form>
+
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Volver al listado</a>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/insDetails.js" asp-append-version="true"></script>

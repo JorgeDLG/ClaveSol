@@ -27,7 +27,7 @@ namespace ClaveSol.Controllers
         }
 
         // GET: Orders/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id) 
         {
             if (id == null)
             {
@@ -155,6 +155,34 @@ namespace ClaveSol.Controllers
         private bool OrderExists(int id)
         {
             return _context.Order.Any(e => e.Id == id);
+        }
+
+        //CARRITO
+        public async Task<IActionResult> CartHome(int? id) //Carrito IF Status = "carrito"?
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Order
+                .Include(o => o.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
+        public IActionResult addToCart(Instrument instrument)
+        {
+
+            var cartState = 0;
+            return Json(cartState);
         }
     }
 }

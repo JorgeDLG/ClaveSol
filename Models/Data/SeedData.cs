@@ -160,7 +160,8 @@ namespace ClaveSol.Data
         private static void SeedAppTables(ClaveSolDbContext cnt)
         {
             if (cnt.Attribut.Any() || cnt.Instrument.Any() || cnt.Category.Any() || cnt.SubCategory.Any() ||
-                cnt.List.Any() || cnt.Attribut_Ins.Any() || cnt.List_Instrument.Any() || cnt.Shop_Ins.Any()
+                cnt.List.Any() || cnt.Attribut_Ins.Any() || cnt.List_Instrument.Any() || cnt.Shop_Ins.Any() ||
+                cnt.LineOrder.Any() || cnt.Order.Any()
             )
                 return; //already seeded
             

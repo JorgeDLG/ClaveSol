@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +28,7 @@ namespace ClaveSol.Controllers
 
         public async Task<IActionResult> Index(string searchStr)
         {
+            System.Diagnostics.Debug.WriteLine((HttpContext.Session).ToString());
             ViewData["CurrentFilter"] = searchStr;
             //var claveSolDbContext = _context.Instrument.Include(i => i.LineOrder).Include(i => i.SubCategory);
             var claveSolDbContext = from s in _context.Instrument
@@ -34,7 +39,6 @@ namespace ClaveSol.Controllers
                 claveSolDbContext = claveSolDbContext.Where(s => s.Name.Contains(searchStr)
                                                     || s.Brand.Contains(searchStr));
             }
-
 
             return View(await claveSolDbContext.AsNoTracking().ToListAsync());
         }

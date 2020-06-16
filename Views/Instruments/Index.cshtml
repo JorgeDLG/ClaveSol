@@ -34,13 +34,13 @@
                 @Html.DisplayNameFor(model => model.SubCategory)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LineOrder)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.InstrumentId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.shInsId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.attrInsId)
             </th>
             <th>Acciones</th>
         </tr>
@@ -70,13 +70,13 @@
                 @Html.DisplayFor(modelItem => item.SubCategory.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LineOrder.Name)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.InstrumentId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.shInsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.attrInsId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |

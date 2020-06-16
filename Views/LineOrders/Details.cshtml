@@ -1,13 +1,13 @@
 @model ClaveSol.Models.LineOrder
 
 @{
-    ViewData["Title"] = "Detalles";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Detalles</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>Línea de Pedido</h4>
+    <h4>LineOrder</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -41,14 +41,14 @@
             @Html.DisplayFor(model => model.Order.State)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IntrumentId)
+            @Html.DisplayNameFor(model => model.Instrument)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IntrumentId)
+            @Html.DisplayFor(model => model.Instrument.Brand)
         </dd>
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Volver al listado</a>
+    <a asp-action="Index">Back to List</a>
 </div>
