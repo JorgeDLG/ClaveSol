@@ -154,30 +154,33 @@ namespace ClaveSol.Controllers
             Order cart;
             User user = retrieveUser(); 
 
-            var orders =  _context.Order.Where(o => o.UserId == user.Id);
-            if (orders.Where(o => o.State == "Cart").Count() == 0)
+            try
             {
-                cart = new Order{
-                    Date = System.DateTime.Now,
-                    nLines = 0,
-                    State = "Cart", //Mark order AS CART
-                    User = user
-                };
-                _context.Order.Add(cart);
-                _context.SaveChanges();
-            }else
-            {
-                if (orders.Where(o => o.State == "Cart").Count() == 1)
+                var orders =  _context.Order.Where(o => o.UserId == user.Id);
+                if (orders.Where(o => o.State == "Cart").Count() == 0)
                 {
-                   cart = orders.Where(o => o.State == "Cart").FirstOrDefault(); 
+                    cart = new Order{
+                        Date = System.DateTime.Now,
+                        nLines = 0,
+                        State = "Cart", //Mark order AS CART
+                        User = user
+                    };
+                    _context.Order.Add(cart);
+                    _context.SaveChanges();
                 }else
                 {
-                    throw new System.ArgumentException("More that 1 Cart for this user", "original");
+                    if (orders.Where(o => o.State == "Cart").Count() == 1)
+                    {
+                       cart = orders.Where(o => o.State == "Cart").FirstOrDefault(); 
+                    }else
+                    {
+                        throw new System.ArgumentException("More that 1 Cart for this user", "original");
+                    }
                 }
+                session.SetInt32("cartId",cart.Id);
+                return cart;
             }
-            session.SetInt32("cartId",cart.Id);
-            return cart;
-
+            catch (System.Exception){throw;}
         }
         public ActionResult getNlinesCart()
         {
