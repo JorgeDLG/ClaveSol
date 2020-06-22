@@ -16,19 +16,19 @@
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="~/assets/carrusel/nativeInstrumentsMIDIcrop.jpg" class="d-block w-100" alt="nativeInstrMIDI">
+              <img src="~/assets/carrusel/nativeInstrumentsMIDIcrop_350.jpg" class="d-block w-100" alt="nativeInstrMIDI">
               <div class="carousel-caption d-none d-md-block">
                 <h2>CLAVESOL</h2>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="~/assets/carrusel/electric.jpg" class="d-block w-100" alt="...">
+              <img src="~/assets/carrusel/electric_350.jpg" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h2>CLAVESOL</h2>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="~/assets/carrusel/dj.jpg" class="d-block w-100" alt="...">
+              <img src="~/assets/carrusel/dj_350.jpg" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h2>CLAVESOL</h2>
               </div>
@@ -51,15 +51,20 @@
   <div class="form-row align-items-center">
     <div class="col-sm-3 my-1">
       @* <label class="sr-only" for="inputIns">Instrument</label> *@
-      <input type="text" class="form-control" id="inputIns" placeholder="Nombre o Marca" name="searchStr" value="@ViewData["currentFilter"]">
+      <input type="text" class="form-control" id="inputIns" placeholder="Nombre o Marca" name="searchStr" value="@ViewData["currentQuery"]">
     </div>
     <div class="col-auto my-1">
       @* <label class="mr-sm-2" for="selectSubCat">Subcategory</label> *@
-      <select class="custom-select mr-sm-2" id="selectSubCat">
-        <option selected>SubCategoría</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="custom-select mr-sm-2" id="selectSubCat" name="subcatId">
+        <option selected="true" value="0">SubCategoría</option>
+
+        @{
+          var subCats = @ViewBag.SubCats;
+          foreach (SubCategory subCat in subCats)
+          {
+             <option value="@subCat.Id">@subCat.Name</option>
+          }
+        }
       </select>
     </div>
     <div class="col-auto my-1">
@@ -72,7 +77,9 @@
       <button type="submit" class="btn btn-primary">Buscar</button>
     </div>
     <div class="col-auto my-1">
-      <button type="submit" class="btn btn-secondary">Restablecer</button>
+
+      @* Tiene que hacer un submit pero poniendo a null el query y a 0 en select de subcategorias *@
+      <button id="reseter" type="submit" class="btn btn-secondary" onclick="reset()">Restablecer</button> 
     </div>
   </div>
 </form>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Globalization;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -26,21 +27,31 @@ namespace ClaveSol.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string searchStr)
+        public async Task<IActionResult> Index(string searchStr, int subcatId)
         {
-            System.Diagnostics.Debug.WriteLine((HttpContext.Session).ToString());
-            ViewData["CurrentFilter"] = searchStr;
-            //var claveSolDbContext = _context.Instrument.Include(i => i.LineOrder).Include(i => i.SubCategory);
-            var claveSolDbContext = from s in _context.Instrument
+            //Query Search string Filter
+            ViewData["currentQuery"] = searchStr;
+            var instruments = from s in _context.Instrument
                                     select s;
 
             if (!String.IsNullOrEmpty(searchStr))
             {
-                claveSolDbContext = claveSolDbContext.Where(s => s.Name.Contains(searchStr)
+                instruments = instruments.Where(s => s.Name.Contains(searchStr)
                                                     || s.Brand.Contains(searchStr));
             }
 
-            return View(await claveSolDbContext.AsNoTracking().ToListAsync());
+            //SubCategories Filter
+            @ViewBag.SubCats = _context.SubCategory.ToList();
+
+            var subCats = from s in _context.SubCategory
+                                    select s;
+
+            if (subcatId != 0)
+            {
+                instruments = instruments.Where(s => s.SubCategoryId.Equals(subcatId));
+            }
+
+            return View(await instruments.AsNoTracking().ToListAsync());
         }
 
         public IActionResult Privacy()

@@ -47,3 +47,11 @@ function ajaxAddToCart(insId) {
         $(".badge").append(data);
     });
 }
+
+
+$("#reseter").click(reset);
+function reset() {
+    console.log("reset world");
+   $("#inputIns").val(""); 
+   $("#selectSubCat").val(0); 
+}

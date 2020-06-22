@@ -63,6 +63,14 @@
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Administración</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" asp-asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a>
+                                        <a class="dropdown-item" asp-asp-area="" asp-controller="Instruments" asp-action="Index">Instrumentos</a>
+                                        <a class="dropdown-item" asp-asp-area="" asp-controller="Orders" asp-action="Index">Pedidos</a>
+                                        <a class="dropdown-item" asp-asp-area="" asp-controller="LineOrders" asp-action="Index">Líneas de Pedido</a>
+                                        <a class="dropdown-item" asp-asp-area="" asp-controller="Tikets" asp-action="Index">Tickets</a>
+                                        <a class="dropdown-item" asp-asp-area="" asp-controller="Comments" asp-action="Index">Comentarios</a>
+                                        <a class="dropdown-item" asp-asp-area="" asp-controller="Operators" asp-action="Index">Operadores</a>
+                                        <a class="dropdown-item" asp-asp-area="" asp-controller="Shops" asp-action="Index">Tiendas</a>
+                                        <a class="dropdown-item" asp-asp-area="" asp-controller="Lists" asp-action="Index">Listas</a>
                                     </div>
                                 </li>
                             }else if(User.IsInRole("normal")){
