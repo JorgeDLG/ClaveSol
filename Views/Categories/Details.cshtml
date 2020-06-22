@@ -4,9 +4,11 @@
     ViewData["Title"] = "Detalles";
 }
 
-<h1>Detalles</h1>
+<h1>
+            @Html.DisplayFor(model => model.Name)
+</h1>
 
-<div>
+@* <div>
     <h4>Categoria</h4>
     <hr />
     <dl class="row">
@@ -17,7 +19,22 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
-</div>
+</div> *@
+    <div class="row row-cols-1 row-cols-md-3">
+    @foreach (var subCat in ViewBag.SubCats)
+    {
+          <div class="col mb-4" style="max-width:20em;">
+            <div class="card h-100" >
+              <img src="~/assets/CatSubCatImage/SubCats/defaultSubCat.jpg" class="card-img-top">
+              <div class="card-body text-center">
+                @* <h2 class="card-title text-center">@subCat.Name</h2> *@
+                <a class="card-title" asp-asp-area="" asp-controller="SubCategories" asp-action="Details" asp-route-id="@subCat.Id" style="font-size:1.5em;">@subCat.Name</a>
+              </div>
+            </div>
+          </div>
+    }
+    </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Volver al listado</a>

@@ -40,6 +40,9 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
+            var subCats = _context.SubCategory.Where(s => s.CategoryId == id).ToList();
+            ViewBag.SubCats = subCats;
+
             return View(category);
         }
 
