@@ -42,6 +42,9 @@ namespace ClaveSol.Controllers
                 return NotFound();
             }
 
+            var instruments = _context.Instrument.Where(i => i.SubCategoryId == id).ToList();
+            ViewBag.instruments = instruments;
+
             return View(subCategory);
         }
 
