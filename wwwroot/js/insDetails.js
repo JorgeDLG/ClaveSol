@@ -69,7 +69,7 @@ var colorContainer = $("#Color");
 try {
     var colorsOptions = colorContainer.find("div");
 
-    colorsOptions.each(function () {
+    colorsOptions.each(function() {
         $(this).click(select);
     });
 
@@ -83,4 +83,25 @@ function select() {
 
     $(this).addClass("selected");
     $(this).find("input").attr("checked", "checked");
+}
+
+//SAVE COMMENTS
+$('#myModal').on('shown.bs.modal', function() {
+    $('#myInput').trigger('focus')
+})
+
+function afterSaveComment() {
+    var url = window.location.href;
+    var insId = url.slice(url.lastIndexOf("/") + 1);
+    var title = $('#title').val(); //coge el valor 
+    var body = $('#body').val(); //coge el valor 
+
+    console.log(insId)
+    $.ajax({
+        url: `/Comments/createComment?insId=${insId}&title=${title}&body=${body}`
+
+    }).done(function(data) { //NO SE RECUPERAN BIEN LOS DATOS
+        console.log("data is: " + data);
+        window.location.reload();
+    });
 }

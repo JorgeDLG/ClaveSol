@@ -75,6 +75,11 @@ namespace ClaveSol.Controllers
 
             ViewBag.attribs = Attribs.ToList();
 
+            //Send Comments for Instrument
+            var comments = _context.Comment.Where(c => c.InstrumentId == id);
+            ViewBag.Comments = comments.ToList();
+            ViewBag.allUsers = _context.User;
+
             return View(instrument);
         }
 

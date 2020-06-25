@@ -35,6 +35,58 @@
     </div>
 
 
+
+    <p>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Comentarios
+      </button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+        Añadir
+      </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+          @foreach (var comment in @ViewBag.Comments)
+          {
+            string author = ViewBag.allUsers.Find(comment.UserId).Name;
+
+           <div class="bg-light mt-2 mb-2">
+              <h4 class="text-center">@comment.Title</h4>
+              <p class="text-center">@comment.Body</p> <b>@author</b>
+            </div>
+          }
+      </div>
+
+      @*Write Comentary*@
+
+      <!-- Button trigger modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Añada su comentario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input id="title" type="text">
+              <textarea id="body" cols="30" rows="10"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button onclick="afterSaveComment()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> @*End Collapse*@
+
+
+
         @* ##### MULTIMEDIA ##### *@
   @if(String.IsNullOrEmpty(Model.MediaDir))
   {
@@ -66,10 +118,6 @@
   {
     //% GET MEDIA FOR INSTRUMENT USING MediaDir
   }
-
-
-
-
 
     @* TODO
         1- GET ATTRIBUTES DATA AND RENDER SORTED BY TYPE (KEY)

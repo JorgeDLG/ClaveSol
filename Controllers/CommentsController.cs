@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using ClaveSol.Data;
 using ClaveSol.Models;
 
@@ -13,10 +15,12 @@ namespace ClaveSol.Controllers
     public class CommentsController : Controller
     {
         private readonly ClaveSolDbContext _context;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public CommentsController(ClaveSolDbContext context)
+        public CommentsController(ClaveSolDbContext context , SignInManager<IdentityUser> signInManager)
         {
             _context = context;
+            _signInManager = signInManager;
         }
 
         // GET: Comments
@@ -71,6 +75,51 @@ namespace ClaveSol.Controllers
             ViewData["UserId"] = new SelectList(_context.User, "Id", "Mail", comment.UserId);
             return View(comment);
         }
+
+        //AJAX Create Comment
+        public Dictionary<string,string> createComment(int insId, string title, string body)
+        {
+            Dictionary<string,string> commentValues = new Dictionary<string, string>();
+            User userLogged = retrieveUser();
+            Comment comment;
+            try
+            {
+                
+             comment = new Comment{
+                Date = System.DateTime.Now,
+                Title = title,
+                Body = body,
+                Stars = 0,
+                Deleted = false,
+                User = userLogged,
+                UserId = userLogged.Id,
+                Instrument = _context.Instrument.Find(insId),
+                InstrumentId = insId
+                };
+                _context.Add(comment);
+                _context.SaveChanges();
+            }
+            catch (System.Exception){throw;}
+
+
+            commentValues.Add("title",comment.Title);
+            commentValues.Add("body",comment.Body);
+            commentValues.Add("author",userLogged.Name);
+
+            return commentValues;
+
+            User retrieveUser() //%FUNC DUPLICATED ON CARTCONTROLLER!!
+            {
+                try
+                {
+                    var claimUser = _signInManager.Context.User; //%if no LOGIN throw EXCEP
+                    string ideUserId = _signInManager.UserManager.GetUserId(claimUser);
+                    return _context.User.Where(x => x.OwnerID == ideUserId).FirstOrDefault();
+                }
+                catch (System.Exception){throw;}
+            }
+        }
+
 
         // GET: Comments/Edit/5
         public async Task<IActionResult> Edit(int? id)
