@@ -30,6 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.TotalPrice)
             </th>
+            <th>Atributos</th>
             <th>Acción</th>
         </tr>
     </thead>
@@ -64,6 +65,52 @@
                 }
                 @precioTotal
             </td>
+
+            <td> @*ATTRIBUTES SELECTED FOR THAT LINEORDER*@
+               @*{
+                   List<Attribut> allAttr = ViewBag.allAttr;
+                   List<Attribut_Ins> allAttrIns = ViewBag.allAttrIns;
+                   var attrForIns = allAttrIns.Where(ai => ai.InstrumentId == item.Id);
+                   foreach (var att in attrForIns)
+                   {
+                       <small>@att.Attribut.Type : @att.Attribut.Value</small> <br>
+
+
+                      <h5>@att.Attribut.Type</h5>
+
+                      if (@att.Attribut.Type == "Color")
+                      {
+                        <div id="@att.Attribut.Type">
+                          @foreach (var att2 in attrIdForIns)
+                          { 
+                              if (att2.Attribut.Type == att.Attribut.Type)
+                              {
+                                <div height=2 id="@att.Attribut.Value">
+                                  @* Make it selected: checked="checked" *@@*
+                                  <input hidden type="radio" id="@att.Attribut.Value" name="radioColor" value="@att.Attribut.Value">
+                                </div>
+                              }
+                          }                         
+                        </div>
+                      }else
+                      {
+                            <select name="@att.Attribut.Type" id="@att.Attribut.Type">
+                              @foreach (var value in attrIdForIns)
+                              {
+                                if (@value.Attribut.Type != "Color")
+                                {
+                                 <option value="@att.Attribut.Value">@att.Attribut.Value</option>
+                                }
+                              }
+                            </select>
+                        
+                      }
+
+                   }
+               }*@
+               Attributes
+
+            </td>
             <td>
                @* <a class="deleteLineOrderlink">Eliminar</a>   *@
                <svg class="bi bi-x text-danger deleteLineOrderlink" style="font-size: x-large;" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -81,6 +128,9 @@
 }
     </tbody>
 </table>
+
+
+
 @{
     decimal? totalOrderPrice = @ViewBag.totalOrderPrice;
 }

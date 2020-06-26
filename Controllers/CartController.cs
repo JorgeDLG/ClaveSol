@@ -47,6 +47,12 @@ namespace ClaveSol.Controllers
             //ViewBag.cartId = cartId;
             ViewBag.totalOrderPrice = updateTotalOrderPrice(lineas.ToList());
 
+            // ViewBag.allAttr = from attr in _context.Attribut
+            //     join attIns in _context.Attribut_Ins on attr.Id equals attIns.AttributId
+            //     select attr;
+            ViewBag.allAttr = _context.Attribut.ToList();
+            //ViewBag.allAttrIns = _context.Attribut_Ins.ToList();
+
             return View(lineas.ToList());
         }
         public ActionResult addToCart(int id)
