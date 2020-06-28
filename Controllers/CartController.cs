@@ -50,12 +50,12 @@ namespace ClaveSol.Controllers
             // ViewBag.allAttr = from attr in _context.Attribut
             //     join attIns in _context.Attribut_Ins on attr.Id equals attIns.AttributId
             //     select attr;
-            ViewBag.allAttr = _context.Attribut.ToList();
+            ViewBag.allAttr = _context.Attribut;
             //ViewBag.allAttrIns = _context.Attribut_Ins.ToList();
 
             return View(lineas.ToList());
         }
-        public ActionResult addToCart(int id)
+        public ActionResult addToCart(int id,string attribsValues=null)
         {
             ISession session = _signInManager.Context.Session;
             //OPTIMIZA Y TESTEA ESTA SHIT DE CODIGO !!
@@ -81,7 +81,6 @@ namespace ClaveSol.Controllers
                 }else
                 {
                     lineOr = new LineOrder{
-                       //Order = _context.Order.Find((int)session.GetInt32("cartId")),  
                        Order = cartOrder,  
                        OrderId = (int)session.GetInt32("cartId"),
                        Instrument = instrument,
@@ -91,6 +90,15 @@ namespace ClaveSol.Controllers
                        UnitaryPrice = instrument.Price,
                        TotalPrice = instrument.Price
                     };
+
+                    //Adding attribs to LineOrder
+                    if (String.IsNullOrEmpty(attribsValues)) //Attribs passed
+                    {   //Default Attribs
+                        attribsValues = getDefValuesEachType(lineOr.InstrumentId);
+                    }
+
+                    insertAttribsIds(attribsValues,lineOr);
+
                     _context.LineOrder.Add(lineOr);
                     _context.SaveChanges();
                 }
@@ -111,6 +119,57 @@ namespace ClaveSol.Controllers
                 return StatusCode(200,nLineOrders);
             }
         }
+        public string getDefValuesEachType(int? insId) //Stablish default Attr.Values (as string comma separated), depending the Instrument
+        {
+            string defValues = null;
+            switch (insId)
+            {
+                case 1: //Bateria
+                    defValues = "Azul,Plastico,Pedal Distorsion";
+                break;
+                case 2: //Oboe
+                    defValues = "Madera";
+                break;
+                case 3: //Electric
+                    defValues = "Azul,Plastico,Set Puas";
+                break;
+                case 4: //Piano
+                    defValues = "Rojo,Madera";
+                break;
+                case 5: //G.Andaluza
+                    defValues = "Madera,Set Puas";
+                break;
+                case 6: //Armonica
+                    defValues = "Azul,Madera";
+                break;
+                case 7: //Flauta
+                    defValues = "Rojo,Madera";
+                break;
+                default:
+                    defValues = null;
+                break;
+            }
+            return defValues;
+        }
+        public void insertAttribsIds(string attribsValues,LineOrder line) //attribsValues input "Rojo,Madera,Set Puas"
+        {
+            //attribsValues to AttribsId comma separated
+            string attribsIds = "";
+            string[] attsValues = attribsValues.Split(','); 
+
+            foreach (var value in attsValues)
+            {
+                string attId = _context.Attribut.Where(a => a.Value == value).FirstOrDefault().Id.ToString();
+                attribsIds += attId + ","; 
+            }
+            attribsIds = attribsIds.Remove(attribsIds.Length-1); //deleting last ',' 
+
+            //set line.Attribs = attribsId
+            line.AtributsId = attribsIds; //Attributes Id's comma separated for lineOrder
+        }
+
+
+
 
         [HttpGet]
         public ActionResult deleteLine(int? id) 

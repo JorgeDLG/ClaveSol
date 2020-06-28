@@ -29,6 +29,9 @@ namespace ClaveSol.Models
         [Display(Name="Precio Total")]
         public decimal TotalPrice {get; set;}
 
+        [DefaultValueAttribute("null")]
+        public string AtributsId {get; set;} //COMMA , SEPARATED (APAÑO)
+
         //Nav props
         public int? OrderId {get; set;} //FK
         public Order Order {get; set;}

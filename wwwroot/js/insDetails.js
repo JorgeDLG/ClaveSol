@@ -97,6 +97,7 @@ function afterSaveComment() {
     var body = $('#body').val(); //coge el valor 
 
     console.log(insId)
+
     $.ajax({
         url: `/Comments/createComment?insId=${insId}&title=${title}&body=${body}`
 
@@ -104,4 +105,43 @@ function afterSaveComment() {
         console.log("data is: " + data);
         window.location.reload();
     });
+}
+
+//ADD TO CART W/ ATTRIBUTES
+function addToCartwAttrs() {
+    var url = window.location.href;
+    var insId = url.slice(url.lastIndexOf("/") + 1);
+
+    var color = $("div#Color").find("input[checked*='checked']").attr("value");
+
+    //debugger;
+    var restoAttrbsValues = getRestAttributesValues();
+    var attrbsValuesStr = color == null ? restoAttrbsValues : color + ',' + restoAttrbsValues
+    console.log("Attributes:" + attrbsValuesStr);
+    console.log("Instrument ID" + insId, "tipo: " + typeof insId);
+
+    // if (attrbsValuesStr == "") { attrbsValuesStr = null }
+
+    $.ajax({
+        url: `/Cart/addToCart?id=${insId}&attribsValues=${attrbsValuesStr}`
+
+    }).done(function(data) {
+        console.log("Ajax response OK, count Lines on Cart:" +
+            data);
+
+        //Contador
+        $(".badge").empty();
+        $(".badge").append(data);
+    });
+}
+
+function getRestAttributesValues() {
+
+    var values = new Array();
+    $(".selectAttribs").each(function() {
+        values.push($(this).prop("selectedOptions")[0].value);
+    });
+
+    return values.join();
+
 }

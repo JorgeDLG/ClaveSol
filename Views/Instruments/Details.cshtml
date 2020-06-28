@@ -171,7 +171,7 @@
                   </div>
                 }else
                 {
-                  <select name="@Type" id="@Type">
+                  <select name="@Type" id="@Type" class="selectAttribs">
                     @foreach (var value in valueList)
                     {
                       <option value="@value">@value</option>
@@ -188,7 +188,7 @@
             <h5 class="card-title">DISPONIBILIDAD</h5>
             <p >@Html.DisplayFor(model => model.State)</p>
             <span class="font-weight-bold"> Alicante</span>
-            <h3 class="text-success border border-success">AÑADIR</h3>
+            <h3 onclick="addToCartwAttrs()" class="text-success border border-success">AÑADIR</h3>
           </div>
         </div>
     </form>
