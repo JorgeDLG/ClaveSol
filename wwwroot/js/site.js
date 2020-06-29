@@ -81,3 +81,7 @@ function select() {
     $(this).find("input").attr("checked", "checked");
 }
 */
+
+function redirLogin() {
+    window.location.replace("https://localhost:5001/Identity/Account/Login")
+}

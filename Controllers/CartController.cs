@@ -16,7 +16,7 @@ using ClaveSol.Models;
 
 namespace ClaveSol.Controllers
 {
-    [Authorize]
+    [Authorize] 
     public class CartController : Controller
     {
         private readonly ClaveSolDbContext _context;

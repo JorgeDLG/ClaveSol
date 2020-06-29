@@ -109,6 +109,7 @@ function afterSaveComment() {
 
 //ADD TO CART W/ ATTRIBUTES
 function addToCartwAttrs() {
+
     var url = window.location.href;
     var insId = url.slice(url.lastIndexOf("/") + 1);
 

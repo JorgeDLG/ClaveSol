@@ -188,7 +188,14 @@
             <h5 class="card-title">DISPONIBILIDAD</h5>
             <p >@Html.DisplayFor(model => model.State)</p>
             <span class="font-weight-bold"> Alicante</span>
-            <h3 onclick="addToCartwAttrs()" class="text-success border border-success">AÑADIR</h3>
+
+            @if (User.IsInRole("normal") || User.IsInRole("admin"))
+            {
+              <h3 onclick="addToCartwAttrs()" class="text-success border border-success">AÑADIR</h3>
+            }else
+            {
+              <h3 onclick="redirLogin()" class="text-success border border-success">AÑADIR</h3>
+            }
           </div>
         </div>
     </form>
