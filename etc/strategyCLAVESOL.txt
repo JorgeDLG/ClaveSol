@@ -1,0 +1,18 @@
+                  Attribut TABLE
+2-Color Azul                       InsId(3,1,6)
+3-Color Verde                      InsId(6,3,1)
+4-Color Rojo                       InsId(7,6,4)
+
+1-Material Madera                  InsId(2,4,6,7,5)
+5-Material Plástico                InsId(1,3,6)
+6-Material Metal                   InsId(1,2,3,6)
+
+7-Accesorio Set Puas               InsId(3,5)
+8-Accesorio Pedal Distorsion       InsId(3,1)
+
+                  Need:
+
+insID FOR:
+  Find AttIDs 
+          GET 1º VALUE OF TYPE
+
